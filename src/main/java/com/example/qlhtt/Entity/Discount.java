@@ -8,6 +8,8 @@ public class Discount {
     private int discount_id;
     private String discount_name;
 
+    private String staff_id;
+
     public int getDiscount_id() {
         return discount_id;
     }
@@ -32,5 +34,4 @@ public class Discount {
         this.staff_id = staff_id;
     }
 
-    private String staff_id;
 }

@@ -5,31 +5,22 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
-@Entity
- @Table(name="Person")
-public class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
-    @Column(columnDefinition = "nvarchar(30) not null")
+public class Person {
+    private int id;
     private String name;
 
-    @Pattern(regexp="Nam | Nữ",message = "chỉ nhận giá trị Nam hoặc Nữ")
-    @Column(columnDefinition = "nvarchar(4) not null")
     private String Gender;
 
-    @Column(columnDefinition = "nvarchar(13) not null ")
     private String identity_card;
 
-    @Temporal(TemporalType.DATE)
     private Date day_of_birth;
 
-    @Column(columnDefinition = "nvarchar(10) not null")
     private String phone_num;
 
-    @Column(columnDefinition = "nvarchar(50) not null")
     private String address;
+
+
 
     public int getId() {
         return id;
