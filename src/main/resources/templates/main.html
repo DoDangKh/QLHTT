@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:c="http://www.w3.org/1999/XSL/Transform"
+      xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap"
+            rel="stylesheet">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css}"/>
+    <link rel="stylesheet" th:href="@{public/owlcarousel/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{public/owlcarousel/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{public/css/reset.css}"/>
+    <link rel="stylesheet" th:href="@{public/css/main.css}"/>
+
+    <title>G-Market</title>
+</head>
+<body>
+<header class="header-top">
+    <div class="header-wrapper">
+        <div class="heading">
+            <a href="/home" class="header-logo"><img
+                    src="https://gmarket24h.com/images/thumbs/0013362_Logo%20Gmarket%20to%20nhat.png"
+                    alt="G-Market"></a>
+            <div class="header-search">
+                <form class="search-form">
+                    <div class="search-form__input">
+                        <input type="text" placeholder="Tìm kiếm">
+                    </div>
+                    <button class="search-form__icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="header-right-wrapper">
+                <div class="header-right">
+                    <div class="cart-icon">
+                        <a href="#" class="btn-cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <div class="cart-num">0</div>
+                            <div class="cart-price">Giỏ hàng</div>
+                        </a>
+                    </div>>
+                    <div class="account-icon">
+                        <div sec:authorize="isAnonymous()">
+                            <i class=" fa-solid fa-user"></i>
+                            <span class="account-title">Tài khoản</span>
+                            <div class="account-dropdown">
+                                <a href="login" class="btn-signin">Đăng nhập</a>
+                                <a href="register" class="btn-signup">Tạo tài khoản</a>
+                            </div>
+                        </div>
+                        <div sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                            <i class=" fa-solid fa-user"></i>
+                            <span class="account-title" sec:authentication="name"></span>
+                            <div class="account-dropdown">
+                                <a href="user/info" class="btn">Thông Tin</a>
+                                <a href="logout" class="btn">Đăng Xuất</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="category-menu">
+                <a class="categories" href="#">
+                    <i class="fa-solid fa-bars"></i>
+                    <span class="category-title">DANH MỤC</span>
+                </a>
+                <div class="dropdown-categories">
+                    <ul>
+                        <li class="category-item">
+                            <a href="#">
+                                <span>KHUYẾN MÃI</span>
+                                <i class="fa-solid fa-angle-up"></i>
+                            </a>
+                            <div class="dropdown-category-item">
+                                <ul>
+                                    <li>
+                                        <a href="#">Hot Deal</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Luôn Có Giá Tốt</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Mua Nhiều Giảm Sâu</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="category-item">
+                            <a href="#">
+                                <span>TRÁI CÂY - RAU CỦ</span>
+                                <i class="fa-solid fa-angle-up"></i>
+                            </a>
+                            <div class="dropdown-category-item">
+                                <ul>
+                                    <li>
+                                        <a href="#">Trái Cây</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Rau Củ Quả</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="category-item">
+                            <a href="#">
+                                <span>THỊT - TRỨNG - HẢI SẢN</span>
+                                <i class="fa-solid fa-angle-up"></i>
+                            </a>
+                            <div class="dropdown-category-item">
+                                <ul>
+                                    <li>
+                                        <a href="#">Thịt</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Trứng</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Hải Sản</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="category-item">
+                            <a href="#">
+                                <span>SỮA - SẢN PHẨM TỪ SỮA</span>
+                                <i class="fa-solid fa-angle-up"></i>
+                            </a>
+                            <div class="dropdown-category-item">
+                                <ul>
+                                    <li>
+                                        <a href="#">Sữa</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Sản Phẩm Từ Sữa</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="category-item">
+                            <a href="#">
+                                <span>THỰC PHẨM KHÔ</span>
+                            </a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#">
+                                <span>BÁNH KẸO - ĐỒ UỐNG</span>
+                            </a>
+                        </li>
+                        <li class="category-item">
+                            <a href="#">
+                                <span>CHĂM SÓC CÁ NHÂN</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+<main>
+    <section class="section-slider-banner container">
+        <div id="slider-banner" class="owl-carousel owl-theme">
+            <div class="slider-item slider-bg-1">
+            </div>
+            <div class="slider-item slider-bg-2">
+            </div>
+            <div class="slider-item slider-bg-3">
+            </div>
+            <div class="slider-item slider-bg-4">
+            </div>
+        </div>
+    </section>
+    <section class="section-products-wrapper container">
+        <div class="show-products">
+            <div class="product-title">
+                <strong class="title-name">KHÔNG THỂ BỎ LỠ</strong>
+            </div>
+            <div class="list-products-sale">
+                <div id="slider-product" class="list-products owl-carousel owl-theme">
+                    <div class="product-item" th:each="product :${p}">
+                        <a th:href="@{product/{path} (path=${product.product_id})}" class="product-link">
+                            <div class="product-img">
+                                <img th:src="@{/public/images/{path}.jpg(path=${product.img})}">
+                            </div>
+                            <div class="product-name" th:text="${product.name}"></div>
+                            <div class="product-price">
+                                <span class="cur-price" th:text="${product.price}"></span>
+                                <span class="old-price" th:text="${product.price}"></span>
+                            </div>
+                        </a>
+                        <div class="product-describe" th:text="${product.describe}"></div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="show-products">
+            <div class="product-title">
+                <strong class="title-name">NGÀY HỘI THÀNH VIÊN</strong>
+            </div>
+            <div class="list-products-sale">
+                <div id="slider-product" class="list-products owl-carousel owl-theme">
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="show-products">
+            <div class="product-title">
+                <strong class="title-name">CHĂM SÓC DA MẶT</strong>
+            </div>
+            <div class="list-products-sale">
+                <div id="slider-product" class="list-products owl-carousel owl-theme">
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="banner container">
+        <img src="/public/images/0017303_1160-x-347-_2_.webp" alt="">
+    </div>
+    <section class="section-types-wrapper container">
+        <div class="show-types-product">
+            <div class="types-title">
+                <strong class="title-name">NGÀNH HÀNG</strong>
+            </div>
+            <ul class="list-types ">
+                <li class="type-item">
+                    <a href="#"><img src="/public/images/Mini-nganh-hang-2501Rau-cu-trai-cay.png" alt=""></a>
+                </li>
+                <li class="type-item">
+                    <a href="#"><img src="/public/images/Mini-nganh-hangTHỊT---TRỨNG.png" alt=""></a>
+                </li>
+                <li class="type-item">
+                    <a href="#"><img src="/public/images/Mini-nganh-hang-2501dong-lanh.png" alt=""></a>
+                </li>
+                <li class="type-item">
+                    <a href="#"><img src="/public/images/Mini-nganh-hangSỮA.png" alt=""></a>
+                </li>
+                <li class="type-item">
+                    <a href="#"><img src="/public/images/Mini-nganh-hang-2501BÁNH-KẸO.webp" alt=""></a>
+                </li>
+                <li class="type-item">
+                    <a href="#"><img src="/public/images/9ec402f3accd609339dc.jpeg" alt=""></a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="section-products-wrapper container">
+        <div class="show-products">
+            <div class="product-title">
+                <strong class="title-name">MUA NHIỀU GIẢM SÂU</strong>
+            </div>
+            <div class="list-products-sale">
+                <div id="slider-product" class="list-products owl-carousel owl-theme">
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <a href="#" class="product-link">
+                            <div class="product-img">
+                                <img src="/public/images/0015820_snack-ca-mieng-vi-muc-cay-vua-funmore-30gr_200.webp"
+                                     alt="">
+                            </div>
+                            <div class="product-name">Snack Cá Vị Mực Cay Quá Xá</div>
+                            <div class="product-price">
+                                <span class="cur-price">28.000</span>
+                                <span class="old-price">34.000</span>
+                            </div>
+                        </a>
+                        <div class="product-describe">Bịch</div>
+                        <form class="product_quantity">
+                            <button class="btn-decre">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <input class="quantity-input" type="number" value="1"/>
+                            <button class="btn-incre">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <div class="product_action">
+                            <button class="btn-add">THÊM VÀO GIỎ HÀNG</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</main>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="footer-left col">
+                <div class="logo"><img src="/public/images/LogoGmarket.png" alt=""></div>
+                <ul class="list-info">
+                    <li class="address">
+                        <i class="fa-sharp fa-solid fa-location-dot"></i>
+                        97, Man Thiện, Phường Tân Nhơn Phú A, TP Thủ Đức
+                    </li>
+                    <li class="phone">
+                        <i class="fa-solid fa-phone"></i>
+                        190056789
+                    </li>
+                    <li class="email">
+                        <i class="fa-solid fa-envelope"></i>
+                        hocvienhoanggia@gmail.com
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-mid col">
+                <div class="title">HỖ TRỢ KHÁCH HÀNG</div>
+                <ul class="list-support">
+                    <li>Đơn hàng</li>
+                    <li>Chính sách thành viên</li>
+                    <li>Chính sách giao hàng</li>
+                    <li>Chính sách đổi trả</li>
+                    <li>Chính sách thanh toán</li>
+                    <li>Chính sách bảo mật</li>
+                </ul>
+            </div>
+            <div class="footer-right col">
+                <div class="title">HÌNH THỨC THANH TOÁN</div>
+                <img src="/public/images/paymentmethod.png" alt="">
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/public/script/main.js"></script>
+<script src="/public/script/owl.carousel.min.js"></script>
+
+</html>

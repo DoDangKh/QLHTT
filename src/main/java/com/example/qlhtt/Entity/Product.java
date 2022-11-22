@@ -8,7 +8,7 @@ public class Product {
     private String img;
     private String describe;
     private int status;
-    private int discount_id;
+    private Long discount_id;
     private int type_id;
 
     public int getProduct_id() {
@@ -67,11 +67,11 @@ public class Product {
         this.status = status;
     }
 
-    public int getDiscount_id() {
+    public Long getDiscount_id() {
         return discount_id;
     }
 
-    public void setDiscount_id(int discount_id) {
+    public void setDiscount_id(Long discount_id) {
         this.discount_id = discount_id;
     }
 
@@ -81,5 +81,20 @@ public class Product {
 
     public void setType_id(int type_id) {
         this.type_id = type_id;
+    }
+
+    public Product(int product_id, String name, int quantity, int price, String img, String describe, int status, Long discount_id, int type_id) {
+        this.product_id = product_id;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.img = img;
+        this.describe = describe;
+        this.status = status;
+        this.discount_id = discount_id;
+        this.type_id = type_id;
+    }
+
+    public Product() {
     }
 }

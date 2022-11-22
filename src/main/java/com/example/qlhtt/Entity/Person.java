@@ -77,4 +77,17 @@ public class Person {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Person() {
+    }
+
+    public Person(int id, String name, String gender, String identity_card, Date day_of_birth, String phone_num, String address) {
+        this.id = id;
+        this.name = name;
+        Gender = gender;
+        this.identity_card = identity_card;
+        this.day_of_birth = day_of_birth;
+        this.phone_num = phone_num;
+        this.address = address;
+    }
 }
