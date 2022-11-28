@@ -1,0 +1,233 @@
+
+
+.categoryBtn {
+    float: right;
+    margin-right: 23px;
+    margin-bottom: 10px;
+}
+
+.categoryBtn__btn {
+    background-color: var(--main-color);
+    border: none;
+    border-radius: var(--boder-radius);
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.categoryBtn__btn:hover {
+    opacity: .8;
+    cursor: pointer;
+}
+
+.categoryBtn__btn i,
+.categoryBtn__btn span {
+    color: var(--white-text);
+    font-size: 1.6rem;
+}
+
+.categoryBtn__btn span {
+    margin-left: 6px;
+}
+
+.btn__remove {
+    background-color: var(--price-color);
+    margin-right: 23px;
+}
+
+.customer {
+    border: 1px solid var(--boder-color);
+    border-radius: var(--boder-radius);
+    display: flex;
+    width: 100%;
+    transition: transform ease-in 0.01s;
+    will-change: transform;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.customer:hover {
+    transform: translateY(-3px);
+    opacity: .8;
+}
+
+.customer__item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    text-decoration: none;
+    padding: 10px;
+    /* box-shadow: 1px 2px 10px #c4c4c4; */
+    flex: 1;
+}
+
+.customer__item i {
+    font-size: 4rem;
+    padding: 0 4px;
+    color: var(--main-color);
+}
+
+.customer__content {
+    margin: 0 10px;
+    flex: 1;
+}
+
+.customer__item-title {
+    font-size: 2rem;
+    line-height: 2.2rem;
+    width: 700px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    color: var(--main-color);
+}
+
+.customer__item-address {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.customer__item-numberphone {
+    font-size: 1.6rem;
+    border: none;
+    background-color: transparent;
+    color: var(--main-text);
+
+}
+
+.customer__item-warehouse {
+    font-size: 1.6rem;
+    display: inline-block;
+    color: var(--main-text);
+
+}
+
+.modal {
+    display: none;
+}
+
+.add-customer {
+    display: none;
+    flex-direction: column;
+}
+
+.add-customer__header {
+    width: 60%;
+    display: flex;
+    justify-content: center;  
+    padding: 10px;
+}
+
+.add-customer__body {
+    width: 60%;
+
+}
+
+.add-customer__btn {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+
+.btnAddCustomerModal-accept,
+.btnCancelCustomerModal-cancel {
+    margin-top: 0px;
+    min-width: 160px;
+    min-height: 40px;
+    font-size: 1.8rem;
+}
+
+.btnCancelCustomerModal-cancel {
+    background-color: var(--boder-color);
+}
+
+.basic-form-radio {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 450px;
+}
+
+.form__radio-tag-label {
+    font-size: 2rem;
+}
+
+.form__radio-label {
+    font-size: 2rem;
+    margin-left: 8px;
+}
+
+.form-radio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form__radio[type='radio'] {
+    /* remove standard background appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* create custom radiobutton appearance */
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    padding: 6px;
+    /* background-color only for content */
+    background-clip: content-box;
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
+}
+
+.form__radio[type="radio"]:checked {
+    background-color: var(--main-color);
+}
+
+.modal-noti-size {
+    max-width: 700px;
+    position: relative;
+}
+
+.modal-noti__head {
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: center;
+}
+
+.modal-noti__head-img {
+    max-width: 170px;
+    display: block;
+    padding: 10px 0;
+}
+
+.modal-noti__body {
+    background-color: var(--white-text);
+}
+
+.modal-noti__body-title {
+    font-size: 2rem;
+    display: block;
+    padding: 20px 10px;
+}
+
+.modal-noti__body-btn {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 10px;
+}
+
+.btnCancelModal-accept,
+.btnCancelModal-cancel {
+    margin-top: 0px;
+    min-width: 160px;
+    min-height: 40px;
+    font-size: 1.8rem;
+}
+
+.btnCancelModal-cancel {
+    background-color: var(--boder-color);
+}

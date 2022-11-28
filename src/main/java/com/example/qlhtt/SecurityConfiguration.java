@@ -1,4 +1,4 @@
-package com.example.qlhtt.configuration;
+package com.example.qlhtt;
 
 import com.example.qlhtt.Service.CustomerUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +36,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/userss/").hasRole("2").anyRequest()
+        http.csrf().disable().authorizeRequests().antMatchers("/admin/").hasRole("2").anyRequest()
                 .permitAll().and().formLogin().loginPage("/login").loginProcessingUrl("/login").usernameParameter("username")
                 .passwordParameter("password").defaultSuccessUrl("/home").failureUrl("/login?error=failed").and()
                 .exceptionHandling().accessDeniedPage("/login?error=deny");
+        http.logout().logoutUrl("/logout").logoutSuccessUrl("/home");
     }
 }

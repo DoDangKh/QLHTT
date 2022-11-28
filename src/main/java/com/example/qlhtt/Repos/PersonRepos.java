@@ -39,12 +39,35 @@ public class PersonRepos  {
     public Person getbyid(int id){
         try{
             Person person= jdbcTemplate.queryForObject("Select * From Person Where id=" + Integer.toString(id), (rs, rowNum) ->
-                    new Person(rs.getInt("id"), rs.getString("name"), rs.getString("gender"),rs.getString("identity_card"), rs.getDate("day_of_birth"), rs.getString("phone_num"), rs.getString("address")));
+                    new Person(rs.getInt("id"), rs.getString("name"), rs.getString("gender"),rs.getString("identity_card"), rs.getString("day_of_birth"), rs.getString("phone_num"), rs.getString("address")));
             return person;
         }
         catch(Exception e){
             e.printStackTrace();
         }
         return null;
+    }
+    public Person getbyidcard(String idcard){
+        try{
+            Person person= jdbcTemplate.queryForObject("Select * From Person Where identity_card='" + idcard+"'", (rs, rowNum) ->
+                    new Person(rs.getInt("id"), rs.getString("name"), rs.getString("gender"),rs.getString("identity_card"), rs.getString("day_of_birth"), rs.getString("phone_num"), rs.getString("address")));
+            return person;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public boolean insertPerson(Person person){
+        try{
+            System.out.print(person.getName()+" "+person.getGender()+" "+person.getIdentity_card()+" "+person.getDay_of_birth()+" "+person.getPhone_num()+" "+person.getAddress());
+            jdbcTemplate.update("INSERT INTO PERSON(name, gender,identity_card, day_of_birth, phone_num, address) VALUES(?, ?, ?, ?, ?, ?)",
+                    person.getName(), person.getGender(), person.getIdentity_card(), person.getDay_of_birth(), person.getPhone_num(), person.getAddress());
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 }

@@ -1,0 +1,88 @@
+.main-body{
+    margin-top: 120px;
+    background-color: var(--page-color);
+    display: flex;
+    justify-content: center;
+}
+
+.register {
+    margin: 40px 0;
+    max-width: 700px;
+    background-color: var(--white-text);
+    border-radius: 10px;
+    padding: 20px 60px;
+    box-shadow: 1px 2px 10px #c4c4c4;
+}
+
+.register__title {
+    font-size: 4rem;
+    line-height: 4rem;
+    color: var(--main-color);
+    font-weight: 600;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register__desc {
+    font-size: 2rem;
+    line-height: 2rem;
+    color: var(--main-text);
+    display: flex;
+    margin-top: 20px;
+}
+
+.register__desc::after {
+    content: '';
+    flex: 1;
+    border-bottom: groove 1px var(--boder-color);
+    margin: auto 4px;
+}
+
+.register__btn {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+.basic-form-radio {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 450px;
+}
+
+.form__radio-tag-label {
+    font-size: 2rem;
+}
+
+.form__radio-label {
+    font-size: 2rem;
+    margin-left: 8px;
+}
+
+.form-radio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form__radio[type='radio'] {
+    /* remove standard background appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* create custom radiobutton appearance */
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    padding: 6px;
+    /* background-color only for content */
+    background-clip: content-box;
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
+}
+
+.form__radio[type="radio"]:checked {
+    background-color: var(--main-color);
+}

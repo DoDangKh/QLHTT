@@ -29,13 +29,40 @@ public class UserLogin {
         return role_id;
     }
 
+    private int enable;
+
+    public int getEnable() {
+        return enable;
+    }
+
+    public void setEnable(int enable) {
+        this.enable = enable;
+    }
+
     public UserLogin() {
     }
 
-    public UserLogin(int person_id, String username, String password, int role_id) {
+    public UserLogin(int person_id, String username, String password, int enable,int role_id) {
         this.person_id = person_id;
         this.username = username;
         this.password = password;
+        this.role_id = role_id;
+        this.enable=enable;
+    }
+
+    public void setPerson_id(int person_id) {
+        this.person_id = person_id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole_id(int role_id) {
         this.role_id = role_id;
     }
 }

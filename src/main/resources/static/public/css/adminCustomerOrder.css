@@ -1,0 +1,119 @@
+.order-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.od-heading {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+}
+.od-heading__link {
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+.od-heading__link:hover {
+    opacity: 0.8;
+}
+
+.od-heading__icon {
+    font-size: 4rem;
+    padding: 15px;
+}
+
+.od-heading__title {
+    font-size: 4rem;
+    font-weight: 500;
+    color: var(--main-color);
+    text-align: center;
+    flex: 1;
+    margin-left: -40px;
+}
+
+.customerOrderDetail {
+    width: 60%;
+    border: 1px solid var(--main-color);
+    border-radius: var(--boder-radius);
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.category__classify {
+    margin-right: 20px;
+}
+
+.category__classify span {
+    font-size: 2rem;
+    color: var(--main-text);
+}
+
+.category__classify-select {
+    font-size: 2rem;
+    margin-left: 4px;
+    min-width: 150px;
+    color: var(--main-text);
+    border-color: var(--main-color);
+}
+
+.basic-form {
+    margin-top: 10px;
+}
+
+.form__label {
+    font-size: 2rem;
+    min-width: 140px;
+}
+
+.form__input {
+    font-size: 1.8rem;
+}
+
+.add-customerOrder__btn {
+    display: flex;
+    justify-content: center;
+}
+
+.basic-form-radio {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 450px;
+}
+
+.form__radio-tag-label {
+    font-size: 2rem;
+}
+
+.form__radio-label {
+    font-size: 2rem;
+    margin-left: 8px;
+}
+
+.form-radio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form__radio[type='radio'] {
+    /* remove standard background appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* create custom radiobutton appearance */
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    padding: 6px;
+    /* background-color only for content */
+    background-clip: content-box;
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
+}
+
+.form__radio[type="radio"]:checked {
+    background-color: var(--main-color);
+}

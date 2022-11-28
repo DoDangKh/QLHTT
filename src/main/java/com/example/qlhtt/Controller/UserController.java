@@ -8,7 +8,9 @@ import com.example.qlhtt.Repos.ProductRepos;
 import com.example.qlhtt.Repos.UserLoginRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +28,9 @@ public class UserController {
 
     @Autowired
     private UserLoginRepos userLoginRepos;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/all")
     public ResponseEntity<?> getListUser(){
@@ -55,4 +60,5 @@ public class UserController {
 //        mav.addObject("error","Đăng Nhập Thất Bại");
 //        return mav;
 //    }
+
 }

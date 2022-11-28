@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css}"
+          integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" th:ref="@{public/css/grid.css}">
+    <link rel="stylesheet" th:href="@{public/css/base.css}">
+    <link rel="stylesheet" th:href="@{public/css/register.css}">
+</head>
+<body>
+<div class="main-header">
+    <header class="heading">
+        <a href="" class="heading__link"><img class="heading__logo" src="./assets/img/LogoGmarket.png" alt=""></a>
+        <div class="heading-with-search">
+            <div class="heading__search">
+                <div class="heading__search-input">
+                    <input type="text" placeholder="Tìm kiếm">
+                </div>
+                <div class="heading__search-logo">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+        </div>
+        <div class="heading__cart">
+            <i class="heading__cart-logo fa-solid fa-cart-shopping"></i>
+            <span class="heading__cart-notice">0</span>
+            <!-- <span class="heading__cart-title">Giỏ hàng</span> -->
+            <span class="heading__cart-title heading__cart-title--price">57.000 đ </span>
+        </div>
+        <div class="heading__account">
+            <i class="heading__account-logo fa-solid fa-user"></i>
+            <span class="heading__account-title">Tài khoản</span>
+        </div>
+    </header>
+
+    <nav class="navigation">
+        <div class="nav-heading">
+            <i class="nav-heading__icon fa-solid fa-bars"></i>
+            <span class="nav-heading__title">DANH MỤC</span>
+            <ul class="nav-list">
+                <a href="" class="nav-list__link">
+                    <li class="nav-list__item">Rau củ - Trái cây</li>
+                    <i class="nav-list__logo fa-solid fa-chevron-right"></i>
+                </a>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="main-body">
+    <div class="register">
+            <span class="register__title">
+                TẠO TÀI KHOẢN
+            </span>
+        <br>
+        <span class="register__desc">
+                Thông tin cá nhân
+            </span>
+
+        <form action="/Confirmregister" method="post">
+            <div class="basic-form">
+                <label for="" class="form__label">Họ và tên:</label>
+                <input type="text" class="form__input input-m " placeholder="Họ và tên" th:field="${person.name}">
+            </div>
+                <div class="form-radio">
+                    <input class="form__radio" checked type="radio" name="gender" th:value="Nam"
+                           th:field="${person.gender}"
+                           id="gender-male">
+                    <label class="form__radio-label" for="gender-male">Nam</label>
+                </div>
+                <div class="form-radio">
+                    <input class="form__radio" type="radio" name="gender" th:value="Nữ" th:field="${person.gender}"
+                           id="gender-female">
+                    <label class="form__radio-label" for="gender-female">Nữ</label>
+                </div>
+
+            <div class="basic-form">
+                <label for="" class="form__label">Số điện thoại:</label>
+                <input type="text" class="form__input input-m" th:field="${person.phone_num}"
+                       placeholder="Số điện thoại">
+            </div>
+            <div class="basic-form">
+                <label for="" class="form__label">CMND:</label>
+                <input type="text" class="form__input input-m" th:field="${person.identity_card}"
+                       placeholder="Số điện thoại">
+            </div>
+            <div class="basic-form">
+                <label for="" class="form__label">Ngày sinh:</label>
+                <input type="date" class="form__input input-m" th:field="${person.day_of_birth}"
+                       placeholder="Ngày sinh">
+            </div>
+
+            <div class="basic-form">
+                <label for="" class="form__label">Email:</label>
+                <input type="email" class="form__input input-m" th:field="${userLogin.username}" placeholder="Email">
+            </div>
+
+            <div class="basic-form">
+                <label for="" class="form__label">Địa chỉ:</label>
+                <input type="text" class="form__input input-m" th:field="${person.address}" placeholder="Địa chỉ">
+            </div>
+
+            <div action="" class="basic-form">
+                <label for="" class="form__label">Mật khẩu:</label>
+                <input type="password" class="form__input input-m" th:field="${userLogin.password}"
+                       placeholder="Mật khẩu">
+            </div>
+
+            <div action="" class="basic-form">
+                <label for="" class="form__label">Nhập lại mật khẩu:</label>
+                <input type="password" class="form__input input-m" placeholder="Nhập lại mật khẩu">
+            </div>
+            <div class="register__btn">
+
+                <button class="btn-l" type="submit">Đăng ký</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<footer class="main-footer">
+    <img src="./assets/img/LogoGmarket.png" alt="" class="footer__img">
+    <span class="footer__title">G Market - bạn của mọi nhà</span>
+    <p class="footer__desc">Cảm ơn bạn rất nhiều vì đã giúp chúng tôi trở thành thương hiệu số một trong lòng khách
+        hàng. Chúng tôi không thể đạt được thành công này nếu không có bạn là khách hàng của chúng tôi. Sự hài lòng của
+        bạn là mối quan tâm số một của chúng tôi và chúng tôi hứa sẽ luôn đáng tin cậy.</p>
+</footer>
+</body>
+</html>

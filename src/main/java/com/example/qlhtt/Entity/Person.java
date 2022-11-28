@@ -14,7 +14,7 @@ public class Person {
 
     private String identity_card;
 
-    private Date day_of_birth;
+    private String day_of_birth;
 
     private String phone_num;
 
@@ -54,11 +54,11 @@ public class Person {
         this.identity_card = identity_card;
     }
 
-    public Date getDate_of_birth() {
+    public String getDay_of_birth() {
         return day_of_birth;
     }
 
-    public void setDate_of_birth(Date day_of_birth) {
+    public void setDate_of_birth(String day_of_birth) {
         this.day_of_birth = day_of_birth;
     }
 
@@ -81,7 +81,11 @@ public class Person {
     public Person() {
     }
 
-    public Person(int id, String name, String gender, String identity_card, Date day_of_birth, String phone_num, String address) {
+    public void setDay_of_birth(String day_of_birth) {
+        this.day_of_birth = day_of_birth;
+    }
+
+    public Person(int id, String name, String gender, String identity_card,String day_of_birth, String phone_num, String address) {
         this.id = id;
         this.name = name;
         Gender = gender;

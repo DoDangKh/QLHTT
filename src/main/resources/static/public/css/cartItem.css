@@ -1,0 +1,368 @@
+
+
+/* MAIN BODY */
+.main-body {
+    margin-top: 120px;
+    background-color: var(--page-color);
+    
+}
+
+.main-body-item {
+    display: flex;
+    justify-content: center;
+}
+
+.item-info__detail {
+    margin-top: 10px;
+    background-color: var(--white-text);
+    padding: 10px;
+}
+
+.item-info__detail-title-del {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--white-text);
+}
+
+
+.customer-info-title__detail,
+.item-info__check-title,
+.item-info__detail-title {
+    font-size: 2.4rem;
+    color: var(--main-color);
+    font-weight: 600;
+    border-left: 4px solid var(--main-color);
+    padding-left: 10px;
+    line-height: 3.4rem;
+}
+
+.item-info__detail-del {
+    font-size: 2.4rem;
+    color: var(--main-text);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.item-info__detail-del i {
+    color: var(--main-color);
+}
+
+.item-info__detail-del span{
+    
+}
+
+.bill-list {
+    padding: 0;
+}
+
+.bill-item {
+    list-style-type: none;
+    display: flex;
+    max-height: 100px;
+    margin-top: 10px;
+}
+
+.bill-item__img {
+    max-height: 100px;
+}
+
+.bill-item__info {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex: 1;
+}
+
+.bill-item__info-title {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    color: var(--main-color);
+    display: block;
+    width: 420px;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.bill-item__info-price {
+    display: block;
+    font-size: 1.8rem;
+    color: var(--price-color);
+}
+
+
+
+.box-check {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.check {
+    font-size: 2.8rem;
+}
+
+.check__title {
+    color: var(--main-text);
+}
+
+.check__sum {
+    color: var(--price-color);
+}
+
+.item-info__check {
+    background-color: var(--white-text);
+    margin: 10px 0;
+    padding: 10px;
+    min-height: 201px;
+}
+
+.item-info__price {
+    font-size: 2.4rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    line-height: 2.4rem;
+    padding: 10px 0;
+}
+
+.item-info__price:last-child {
+    border-top: 1px solid var(--boder-color);
+}
+
+.item-info__price-pri,
+.item-info__price-tit {
+    color:  var(--price-color);
+}
+
+/* CUSTOMER INFO */
+.customer-info {
+    background-color: var(--white-text);
+    padding: 10px;
+    margin: 10px 0;
+    min-height: 486px;
+}
+
+.customer-info-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.customer-info-title__login {
+    font-size: 2.4rem;
+}
+
+.customer-info-title__login span {
+    color: var(--main-text);
+}
+
+.customer-info-title__login a {
+    color: var(--main-text);
+    font-weight: 600;
+}
+
+.ship-info-title {
+    font-size: 2rem;
+    margin-top: 10px;
+    font-weight: 600;
+    color: var(--main-text);
+    display: flex;
+}
+
+.ship-info-title::after {
+    content:'';
+    flex: 1;
+    border-bottom: groove 1px var(--boder-color);
+    margin: auto 4px;
+}
+
+.form-cus-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 0 120px;
+}
+
+.form-cus__label {
+    font-size: 2rem;
+
+}
+
+.form-cus__input {
+    max-width: 178px;
+    font-size: 2rem;
+    line-height: 2rem;
+    padding: 10px;
+    border-radius: var(--boder-radius);
+    border: 1px solid var(--boder-color);
+}
+
+.confirm {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+/* No Iteam In Cart */
+.no-item {
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-item__img {
+    max-width: 600px;
+    max-height: 400px;
+    display: block;
+}
+
+.no-item__para {
+    font-size: 3rem;
+    color: var(--main-text);
+}
+
+
+
+
+/* MODAL */
+
+.login {
+    position: absolute;
+    width: 600px;
+    margin-top: calc((330px - 68px) / 2);
+}
+
+.header {
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: center;
+}
+
+.header__img {
+    max-width: 160px;
+    max-height: 70px;
+}
+
+.header__icon {
+    font-size: 2rem;
+    color: var(--white-text);
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.header__icon:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.body {
+    background-color: var(--white-text);
+}
+
+.title {
+    margin: 0;
+    padding: 10px 0px;
+    text-align: center;
+    color: var(--main-color);
+    font-size: 3rem;
+    line-height: 3rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-input {
+    width: 400px;
+    border-radius: var(--boder-radius);
+    border: solid 1px var(--boder-color);
+    display: flex;
+}
+
+.form-input:last-child {
+    margin-top: 10px;
+}
+
+.form-input__icon {
+    font-size: 2rem;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: var(--white-text);
+    border-top-left-radius: var(--boder-radius);
+    border-bottom-left-radius: var(--boder-radius);
+}
+
+.form-input__icon-m {
+    font-size: 2.3rem;
+}
+
+.form-input__inp {
+    padding: 6px;
+    outline: none;
+    border: transparent;
+    font-size: 2rem;
+    flex: 1;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+.nav-content__forget,
+.nav-content__register-regs {
+    font-size: 1.6rem;
+    color: var(--main-text);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.nav-content__register {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-content__register-title {
+    font-size: 1.6rem;
+}
+
+.nav-content__register-regs {
+    display: flex;
+    justify-content: end;
+    margin-top: 6px;
+}
+
+.btn-login {
+    text-align: center;
+}
+
+.btn-login button{
+    width: 400px;
+    font-size: 2rem;
+    color: var(--white-text);
+    background-color: var(--main-color);
+    border: transparent;
+    border-radius: var(--boder-radius);
+    line-height: 2rem;
+    padding: 11px;
+    margin: 30px;
+}
+
+.btn-login button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}

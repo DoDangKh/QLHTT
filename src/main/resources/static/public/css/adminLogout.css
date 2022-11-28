@@ -1,0 +1,48 @@
+.modal {
+    display: flex;
+}
+
+.modal-noti-size {
+    max-width: 700px;
+    position: relative;
+}
+
+.modal-noti__head {
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: center;
+}
+
+.modal-noti__head-img {
+    max-width: 170px;
+    display: block;
+    padding: 10px 0;
+}
+
+.modal-noti__body {
+    background-color: var(--white-text);
+}
+
+.modal-noti__body-title {
+    font-size: 2rem;
+    display: block;
+    padding: 20px 10px;
+}
+
+.modal-noti__body-btn {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 10px;
+}
+
+.btnCancelModal-accept,
+.btnCancelModal-cancel {
+    margin-top: 0px;
+    min-width: 160px;
+    min-height: 40px;
+    font-size: 1.8rem;
+}
+
+.btnCancelModal-cancel {
+    background-color: var(--boder-color);
+}

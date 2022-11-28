@@ -1,0 +1,143 @@
+.order-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.od-heading {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+}
+.od-heading__link {
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+.od-heading__link:hover {
+    opacity: 0.8;
+}
+
+.od-heading__icon {
+    font-size: 4rem;
+    padding: 15px;
+}
+
+.od-heading__title {
+    font-size: 4rem;
+    font-weight: 500;
+    color: var(--main-color);
+    text-align: center;
+    flex: 1;
+    margin-left: -40px;
+}
+
+.productDetail {
+    width: 80%;
+    border: 1px solid var(--main-color);
+    border-radius: var(--boder-radius);
+    overflow: hidden;
+}
+
+.category__classify {
+    margin-right: 20px;
+}
+
+.category__classify span {
+    font-size: 2rem;
+    color: var(--main-text);
+}
+
+.category__classify-select {
+    font-size: 2rem;
+    margin-left: 4px;
+    min-width: 150px;
+    color: var(--main-text);
+    border-color: var(--main-color);
+}
+
+.basic-form {
+    margin-top: 10px;
+}
+
+.form__label {
+    font-size: 2rem;
+    min-width: 120px;
+}
+
+.form__input {
+    font-size: 1.8rem;
+}
+
+.add-product__selection {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.add-product__selection label {
+    min-width: 120px;
+    display: block;
+}
+
+.add-product__selection select{
+    font-size: 2rem;
+    min-width: 200px;
+    margin-left: 10px;
+}
+
+.product-detail__img {
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#myfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.myfile-label {
+    /* width: 194px; */
+}
+
+.myfile-label i {
+    font-size: 1.6rem;
+}
+
+.product-detail__img #mylife,
+.product-detail__img .myfile-label {
+    font-size: 1.4rem;
+    color: var(--white-text);
+    background-color: var(--main-color);
+    padding: 5px;
+    border-radius: var(--boder-radius);
+    margin-left: 10px;
+}
+
+.product-detail__img .myfile-label:hover {
+    cursor: pointer;
+    opacity: .8;
+}
+
+.show-img {
+    margin-left: 10px;
+    border: 1px solid var(--boder-color);
+    border-radius: var(--boder-radius);
+    width: 63%;
+    display: flex;
+    justify-content: center;
+}
+
+.myfile__img {
+    max-width: 120px;
+    padding: 5px;
+}
+
+.add-product__btn {
+    display: flex;
+    justify-content: center;
+}
