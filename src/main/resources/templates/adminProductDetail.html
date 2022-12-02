@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/productDetail.css">
+</head>
+<body>
+    <div class="employee">
+        <header class="employee-header">
+            
+        </header>
+        <div class="order-details">
+            <div class="od-heading">
+                <a href="./adminProduct.html" class="od-heading__link">
+                    <i class="od-heading__icon fa-solid fa-arrow-left"></i>
+                </a>
+                <h1 class="od-heading__title">
+                    THÔNG TIN SẢN PHẨM
+                </h1>
+            </div>
+
+            <div class="productDetail">
+                <div class="modal__body add-product__body">
+                    <form action="" class="basic-form">
+                        <label for="" class="form__label">Tên sản phẩm:</label>
+                        <input type="text" class="form__input" value="Sữa cô gái Hà Lan">
+                    </form>
+    
+                    <div class="category__classify add-product__selection">
+                        <label for="" class="form__label">Loại sản phẩm:</label>
+                        <select name="type" id="" class="category__classify-select ">
+                            <option value="" class="form-product__option">Option 1</option>
+                            <option value="" class="form-product__option">Option 2</option>
+                            <option value="" class="form-product__option">Option 1</option>
+                            <option value="" class="form-product__option">Option 2</option>
+                        </select>
+                    </div>
+    
+                    <div class="category__classify add-product__selection">
+                        <label for="" class="form__label">Khuyến mãi:</label>
+                        <select name="type" id="" class="category__classify-select">
+                            <option value="" class="form-product__option">Option 1</option>
+                            <option value="" class="form-product__option">Option 2</option>
+                            <option value="" class="form-product__option">Option 1</option>
+                            <option value="" class="form-product__option">Option 2</option>
+                        </select>
+                    </div>
+    
+                    <div class="product-detail">
+                        <form action="" class="basic-form product-detail__img">
+                            <label for="myfile" class="form__label product-detail__title">Hình ảnh:</label>
+                            <input type="file" id="myfile" accept="*" onchange="readFile(this)">
+                            <label for="myfile" class="myfile-label">
+                                <i class="fa-solid fa-file-circle-plus"></i>
+                                Thêm hình ảnh
+                            </label>
+                            <div class="show-img">
+                                <img class="myfile__img" src="./assets/img/316007448_1372406313591188_7687324597456367359_n.jpg" alt="">
+                            </div>
+                        </form>
+        
+                        <div class="product-detail__info">
+                            <form action="" class="basic-form">
+                                <label for="" class="form__label">Giá:</label>
+                                <input type="text" class="form__input" value="">
+                            </form>
+            
+                            <form action="" class="basic-form">
+                                <label for="" class="form__label">Số lượng:</label>
+                                <input type="text" class="form__input" value="">
+                            </form>
+                        </div>
+                    </div>
+    
+                    <form action="" class="basic-form">
+                        <label for="" class="form__label">Mô tả:</label>
+                        <input type="text" class="form__input" value="">
+                    </form>
+                    <div class="add-product__btn">
+                        <button class="btn-l btnCancelAddProductModal-accept">Cập nhật</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="or-body-none">
+                Rất tiếc đơn hàng này đã bị xoá!!!
+            </div> -->
+        </div>
+        <footer class="footer"></footer>
+    </div>
+    <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
+    <script src="/QLHTT/src/main/resources/templates/footerCustomer.js"></script>
+
+    <!-- <div id="acceptModal" class="modal">
+        <div class="modal-noti-size">
+            <div class="modal-noti__head">
+                <img class="modal-noti__head-img" src="./assets/img/LogoGmarket.png" alt="">
+            </div>
+            <div class="modal-noti__body">
+                <span class="modal-noti__body-title">
+                    Bạn có chắc chắn xác nhận đơn hàng này không?
+                </span>
+                <div class="modal-noti__body-btn">
+                    <button class="btn-l btnAcceptModal-accept">Xác nhận</button>
+                    <button class="btn-l btnAcceptModal-cancel or-body__btn-cancel">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cancelModal" class="modal">
+        <div class="modal-noti-size">
+            <div class="modal-noti__head">
+                <img class="modal-noti__head-img" src="./assets/img/LogoGmarket.png" alt="">
+            </div>
+            <div class="modal-noti__body">
+                <span class="modal-noti__body-title">
+                    Bạn có chắc chắn huỷ đơn hàng này không?
+                </span>
+                <div class="modal-noti__body-btn">
+                    <button class="btn-l btnCancelModal-accept">Xác nhận</button>
+                    <button class="btn-l btnCancelModal-cancel or-body__btn-cancel">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <script>
+        // Accept Button
+        var acceptBtn = document.querySelector('.or-body__btn-accept')
+        var acceptModal = document.getElementById('acceptModal')
+        var acceptModalisAccepted = document.querySelector('.btnAcceptModal-accept')
+        var acceptModalisCanceled = document.querySelector('.btnAcceptModal-cancel')
+        
+
+        // Cancel Button
+        var cancelBtn = document.querySelector('.or-body__btn-cancel')
+        var cancelModal = document.getElementById('cancelModal')
+        var cancelModalisAccepted = document.querySelector('.btnCancelModal-accept')
+        var cancelModalisCanceled = document.querySelector('.btnCancelModal-cancel')
+        var orBody = document.querySelector('.or-body')
+        var orBodyNone = document.querySelector('.or-body-none')
+        cancelBtn.onclick = function() {
+            cancelModal.setAttribute("style", "display: flex;")
+            cancelModalisAccepted.addEventListener("click", function() {
+                orBody.setAttribute("style", "display: none;")
+                orBodyNone.setAttribute("style", "display: block;")
+                cancelModal.setAttribute("style", "display: none;")
+            })
+            cancelModalisCanceled.addEventListener("click", function() {
+                cancelModal.setAttribute("style", "display: none;")
+            })
+        }
+
+        var orderDetailAPI = "http://localhost:3000/orderDetail";
+        var orderDetailList;
+        fetch(orderDetailAPI)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(list) {
+                orderDetailList = list;
+                console.log(orderDetailList)
+                return handleData(list);
+            })
+            function handleData(list) {
+                orderDetailList = list;
+                console.log(orderDetailList)
+                var orderDetailhtmls = orderDetailList.map(function(orderDetail){
+                var priceCount = orderDetail.count * orderDetail.price
+                    return `
+                        <tr>
+                            <td class="or-customer__item or-customer__item-name">
+                                ${orderDetail.name}
+                            </td>
+                            <td class="or-customer__item or-customer__item-count">
+                                ${orderDetail.count}
+                            </td>
+                            <td class="or-customer__item or-customer__item-left">
+                                ${orderDetail.price}
+                            </td>
+                            <td class="or-customer__item or-customer__item-price">
+                                ${priceCount}
+                            </td>
+                        </tr>
+                    `
+                })
+                var orderDetailhtml = orderDetailhtmls.join('')
+                document.querySelector('.or-customer__body').innerHTML = orderDetailhtml
+                var sumPriceTable = document.querySelector('tfoot .or-customer__item-price')
+                sumPriceTable.innerHTML = sumPrice(orderDetailList)
+
+                acceptBtn.onclick = function() {
+                    acceptModal.setAttribute("style", "display: flex;")
+                    acceptModalisAccepted.addEventListener("click", function() {
+                        acceptModal.setAttribute("style", "display: none;")
+
+                        location.href = "./order.html"
+                    })
+                        acceptModalisCanceled.addEventListener("click", function() {
+                        acceptModal.setAttribute("style", "display: none;")
+                    })
+                }
+            }
+        
+            // hàm tính tổng tiền
+            function sumPrice(orderDetailList) {
+                var sum = 0; 
+                for(var i = 0; i < orderDetailList.length; i++) {
+                    sum += Number(orderDetailList[i].price) * Number(orderDetailList[i].count);
+                }
+                return sum;
+            }
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/adminProduct.css">
+</head>
+<body>
+    <div class="employee">
+        <header class="employee-header">
+            
+        </header>
+        <div class="grid">
+            <div class="row sm-gutter space">
+                <div class="col l-2">
+                    <nav class="navbar">
+                        
+                    </nav>
+                </div>
+
+                <div class="col l-10">
+                    <div class="edit">
+                        <div class="category">
+                            <div class="category__classify">
+                                <span>
+                                    Loại
+                                </span>
+                                <select name="type" id="" class="category__classify-select">
+                                    <option value="" class="form-product__option">Option 1</option>
+                                    <option value="" class="form-product__option">Option 2</option>
+                                    <option value="" class="form-product__option">Option 1</option>
+                                    <option value="" class="form-product__option">Option 2</option>
+                                </select>
+                            </div>
+                            <div class="category__classify">
+                                <span>
+                                    Khuyến mãi
+                                </span>
+                                <select name="type" id="" class="category__classify-select">
+                                    <option value="" class="form-product__option">Option 1</option>
+                                    <option value="" class="form-product__option">Option 2</option>
+                                    <option value="" class="form-product__option">Option 1</option>
+                                    <option value="" class="form-product__option">Option 2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="categoryBtn">
+                            <button class="categoryBtn__btn btn__plus">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Thêm</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <a href="#" class="product__item">
+                            <img src="./assets/img/suatuoi.webp" alt="" class="product__item-img">
+                            <div class="product__content">
+                                <span class="product__item-title">
+                                    Sữa cô gái Hà Lan
+                                    Sữa cô gái Hà Lan
+                                    Sữa cô gái Hà Lan
+                                    Sữa cô gái Hà Lan
+                                    Sữa cô gái Hà Lan
+                                    Sữa cô gái Hà Lan
+                                    Sữa cô gái Hà Lan
+                                    Sữa cô gái Hà Lan
+    
+                                </span>
+                                <div>
+                                    <span class="product__item-warehouse">Thể loại:</span>
+                                    <span class="product__item-count">100</span>
+                                </div>
+                                <div>
+                                    <span class="product__item-warehouse">Khuyến mãi:</span>
+                                    <span class="product__item-count">100</span>
+                                </div>
+                                <div>
+                                    <span class="product__item-warehouse">Số lượng tồn:</span>
+                                    <span class="product__item-count">100</span>
+                                </div>
+                            </div>
+                        </a>
+                        <button class="categoryBtn__btn btn__remove">
+                            <i class="fa-solid fa-times"></i>
+                            <span>Xoá</span>
+                        </button>    
+                    </div>
+                </div>
+            </div>
+            <footer class="footer"></footer>
+        </div>
+
+        <div class="modal add-product">
+            <div class="modal__header add-product__header">
+                <img src="./assets/img/LogoGmarket.png" alt="" class="modal__header-img">
+            </div>
+            <div class="modal__body add-product__body">
+                <form action="" class="basic-form">
+                    <label for="" class="form__label">Tên sản phẩm:</label>
+                    <input type="text" class="form__input" value="">
+                </form>
+
+                <div class="category__classify add-product__selection">
+                    <label for="" class="form__label">Loại sản phẩm:</label>
+                    <select name="type" id="" class="category__classify-select ">
+                        <option value="" class="form-product__option">Option 1</option>
+                        <option value="" class="form-product__option">Option 2</option>
+                        <option value="" class="form-product__option">Option 1</option>
+                        <option value="" class="form-product__option">Option 2</option>
+                    </select>
+                </div>
+
+                <div class="category__classify add-product__selection">
+                    <label for="" class="form__label">Khuyến mãi:</label>
+                    <select name="type" id="" class="category__classify-select">
+                        <option value="" class="form-product__option">Option 1</option>
+                        <option value="" class="form-product__option">Option 2</option>
+                        <option value="" class="form-product__option">Option 1</option>
+                        <option value="" class="form-product__option">Option 2</option>
+                    </select>
+                </div>
+
+                <div class="product-detail">
+                    <form action="" class="basic-form product-detail__img">
+                        <label for="myfile" class="form__label product-detail__title">Hình ảnh:</label>
+                        <input type="file" id="myfile" accept="*" onchange="readFile(this)">
+                        <label for="myfile" class="myfile-label">
+                            <i class="fa-solid fa-file-circle-plus"></i>
+                            Thêm hình ảnh
+                        </label>
+                        <div class="show-img">
+                            <img class="myfile__img" src="" alt="">
+                        </div>
+                    </form>
+    
+                    <div class="product-detail__info">
+                        <form action="" class="basic-form">
+                            <label for="" class="form__label">Giá:</label>
+                            <input type="text" class="form__input" value="">
+                        </form>
+        
+                        <form action="" class="basic-form">
+                            <label for="" class="form__label">Số lượng:</label>
+                            <input type="text" class="form__input" value="">
+                        </form>
+                    </div>
+                </div>
+
+                <form action="" class="basic-form">
+                    <label for="" class="form__label">Mô tả:</label>
+                    <input type="text" class="form__input" value="">
+                </form>
+                <div class="add-product__btn">
+                    <button class="btn-l btnCancelAddProductModal-accept">Xác nhận</button>
+                    <button class="btn-l btnCancelAddProductModal-cancel">Huỷ</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal cancel-add-product">
+            <div class="modal-noti-size">
+                <div class="modal-noti__head">
+                    <img class="modal-noti__head-img" src="./assets/img/LogoGmarket.png" alt="">
+                </div>
+                <div class="modal-noti__body">
+                    <span class="modal-noti__body-title">
+                        Bạn có chắc chắn huỷ thêm sản phẩm này không?
+                    </span>
+                    <div class="modal-noti__body-btn">
+                        <button href="" class="btn-l btnCancelModal-accept">Xác nhận</button>
+                        <button class="btn-l btnCancelModal-cancel or-body__btn-cancel">Huỷ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal delete-product">
+            <div class="modal-noti-size">
+                <div class="modal-noti__head">
+                    <img class="modal-noti__head-img" src="./assets/img/LogoGmarket.png" alt="">
+                </div>
+                <div class="modal-noti__body">
+                    <span class="modal-noti__body-title">
+                        Bạn có chắc chắn xoá sản phẩm này không?
+                    </span>
+                    <div class="modal-noti__body-btn">
+                        <button href="" class="btn-l btnCancelModal-accept btnDeleteModal-accept">Xác nhận</button>
+                        <button class="btn-l or-body__btn-cancel btnCancelModal-cancel btnCancelDeleteModal-cancel">Huỷ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
+    <script src="/QLHTT/src/main/resources/templates/navbarEmployee.js"></script>
+    <script src="/QLHTT/src/main/resources/templates/footerCustomer.js"></script>
+    <script>
+        // Add Button
+        var btnPlus = document.querySelector('.btn__plus')
+        var addProduct = document.querySelector('.add-product')
+        var modalAcceptBtn = document.querySelector('.btnCancelAddProductModal-accept')
+        var modalCancelBtn = document.querySelector('.btnCancelAddProductModal-cancel')
+        var cancelAddProduct = document.querySelector('.cancel-add-product')
+
+        var btnRemove = document.querySelector('.btn__remove')
+        var deleteProduct = document.querySelector('.delete-product')
+
+        btnPlus.onclick = function() {
+            addProduct.setAttribute("style", "display: flex;")
+            addNewItem()
+            cancelAddNewItem()
+        }
+
+        function addNewItem() {
+            modalAcceptBtn.onclick = function() {
+                addProduct.setAttribute("style", "display: none;")
+                // console.log('hi')
+            }
+        }
+        function cancelAddNewItem() {
+            modalCancelBtn.onclick = function() {
+                addProduct.setAttribute("style", "display: none;")
+                // console.log('hi')
+                cancelAddProduct.setAttribute("style", "display: flex") 
+                cancelCancelAddProduct()      
+                acceptCancelAddProduct()         
+            }
+        }
+        function cancelCancelAddProduct() {
+            var acceptCancel = document.querySelector('.btnCancelModal-cancel')
+            acceptCancel.onclick = function() {
+                addProduct.setAttribute("style", "display: flex;")
+                cancelAddProduct.setAttribute("style", "display: none") 
+            }
+        }
+        function acceptCancelAddProduct() { 
+            var cancelCancel = document.querySelector('.btnCancelModal-accept')
+            cancelCancel.onclick = function() {
+                cancelAddProduct.setAttribute("style", "display: none;")
+            }
+        }
+
+        btnRemove.onclick = function() {
+            deleteProduct.setAttribute("style", "display: flex;")
+            acceptDelateProduct()
+            cancelDelateProduct()
+        }
+        function acceptDelateProduct() {
+            var acceptCancel = document.querySelector('.btnDeleteModal-accept')
+            acceptCancel.onclick = function() {
+                deleteProduct.setAttribute("style", "display: none;")
+            }
+        }
+        function cancelDelateProduct() {
+            var cancelCancel = document.querySelector('.btnCancelDeleteModal-cancel')
+            // console.log(cancelCancel)
+            cancelCancel.onclick = function() {
+                deleteProduct.setAttribute("style", "display: none;")
+            }
+        }
+
+        var showFile = document.querySelector('.myfile__img')
+        var inputFile = document.querySelector('#myfile')
+        function readFile(input) {
+            // console.log('hi')
+            if(input.files && input.files[0]) {
+                var reader = new FileReader()
+                reader.onload = function(e) {
+                    // console.log(e.target.result)
+                    document.querySelector('.show-img').setAttribute("style", "display: flex;")
+                    showFile.setAttribute('src', e.target.result)
+                }
+            }
+            reader.readAsDataURL(input.files[0])
+        }
+    </script>
+</body>
+</html>

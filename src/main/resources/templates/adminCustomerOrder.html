@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/cssa/adminCustomerOrder.css">
+</head>
+<body>
+    <div class="employee">
+        <header class="employee-header">
+            <!-- <a href="./employee.html" class="header__logo">
+                <img src="./assets/img/LogoGmarket.png" alt="" class="header__img">
+            </a> -->
+        </header>
+        <div class="order-details">
+            <div class="od-heading">
+                <a href="./adminCustomerOrder.html" class="od-heading__link">
+                    <i class="od-heading__icon fa-solid fa-arrow-left"></i>
+                </a>
+                <h1 class="od-heading__title">
+                    THÔNG TIN KHÁCH HÀNG
+                </h1>
+            </div>
+
+            <div class="customerOrderDetail">
+                <div class="modal__body add-customerOrder__body">
+                    <form action="" class="basic-form">
+                        <label for="" class="form__label">Họ và tên:</label>
+                        <input type="text" class="form__input" value="Sữa cô gái Hà Lan">
+                    </form>
+
+                    <form action="" class="basic-form-radio">
+                        <div class="form-radio">
+                            <input class="form__radio" type="radio" name="gender" id="gender-male">
+                            <label class="form__radio-label" for="gender-male">Nam</label>
+                        </div>
+                        <div class="form-radio">
+                            <input class="form__radio" checked type="radio" name="gender" id="gender-female">
+                            <label class="form__radio-label" for="gender-female">Nữ</label>
+                        </div>
+                    </form>
+
+                    <form action="" class="basic-form">
+                        <label for="" class="form__label">CCCD/CMND:</label>
+                        <input type="text" class="form__input" value="012121212">
+                    </form>
+
+                    <form action="" class="basic-form">
+                        <label for="" class="form__label">Ngày sinh:</label>
+                        <input type="text" class="form__input" value="1/1/2022">
+                    </form>
+
+                    <form action="" class="basic-form">
+                        <label for="" class="form__label">Số điện thoại:</label>
+                        <input type="text" class="form__input" value="012121212">
+                    </form>
+
+                    <form action="" class="basic-form">
+                        <label for="" class="form__label">Địa chỉ:</label>
+                        <input type="text" class="form__input" value="">
+                    </form>
+    
+                    <div class="add-customerOrder__btn">
+                        <button class="btn-l btn-accept">Cập nhật</button>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer"></footer>
+        </div>
+    </div>
+    <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
+    <script src="/QLHTT/src/main/resources/templates/footerCustomer.js"></script>
+</body>
+</html>

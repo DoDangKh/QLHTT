@@ -1,0 +1,427 @@
+<link
+            href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap"
+            rel="stylesheet">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css}"/>
+    <link rel="stylesheet" th:href="@{public/owlcarousel/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{public/owlcarousel/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{public/css/reset.css}"/>
+    <link rel="stylesheet" th:href="@{public/css/main.css}"/>
+<div class="header-wrapper">
+    <div class="heading">
+        <a href="/home" class="header-logo"><img
+                src="https://gmarket24h.com/images/thumbs/0013362_Logo%20Gmarket%20to%20nhat.png"
+                alt="G-Market"></a>
+        <div class="header-search">
+            <form class="search-form">
+                <div class="search-form__input">
+                    <input type="text" placeholder="Tìm kiếm">
+                </div>
+                <button class="search-form__icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+        </div>
+        <div class="header-right-wrapper">
+            <div class="header-right">
+                <div class="cart-icon">
+                    <a href="#" class="btn-cart" th:href="@{cart/all}">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <div class="cart-num">0</div>
+                        <div class="cart-price">Giỏ hàng</div>
+                    </a>
+                </div>>
+                <div class="account-icon">
+                    <div sec:authorize="isAnonymous()">
+                        <i class=" fa-solid fa-user"></i>
+                        <span class="account-title">Tài khoản</span>
+                        <div class="account-dropdown">
+                            <a href="login" class="btn-signin">Đăng nhập</a>
+                            <a href="register" class="btn-signup">Tạo tài khoản</a>
+                        </div>
+                    </div>
+                    <div sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                        <i class=" fa-solid fa-user"></i>
+                        <span class="account-title" sec:authentication="name"></span>
+                        <div class="account-dropdown">
+                            <a href="user/info" class="btn-signin">Thông Tin</a>
+                            <a href="/logout" class="btn-signup">Đăng Xuất</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="header-menu">
+        <div class="category-menu">
+            <a class="categories" href="#">
+                <i class="fa-solid fa-bars"></i>
+                <span class="category-title">DANH MỤC</span>
+            </a>
+            <div class="dropdown-categories">
+                <ul>
+                    <li class="category-item">
+                        <a href="#">
+                            <span>KHUYẾN MÃI</span>
+                            <i class="fa-solid fa-angle-up"></i>
+                        </a>
+                        <div class="dropdown-category-item">
+                            <ul>
+                                <li>
+                                    <a href="#">Hot Deal</a>
+                                </li>
+                                <li>
+                                    <a href="#">Luôn Có Giá Tốt</a>
+                                </li>
+                                <li>
+                                    <a href="#">Mua Nhiều Giảm Sâu</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="category-item">
+                        <a href="#">
+                            <span>TRÁI CÂY - RAU CỦ</span>
+                            <i class="fa-solid fa-angle-up"></i>
+                        </a>
+                        <div class="dropdown-category-item">
+                            <ul>
+                                <li>
+                                    <a href="#">Trái Cây</a>
+                                </li>
+                                <li>
+                                    <a href="#">Rau Củ Quả</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="category-item">
+                        <a href="#">
+                            <span>THỊT - TRỨNG - HẢI SẢN</span>
+                            <i class="fa-solid fa-angle-up"></i>
+                        </a>
+                        <div class="dropdown-category-item">
+                            <ul>
+                                <li>
+                                    <a href="#">Thịt</a>
+                                </li>
+                                <li>
+                                    <a href="#">Trứng</a>
+                                </li>
+                                <li>
+                                    <a href="#">Hải Sản</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="category-item">
+                        <a href="#">
+                            <span>SỮA - SẢN PHẨM TỪ SỮA</span>
+                            <i class="fa-solid fa-angle-up"></i>
+                        </a>
+                        <div class="dropdown-category-item">
+                            <ul>
+                                <li>
+                                    <a href="#">Sữa</a>
+                                </li>
+                                <li>
+                                    <a href="#">Sản Phẩm Từ Sữa</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="category-item">
+                        <a href="#">
+                            <span>THỰC PHẨM KHÔ</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#">
+                            <span>BÁNH KẸO - ĐỒ UỐNG</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#">
+                            <span>CHĂM SÓC CÁ NHÂN</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+<!-- <style>
+
+@charset "UTF-8";
+@keyframes moveUp {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+body,
+html {
+  font-family: "Rubik", sans-serif;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 1340px;
+  margin: 0 auto;
+}
+
+.header-top {
+  position: relative;
+  height: 150px;
+}
+    .header-top .header-wrapper {
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  background-color: #fff;
+  z-index: 200;
+}
+.header-top .header-wrapper .heading {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--white-text);
+}
+.header-top .header-wrapper .heading .header-logo {
+  display: inline-block;
+  padding-right: 20px;
+}
+.header-top .header-wrapper .heading .header-logo img {
+  max-width: 100%;
+  max-height: 75px;
+}
+.header-top .header-wrapper .heading .header-search {
+  width: 50%;
+}
+.header-top .header-wrapper .heading .header-search .search-form {
+  display: flex;
+}
+.header-top .header-wrapper .heading .header-search .search-form .search-form__input {
+  width: 90%;
+}
+.header-top .header-wrapper .heading .header-search .search-form .search-form__input input {
+  display: block;
+  width: 100% !important;
+  border: 1px solid #c4c4c4;
+  border-radius: 4px 0 0px 4px;
+  border-right: 0;
+  height: 50px;
+  text-align: left;
+  padding-left: 10px;
+  font-size: 18px;
+  font-weight: 400;
+}
+.header-top .header-wrapper .heading .header-search .search-form .search-form__icon {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: block;
+  border: 1px solid #c4c4c4;
+  border-radius: 0px 4px 4px 0px;
+  border-left: 0;
+}
+.header-top .header-wrapper .heading .header-search .search-form .search-form__icon i {
+  font-size: 18px;
+  color: green;
+}
+.header-top .header-wrapper .heading .header-search .search-form .search-form__icon:hover {
+  background-color: #031d17;
+}
+.header-top .header-wrapper .heading .header-right-wrapper {
+  width: 34%;
+  float: right;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .cart-icon {
+  padding: 0 30px;
+  border-right: 1px solid #ebe7e7;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .cart-icon .btn-cart {
+  display: block;
+  position: relative;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .cart-icon .btn-cart i {
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: green;
+  padding-bottom: 8px;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .cart-icon .btn-cart .cart-num {
+  position: absolute;
+  background-color: #f88d2a;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  top: -10px;
+  right: 5px;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .cart-icon .btn-cart .cart-price {
+  font-size: 18px;
+  color: #707070;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .account-icon {
+  margin: 0 30px;
+  position: relative;
+  padding: 10px 0;
+  cursor: pointer;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .account-icon i {
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: green;
+  padding-bottom: 8px;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .account-icon .account-title {
+  display: block;
+  font-size: 18px;
+  color: #707070;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .account-icon:hover .account-title {
+  color: red;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .account-icon:hover .account-dropdown {
+  display: block;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .account-icon .account-dropdown {
+  display: none;
+  position: absolute;
+  width: 200px;
+  margin-top: 8px;
+  left: -60px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .account-icon .account-dropdown .btn-signin {
+  width: 100%;
+  display: inline-block;
+  padding: 12px;
+  margin-bottom: 16px;
+  background-color: #0dad58;
+  border-radius: 0.5rem;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .account-icon .account-dropdown .btn-signin:hover {
+  background-color: #00833e;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .account-icon .account-dropdown .btn-signup {
+  width: 100%;
+  display: inline-block;
+  padding: 12px;
+  background-color: #fff;
+  border: 1px solid #00833e;
+  border-radius: 0.5rem;
+  font-size: 16px;
+  font-weight: 400;
+  color: #00833e;
+}
+.header-top .header-wrapper .heading .header-right-wrapper .header-right .account-icon .account-dropdown .btn-signup:hover {
+  background-color: #00833e;
+  color: #fff;
+}
+.header-top .header-wrapper .header-menu {
+  background-color: #00833e;
+  padding: 0 100px;
+}
+.header-top .header-wrapper .header-menu .category-menu {
+  position: relative;
+  display: inline-block;
+}
+.header-top .header-wrapper .header-menu .category-menu .categories {
+  cursor: pointer;
+  display: inline-block;
+  color: #fff;
+  font-size: 22px;
+  padding: 15px 0;
+}
+.header-top .header-wrapper .header-menu .category-menu .categories .category-title {
+  display: inline-block;
+  margin-left: 20px;
+}
+.header-top .header-wrapper .header-menu .category-menu:hover .dropdown-categories {
+  display: block;
+}
+.header-top .header-wrapper .header-menu .category-menu .dropdown-categories {
+  display: none;
+  width: 250px;
+  position: absolute;
+  z-index: 100;
+  background-color: #fff;
+  border: 1px solid #eee;
+  transform: translateY(-10px);
+  animation: moveUp 0.5s forwards;
+}
+.header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item {
+  position: relative;
+}
+.header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item > a {
+  display: block;
+  padding: 10px;
+  font-size: 15px;
+  color: #707070;
+}
+.header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item > a > span {
+  padding-left: 6px;
+}
+.header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item > a > i {
+  float: right;
+  transition: all 0.4s ease-in;
+}
+.header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item:hover > a {
+  color: red;
+}
+.header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item:hover > a > i {
+  transform: rotate(90deg);
+}
+.header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item:hover .dropdown-category-item {
+  display: block;
+}
+.header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item .dropdown-category-item {
+  display: none;
+  width: 100%;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #fff;
+  border: 1px solid #eee;
+  z-index: 101;
+  overflow: hidden;
+  transition: all 0.8s;
+}
+.header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item .dropdown-category-item > ul > li > a {
+  display: block;
+  padding: 10px;
+  color: #707070;
+  font-size: 16px;
+}
+.header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item .dropdown-category-item > ul > li > a:hover {
+  color: red;
+}
+</style> -->

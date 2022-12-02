@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/adminLogout.css">
+</head>
+
+<body>
+    <div class="modal exit">
+        <div class="modal-noti-size">
+            <div class="modal-noti__head">
+                <img class="modal-noti__head-img" src="./assets/img/LogoGmarket.png" alt="">
+            </div>
+            <div class="modal-noti__body">
+                <span class="modal-noti__body-title">
+                    Bạn có chắc chắn đăng xuất khỏi trang?
+                </span>
+                <div class="modal-noti__body-btn">
+                    <button onclick="window.location.href='./cartItem';" class="btn-l btnCancelModal-accept">Xác nhận</button>
+                    <button class="btn-l btnCancelModal-cancel">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var exitModal = document.querySelector('.exit')
+        var cancelModal = document.querySelector('.btnCancelModal-cancel')
+        var acceptModal = document.querySelector('.btnCancelModal-accept')
+        var home = document.querySelector('.home')
+
+        acceptModal.onclick = function() {
+            window.location.pathname = "./cartItem.html"
+        }
+        cancelModal.onclick = function() {
+            window.location.pathname = "./employee.html"
+        }
+    </script>
+</body>
+</html>
