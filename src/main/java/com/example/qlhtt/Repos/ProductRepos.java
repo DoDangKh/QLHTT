@@ -36,4 +36,15 @@ public class ProductRepos {
         }
         return null;
     }
+    public boolean update(Product product){
+        try{
+            jdbcTemplate.update("update Product set name =? ,quantity=?, price=?, img=?, describe=?, discount_id=?, type_id=? where product_id=? "
+            , product.getName(), product.getQuantity(), product.getPrice(), product.getImg(), product.getDescribe(), product.getDiscount_id(), product.getType_id(), product.getProduct_id());
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

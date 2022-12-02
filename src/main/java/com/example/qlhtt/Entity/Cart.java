@@ -2,8 +2,9 @@ package com.example.qlhtt.Entity;
 
 public class Cart {
     private int customer_id;
-    private int product_id;
+    private Product product;
     private int quantity;
+
 
     public int getCustomer_id() {
         return customer_id;
@@ -13,12 +14,12 @@ public class Cart {
         this.customer_id = customer_id;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getQuantity() {
@@ -26,6 +27,13 @@ public class Cart {
     }
 
     public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Cart(int customer_id, int product_id, int quantity) {
+        this.customer_id = customer_id;
+        this.product= new Product();
+        this.product.setProduct_id(product_id);
         this.quantity = quantity;
     }
 }

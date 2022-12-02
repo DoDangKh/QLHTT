@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css}" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{public/css/grid.css}">
+    <link rel="stylesheet" th:href="@{/public/css/base.css}">
+    <link rel="stylesheet" th:href="@{/public/css/cartItem.css}">
+</head>
+<body>
+    <!-- Header -->
+    <div class="main-header">
+        <header class="heading">
+            <a href="" class="heading__link" th:href="@{/home}" ><img class="heading__logo" th:src="@{/public/images/LogoGmarket.png}"  alt=""></a>
+            <div class="heading-with-search">
+                <div class="heading__search">
+                    <div class="heading__search-input">
+                        <input type="text" placeholder="Tìm kiếm">
+                    </div>
+                    <div class="heading__search-logo">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="heading__cart">
+                <i class="heading__cart-logo fa-solid fa-cart-shopping"></i>
+                <span class="heading__cart-notice">0</span>
+                <!-- <span class="heading__cart-title">Giỏ hàng</span> -->
+                <span class="heading__cart-title heading__cart-title--price">57.000 đ </span>
+            </div>
+            <div class="heading__account">
+                <i class="heading__account-logo fa-solid fa-user"></i>
+                <span class="heading__account-title">Tài khoản</span>
+            </div>
+        </header>
+
+        <nav class="navigation">
+            <div class="nav-heading">
+                <i class="nav-heading__icon fa-solid fa-bars"></i>
+                <span class="nav-heading__title">DANH MỤC</span>
+                <ul class="nav-list">
+                    <a href="" class="nav-list__link">
+                        <li class="nav-list__item">Rau củ - Trái cây</li>
+                        <i class="nav-list__logo fa-solid fa-chevron-right"></i>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="main-body">
+        <div class="grid wide">
+            <div class="row main-body-item">
+                <div class="item-info col l-9">
+                    <div class="item-info__detail">
+                        <div class="item-info__detail-title-del">
+                            <span class="item-info__detail-title">
+                                Thông tin đơn hàng
+                            </span>
+                            <button class="item-info__detail-del">
+                                <i class="fa-solid fa-trash-can"></i>
+                                <span>Xóa giỏ hàng</span>
+                            </button>
+                        </div>
+    
+                        <ul class="bill-list" th:each="product :${cartitem}">
+                            <li class="bill-item">
+                                <img th:src="@{/public/images/{path}.jpg (path=${product.product.img})}" alt="" class="bill-item__img">
+                                <div class="bill-item__info">
+                                    <span class="bill-item__info-title" th:text="${product.product.name}" th:with="sum=sum+${product.product.price * product.quantity}">
+                                    </span>
+                                    <span class="bill-item__info-price" th:text="${product.product.price}"></span>
+                                    <div class="box-check">
+                                        <form class="btn-box">
+                                            <button class="btn btn-box__minus">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </button>
+                                            <input type="text" th:value="${product.quantity}" class="btn-box__count">
+                                            <button class="btn btn-box__plus" type="submit" th:formaction="@{add/{path} (path=${product.product.product_id})}">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </form>
+
+                                        <div class="check">
+                                            <span class="check__title">Tổng: </span>
+                                            <span class="check__sum" th:with="var=${product.product.price * product.quantity}" th:text="${var}"></span>
+                                        </div>
+                                    </div>
+                                    <span th:text="${error}"></span>
+                                </div>
+                            </li>
+
+
+                        </ul>
+                    </div>
+
+                    <div class="item-info__check">
+                        <span class="item-info__check-title">
+                            Thông tin đơn hàng
+                        </span>
+                        <div class="item-info__price">
+                            <span style="color: #544444" class="item-info__price-tit">Tạm tính:</span>
+                            <span class="item-info__price-pri" th:text="${sum}"></span>
+                        </div>
+    
+                        <div class="item-info__price">
+                            <span class="item-info__price-tit">Tổng tiền:</span>
+                            <span class="item-info__price-pri">Chờ thanh toán</span>
+                        </div>
+                        <div class="confirm">
+                            <button class="btn-l">Đặt hàng</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="customer-info col l-6">
+                    <div class="customer-info-title">
+                        <span class="customer-info-title__detail">
+                            Thông tin
+                        </span>
+                        <div class="customer-info-title__login">
+                            <span>Bạn đã có tài khoản?</span>
+                            <a href="">Đăng nhập</a>
+                        </div>
+                    </div>
+
+                    <form action="" class="form-cus-info">
+                        <label class="form-cus__label" for="">Số điện thoại</label>
+                        <input class="form-cus__input" type="text" placeholder="Số điện thoại">
+                    </form>
+                    <form action="" class="form-cus-info">
+                        <label class="form-cus__label" for="">Họ và tên</label>
+                        <input class="form-cus__input" type="text" placeholder="Họ và tên">
+                    </form>
+
+                    <span class="ship-info-title">
+                        Thông tin giao hàng
+                    </span>
+
+                    <form action="" class="basic-form">
+                        <label class="form__label" for="">Địa chỉ</label>
+                        <input class="form__input" type="text" placeholder="Địa chỉ">
+                    </form>
+                    <form action="" class="basic-form">
+                        <label class="form__label" for="">Ghi chú</label>
+                        <input class="form__input" type="text" placeholder="Ghi chú">
+                    </form>
+
+                    <div class="confirm">
+                        <button class="btn-l">Đặt hàng</button>
+                    </div>
+                </div>  -->
+
+                <!-- <div class="no-item col l-12">
+                    <img class="no-item__img" src="./assets/img/cart_empty.png" alt="">
+                    <span class="no-item__para">Rất tiếc! Bạn không có sản phẩm nào ở đây</span>
+                </div> -->
+            </div>
+        </div>
+
+        
+    </div>
+
+    <footer class="main-footer">
+        <img src="./assets/img/LogoGmarket.png" alt="" class="footer__img">
+        <span class="footer__title">G Market - bạn của mọi nhà</span>
+        <p class="footer__desc">Cảm ơn bạn rất nhiều vì đã giúp chúng tôi trở thành thương hiệu số một trong lòng khách hàng. Chúng tôi không thể đạt được thành công này nếu không có bạn là khách hàng của chúng tôi. Sự hài lòng của bạn là mối quan tâm số một của chúng tôi và chúng tôi hứa sẽ luôn đáng tin cậy.</p>
+    </footer>
+
+    <!-- MODAL -->
+    <!-- <div class="modal">
+        <div class="login">
+            <header class="header">
+                <img class="header__img" src="./assets/img/LogoGmarket.png" alt="">
+                <i class="header__icon fa-solid fa-xmark"></i>
+            </header>
+            <div class="body">
+                <h1 class="title">Wel come to my market</h1>
+                <div class="form">
+                    <div class="form-input">
+                        <i class="form-input__icon fa-solid fa-phone"></i>
+                        <input type="text" class="form-input__inp">
+                    </div>
+                    <div class="form-input">
+                        <i class="form-input__icon form-input__icon-m fa-solid fa-lock"></i>
+                        <input type="text" class="form-input__inp">
+                    </div>
+                </div>
+
+                <div class="nav-content">
+                    <a href="" class="nav-content__forget">Quên mật khẩu?</a>
+                    <div class="nav-content__register">
+                        <span class="nav-content__register-title">
+                            Bạn chưa có tài khoản?
+                        </span>
+                        <a href="./register.html" class="nav-content__register-regs">Tạo tài khoản</a>
+                    </div>
+                </div>
+
+                <div class="btn-login">
+                    <button>Đăng nhập</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</body>
+</html>
