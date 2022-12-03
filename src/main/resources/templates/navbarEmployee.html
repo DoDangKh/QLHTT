@@ -1,38 +1,79 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./assets/css/grid.css">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/adminCustomer.css">
-
 <span class="navbar__title">Danh Mục</span>
 <ul class="navbar__list">
-    <a href="./employee.html" class="navbar__link">
+    <a href="/QLHTT/src/main/resources/templates/employee.html" class="navbar__link">
         <li class="navbar__item">
             Thông tin cá nhân
         </li>
     </a>
-    <a href="./adminProduct.html" class="navbar__link">
+    <a href="/QLHTT/src/main/resources/templates/adminProduct.html" class="navbar__link">
         <li class="navbar__item">
             Quản lí sản phẩm
         </li>
     </a>
-    <a href="./adminOrder.html" class="navbar__link">
+    <a href="/QLHTT/src/main/resources/templates/adminOrder.html" class="navbar__link">
         <li class="navbar__item">
             Quản lí đơn hàng
         </li>
     </a>
-    <a href="./adminCustomer.html" class="navbar__link">
-        <li class="navbar__item active">
+    <a href="/QLHTT/src/main/resources/templates/adminCustomer.html" class="navbar__link">
+        <li class="navbar__item">
             Quản lí khách hàng
         </li>
     </a>
-    <a href="./adminLogout.html" class="navbar__link">
+    <a href="/QLHTT/src/main/resources/templates/adminLogout.html" class="navbar__link">
         <li class="navbar__item">
             Đăng xuất
         </li>
     </a>
 </ul>
+<style>
+    .navbar__title {
+    font-size: 2rem;
+    color: var(--main-color);
+    display: block;
+    padding: 20px
+}
+
+.navbar__icon {
+    font-size: 8rem;
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    color: var(--main-color);
+}
+
+.navbar__link {
+    text-decoration: none;
+    border-top: 1px solid var(--white-text);
+    display: block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.navbar__list {
+    padding: 0;
+}
+
+.navbar__link:first-child{
+    border-color: var(--main-color);
+}
+
+.navbar__item {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    padding: 15px 0px;
+    color: var(--main-color);
+    animation: transform linear 0.1s;
+    will-change: transform;
+    list-style-type: none;
+}
+
+.navbar__item.active {
+    color: var(--second-color);
+}
+.navbar__item:hover {
+    transform: translateX(5px);
+    color: var(--second-color);
+}
+
+</style>
