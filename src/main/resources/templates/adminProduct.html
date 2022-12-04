@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="product">
-                        <a href="#" class="product__item">
+                        <a href="/QLHTT/src/main/resources/templates/adminProductDetail.html" class="product__item">
                             <img src="./assets/img/suatuoi.webp" alt="" class="product__item-img">
                             <div class="product__content">
                                 <span class="product__item-title">
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                         </a>
-                        <button class="categoryBtn__btn btn__remove">
+                        <button onclick="removeItem(this)" class="categoryBtn__btn btn__remove">
                             <i class="fa-solid fa-times"></i>
                             <span>Xoá</span>
                         </button>    
@@ -243,23 +243,25 @@
             }
         }
 
-        btnRemove.onclick = function() {
+        function removeItem(item) {
+            console.log(item)
             deleteProduct.setAttribute("style", "display: flex;")
             acceptDelateProduct()
             cancelDelateProduct()
         }
         function acceptDelateProduct() {
             var acceptCancel = document.querySelector('.btnDeleteModal-accept')
-            acceptCancel.onclick = function() {
+            acceptCancel.addEventListener("click", function() {
                 deleteProduct.setAttribute("style", "display: none;")
-            }
+                product.setAttribute("style", "display: none;")
+            })
         }
         function cancelDelateProduct() {
             var cancelCancel = document.querySelector('.btnCancelDeleteModal-cancel')
             // console.log(cancelCancel)
-            cancelCancel.onclick = function() {
+            cancelCancel.addEventListener("click", function() {
                 deleteProduct.setAttribute("style", "display: none;")
-            }
+            })
         }
 
         var showFile = document.querySelector('.myfile__img')

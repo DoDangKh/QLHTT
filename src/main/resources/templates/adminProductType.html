@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/QLHTT/src/main/resources/static/public/css/grid.css">
+    <link rel="stylesheet" href="/QLHTT/src/main/resources/static/public/css/base.css">
+    <link rel="stylesheet" href="/QLHTT/src/main/resources/static/public/css/adminProductType.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="employee">
+        <header class="employee-header">
+            
+        </header>
+        <div class="grid">
+            <div class="row sm-gutter space">
+                <div class="col l-2">
+                    <nav class="navbar">
+                        
+                    </nav>
+                </div>
+
+                <div class="col l-10">
+                    <div class="categoryBtn">
+                        <button class="categoryBtn__btn btn__plus">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Thêm</span>
+                        </button>
+                    </div>
+
+                    <div class="row">
+                        <div class="col l-2">
+                            <div class="productType">
+                                <h2 class="productType__title">Thịt sống</h2>
+                            </div>
+                        </div>
+                        <div class="col l-2">
+                            <div class="productType">
+                                <h2 class="productType__title">Thịt sống</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal add-type">
+        <div class="modal__header">
+            <img src="/QLHTT/src/main/resources/static/public/images/LogoGmarket.png" alt="" class="modal__header-img">
+        </div>
+        <div class="modal__body">
+            <form action="">
+                <div class="basic-form">
+                    <label for="" class="form__label">Mã loại:</label>
+                    <input type="text" class="form__input">
+                </div>
+                <div class="basic-form">
+                    <label for="" class="form__label">Tên loại:</label>
+                    <input type="text" class="form__input">
+                </div>
+            </form>
+            <div class="add-type__btn">
+                <button class="btn-l btnAddTypeModal-accept">Xác nhận</button>
+                <button class="btn-l btnCancelTypeModal-cancel">Huỷ</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal cancel-add-type">
+        <div class="modal-noti-size">
+            <div class="modal-noti__head">
+                <img class="modal-noti__head-img" src="/QLHTT/src/main/resources/static/public/images/LogoGmarket.png" alt="">
+            </div>
+            <div class="modal-noti__body">
+                <span class="modal-noti__body-title">
+                    Bạn có chắc chắn huỷ thêm loại hàng này không?
+                </span>
+                <div class="modal-noti__body-btn">
+                    <button href="" class="btn-l btnCancelModal-accept">Xác nhận</button>
+                    <button class="btn-l btnCancelModal-cancel">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var btnPlus = document.querySelector('.btn__plus')
+        var addType = document.querySelector('.add-type')
+        var modalAcceptBtn = document.querySelector('.btnAddTypeModal-accept')
+        var modalCancelBtn = document.querySelector('.btnCancelTypeModal-cancel')
+        var cancelAddType = document.querySelector('.cancel-add-type')
+
+        btnPlus.onclick = function() {
+            addType.setAttribute("style", "display: flex;")
+            addNewItem()
+            cancelAddNewItem()
+        }
+
+        function addNewItem() {
+            modalAcceptBtn.onclick = function() {
+                addType.setAttribute("style", "display: none;")
+                // console.log('hi')
+            }
+        }
+        function cancelAddNewItem() {
+            modalCancelBtn.onclick = function() {
+                // console.log('hi')
+                cancelAddType.setAttribute("style", "display: flex") 
+                cancelCancelAddType()      
+                acceptCancelAddType()         
+            }
+        }
+        function cancelCancelAddType() {
+            var acceptCancel = document.querySelector('.btnCancelModal-cancel')
+            console.log('hi')
+            acceptCancel.onclick = function() {
+                addType.setAttribute("style", "display: flex;")
+                cancelAddType.setAttribute("style", "display: none") 
+            }
+        }
+        function acceptCancelAddType() { 
+            var cancelCancel = document.querySelector('.btnCancelModal-accept')
+            cancelCancel.onclick = function() {
+                cancelAddType.setAttribute("style", "display: none;")
+                addType.setAttribute("style", "display: none;")
+            }
+        }
+    </script>
+    
+    <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
+    <script src="/QLHTT/src/main/resources/templates/navbarEmployee.js"></script>
+</body>
+</html>

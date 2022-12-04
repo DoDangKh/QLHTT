@@ -7,9 +7,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./assets/css/grid.css">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/orderDetail.css">
+    <link rel="stylesheet" href="/QLHTT/src/main/resources/static/public/css/grid.css">
+    <link rel="stylesheet" href="/QLHTT/src/main/resources/static/public/css/base.css">
+    <link rel="stylesheet" href="/QLHTT/src/main/resources/static/public/css/orderDetail.css">
 </head>
 <body>
     <div class="employee">
@@ -18,7 +18,7 @@
         </header>
         <div class="order-details">
             <div class="od-heading">
-                <a href="./order.html" class="od-heading__link">
+                <a href="/QLHTT/src/main/resources/templates/adminOrder.html" class="od-heading__link">
                     <i class="od-heading__icon fa-solid fa-arrow-left"></i>
                 </a>
                 <h1 class="od-heading__title">
@@ -66,6 +66,25 @@
                                 </td>
                             </tr>
                         </tbody>
+                        <tbody class="or-customer__body">
+                            <tr>
+                                <td class="or-customer__item or-customer__item-name">
+                                    Sữa cô gái Hà Lan DUTCH LADY
+                                    Sữa cô gái Hà Lan DUTCH LADY
+                                    Sữa cô gái Hà Lan DUTCH LADY
+
+                                </td>
+                                <td class="or-customer__item or-customer__item-count">
+                                    1
+                                </td>
+                                <td class="or-customer__item or-customer__item-left">
+                                    20.000
+                                </td>
+                                <td class="or-customer__item or-customer__item-price">
+                                    20.000
+                                </td>
+                            </tr>
+                        </tbody>
                         <tfoot>
                             <th colspan="3" class="or-customer__heading">
                                 Tổng cộng
@@ -78,6 +97,9 @@
                     <div class="or-body__btn">
                         <button class="btn-l or-body__btn-cancel">Huỷ</button>
                         <button class="btn-l or-body__btn-accept">Xác nhận</button>
+                    </div>
+                    <div class="or-body-accept">
+                        Đơn hàng được xác nhận
                     </div>
                 </div>
             </div>
@@ -123,14 +145,27 @@
         </div>
     </div>
     <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
-    <script src="/QLHTT/src/main/resources/templates/footerCustomer.js"></script>
     <script>
         // Accept Button
         var acceptBtn = document.querySelector('.or-body__btn-accept')
         var acceptModal = document.getElementById('acceptModal')
         var acceptModalisAccepted = document.querySelector('.btnAcceptModal-accept')
         var acceptModalisCanceled = document.querySelector('.btnAcceptModal-cancel')
-        
+        var orBodyBtn = document.querySelector('.or-body__btn')
+        var orBodyAccept = document.querySelector('.or-body-accept')
+
+        acceptBtn.onclick = function() { 
+            // orBodyBtn.setAttribute("style", "display: none;")
+            acceptModal.setAttribute("style", "display: flex;")
+            acceptModalisAccepted.addEventListener("click", function() {
+                orBodyBtn.setAttribute("style", "display: none;")
+                orBodyAccept.setAttribute("style", "display: block")
+                acceptModal.setAttribute("style", "display: none;")
+            })
+            acceptModalisCanceled.addEventListener("click", function() {
+                acceptModal.setAttribute("style", "display: none;")
+            })
+        }
 
         // Cancel Button
         var cancelBtn = document.querySelector('.or-body__btn-cancel')
@@ -151,65 +186,65 @@
             })
         }
 
-        var orderDetailAPI = "http://localhost:3000/orderDetail";
-        var orderDetailList;
-        fetch(orderDetailAPI)
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(list) {
-                orderDetailList = list;
-                console.log(orderDetailList)
-                return handleData(list);
-            })
-            function handleData(list) {
-                orderDetailList = list;
-                console.log(orderDetailList)
-                var orderDetailhtmls = orderDetailList.map(function(orderDetail){
-                var priceCount = orderDetail.count * orderDetail.price
-                    return `
-                        <tr>
-                            <td class="or-customer__item or-customer__item-name">
-                                ${orderDetail.name}
-                            </td>
-                            <td class="or-customer__item or-customer__item-count">
-                                ${orderDetail.count}
-                            </td>
-                            <td class="or-customer__item or-customer__item-left">
-                                ${orderDetail.price}
-                            </td>
-                            <td class="or-customer__item or-customer__item-price">
-                                ${priceCount}
-                            </td>
-                        </tr>
-                    `
-                })
-                var orderDetailhtml = orderDetailhtmls.join('')
-                document.querySelector('.or-customer__body').innerHTML = orderDetailhtml
-                var sumPriceTable = document.querySelector('tfoot .or-customer__item-price')
-                sumPriceTable.innerHTML = sumPrice(orderDetailList)
+        // var orderDetailAPI = "http://localhost:3000/orderDetail";
+        // var orderDetailList;
+        // fetch(orderDetailAPI)
+        //     .then(function(response) {
+        //         return response.json();
+        //     })
+        //     .then(function(list) {
+        //         orderDetailList = list;
+        //         console.log(orderDetailList)
+        //         return handleData(list);
+        //     })
+        //     function handleData(list) {
+        //         orderDetailList = list;
+        //         console.log(orderDetailList)
+        //         var orderDetailhtmls = orderDetailList.map(function(orderDetail){
+        //         var priceCount = orderDetail.count * orderDetail.price
+        //             return `
+        //                 <tr>
+        //                     <td class="or-customer__item or-customer__item-name">
+        //                         ${orderDetail.name}
+        //                     </td>
+        //                     <td class="or-customer__item or-customer__item-count">
+        //                         ${orderDetail.count}
+        //                     </td>
+        //                     <td class="or-customer__item or-customer__item-left">
+        //                         ${orderDetail.price}
+        //                     </td>
+        //                     <td class="or-customer__item or-customer__item-price">
+        //                         ${priceCount}
+        //                     </td>
+        //                 </tr>
+        //             `
+        //         })
+        //         var orderDetailhtml = orderDetailhtmls.join('')
+        //         document.querySelector('.or-customer__body').innerHTML = orderDetailhtml
+        //         var sumPriceTable = document.querySelector('tfoot .or-customer__item-price')
+        //         sumPriceTable.innerHTML = sumPrice(orderDetailList)
 
-                acceptBtn.onclick = function() {
-                    acceptModal.setAttribute("style", "display: flex;")
-                    acceptModalisAccepted.addEventListener("click", function() {
-                        acceptModal.setAttribute("style", "display: none;")
+        //         acceptBtn.onclick = function() {
+        //             acceptModal.setAttribute("style", "display: flex;")
+        //             acceptModalisAccepted.addEventListener("click", function() {
+        //                 acceptModal.setAttribute("style", "display: none;")
 
-                        location.href = "./order.html"
-                    })
-                        acceptModalisCanceled.addEventListener("click", function() {
-                        acceptModal.setAttribute("style", "display: none;")
-                    })
-                }
-            }
+        //                 location.href = "./order.html"
+        //             })
+        //                 acceptModalisCanceled.addEventListener("click", function() {
+        //                 acceptModal.setAttribute("style", "display: none;")
+        //             })
+        //         }
+        //     }
         
-            // hàm tính tổng tiền
-            function sumPrice(orderDetailList) {
-                var sum = 0; 
-                for(var i = 0; i < orderDetailList.length; i++) {
-                    sum += Number(orderDetailList[i].price) * Number(orderDetailList[i].count);
-                }
-                return sum;
-            }
+        //     // hàm tính tổng tiền
+        //     function sumPrice(orderDetailList) {
+        //         var sum = 0; 
+        //         for(var i = 0; i < orderDetailList.length; i++) {
+        //             sum += Number(orderDetailList[i].price) * Number(orderDetailList[i].count);
+        //         }
+        //         return sum;
+        //     }
     </script>
 </body>
 </html>

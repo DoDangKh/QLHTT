@@ -51,7 +51,41 @@
                                 </div>
                             </div>
                         </a>
-                        <button class="categoryBtn__btn btn__remove">
+                        <button onclick="removeCus(this)" class="categoryBtn__btn btn__remove">
+                            <i class="fa-solid fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="customer">
+                        <a href="./customerOrder.html" class="customer__item">
+                            <i class="fa-solid fa-user"></i>
+                            <div class="customer__content">
+                                <span class="customer__item-title">
+                                    Hà Lan
+                                </span>
+                                <div class="customer__item-address">
+                                    <span class="customer__item-warehouse">Số điện thoại:</span>
+                                    <input disabled value="11222312312" class="customer__item-numberphone"></input>
+                                </div>
+                            </div>
+                        </a>
+                        <button onclick="removeCus(this)" class="categoryBtn__btn btn__remove">
+                            <i class="fa-solid fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="customer">
+                        <a href="./customerOrder.html" class="customer__item">
+                            <i class="fa-solid fa-user"></i>
+                            <div class="customer__content">
+                                <span class="customer__item-title">
+                                    Hà Lan
+                                </span>
+                                <div class="customer__item-address">
+                                    <span class="customer__item-warehouse">Số điện thoại:</span>
+                                    <input disabled value="11222312312" class="customer__item-numberphone"></input>
+                                </div>
+                            </div>
+                        </a>
+                        <button onclick="removeCus(this)" class="categoryBtn__btn btn__remove">
                             <i class="fa-solid fa-times"></i>
                         </button>
                     </div>
@@ -105,8 +139,6 @@
             </div>
         </div>
     </div>
-
-    <footer class="footer"></footer>
 
     <div class="modal cancel-add-customer">
         <div class="modal-noti-size">
@@ -190,7 +222,7 @@
             }
         }
 
-        btnRemove.onclick = function() {
+        function removeCus(item) {
             deleteCustomer.setAttribute("style", "display: flex;")
             acceptDeleteCustomer()
             cancelDeleteCustomer()
