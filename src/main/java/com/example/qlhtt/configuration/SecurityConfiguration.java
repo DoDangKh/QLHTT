@@ -37,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/home","/public/**","/product/**").permitAll();
-        http.csrf().disable().authorizeRequests().antMatchers("/cart/**").hasRole("EMPLOYEE").anyRequest()
+        http.csrf().disable().authorizeRequests().antMatchers("/cart/**").hasRole("CUSTOMER").anyRequest()
                 .authenticated().and().formLogin().loginPage("/login").permitAll().loginProcessingUrl("/login").usernameParameter("username")
                 .passwordParameter("password").defaultSuccessUrl("/home").failureUrl("/login?error=failed").and()
                 .exceptionHandling().accessDeniedPage("/login?error=deny");

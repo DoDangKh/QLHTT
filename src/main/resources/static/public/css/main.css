@@ -1,4 +1,4 @@
-/* @charset "UTF-8";
+@charset "UTF-8";
 @keyframes moveUp {
   from {
     transform: translateY(10px);
@@ -21,8 +21,8 @@ html {
 .header-top {
   position: relative;
   height: 150px;
-} */
-/* .header-top .header-wrapper {
+}
+.header-top .header-wrapper {
   top: 0;
   left: 0;
   right: 0;
@@ -265,7 +265,7 @@ html {
 }
 .header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item .dropdown-category-item > ul > li > a:hover {
   color: red;
-} */
+}
 
 main {
   background-color: #f6f6f6;

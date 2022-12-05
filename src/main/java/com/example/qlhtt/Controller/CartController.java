@@ -3,10 +3,7 @@ package com.example.qlhtt.Controller;
 import com.example.qlhtt.Entity.Cart;
 import com.example.qlhtt.Entity.Product;
 import com.example.qlhtt.Entity.UserLogin;
-import com.example.qlhtt.Repos.CartRepos;
-import com.example.qlhtt.Repos.PersonRepos;
-import com.example.qlhtt.Repos.ProductRepos;
-import com.example.qlhtt.Repos.UserLoginRepos;
+import com.example.qlhtt.Repos.*;
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -37,6 +34,9 @@ public class CartController {
 
     @Autowired
     ProductRepos productRepos;
+
+    @Autowired
+    OrderRepos orderRepos;
 
     @GetMapping("/all")
     public ModelAndView cart(){
@@ -71,5 +71,27 @@ public class CartController {
         }
         model.addAttribute("error",error);
         return "redirect:/cart/all";
+    }
+    @GetMapping("/dec/{id}")
+    public String dec(@PathVariable int id, Model model){
+        UserLogin userLogin=userLoginRepos.getUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<Cart> cart=cartRepos.getbyID(userLogin.getPerson_id());
+        for(int i=0;i<cart.size();i++){
+            if(cart.get(i).getProduct().getProduct_id()==id){
+                cart.get(i).setQuantity(cart.get(i).getQuantity()-1);
+                cartRepos.dec(cart.get(i));
+                break;
+            }
+        }
+        return "redirect:/cart/all";
+    }
+
+    @RequestMapping("/checkout")
+    public String checkout(){
+        UserLogin userLogin=userLoginRepos.getUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<Cart> cart=cartRepos.getbyID(userLogin.getPerson_id());
+        orderRepos.checkout(cart);
+        cartRepos.Delete(cart);
+        return "redirect:/home";
     }
 }

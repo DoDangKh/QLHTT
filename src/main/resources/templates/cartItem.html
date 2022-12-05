@@ -13,9 +13,47 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="header-top">
-        
-    </header>
+<header class="header-top">
+    <div th:insert="header"></div>
+</header>
+<!--    <div class="main-header">-->
+<!--        <header class="heading">-->
+<!--            <a href="" class="heading__link" th:href="@{/home}" ><img class="heading__logo" th:src="@{/public/images/LogoGmarket.png}"  alt=""></a>-->
+<!--            <div class="heading-with-search">-->
+<!--                <div class="heading__search">-->
+<!--                    <div class="heading__search-input">-->
+<!--                        <input type="text" placeholder="Tìm kiếm">-->
+<!--                    </div>-->
+<!--                    <div class="heading__search-logo">-->
+<!--                        <i class="fa-solid fa-magnifying-glass"></i>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="heading__cart">-->
+<!--                <i class="heading__cart-logo fa-solid fa-cart-shopping"></i>-->
+<!--                <span class="heading__cart-notice">0</span>-->
+<!--                &lt;!&ndash; <span class="heading__cart-title">Giỏ hàng</span> &ndash;&gt;-->
+<!--                <span class="heading__cart-title heading__cart-title&#45;&#45;price">57.000 đ </span>-->
+<!--            </div>-->
+<!--            <div class="heading__account">-->
+<!--                <i class="heading__account-logo fa-solid fa-user"></i>-->
+<!--                <span class="heading__account-title">Tài khoản</span>-->
+<!--            </div>-->
+<!--        </header>-->
+
+<!--        <nav class="navigation">-->
+<!--            <div class="nav-heading">-->
+<!--                <i class="nav-heading__icon fa-solid fa-bars"></i>-->
+<!--                <span class="nav-heading__title">DANH MỤC</span>-->
+<!--                <ul class="nav-list">-->
+<!--                    <a href="" class="nav-list__link">-->
+<!--                        <li class="nav-list__item">Rau củ - Trái cây</li>-->
+<!--                        <i class="nav-list__logo fa-solid fa-chevron-right"></i>-->
+<!--                    </a>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </nav>-->
+<!--    </div>-->
 
     <div class="main-body">
         <div class="grid wide">
@@ -41,7 +79,7 @@
                                     <span class="bill-item__info-price" th:text="${product.product.price}"></span>
                                     <div class="box-check">
                                         <form class="btn-box">
-                                            <button class="btn btn-box__minus">
+                                            <button class="btn btn-box__minus" type="submit" th:formaction="@{dec/{path} (path=${product.product.product_id})}">
                                                 <i class="fa-solid fa-minus"></i>
                                             </button>
                                             <input type="text" th:value="${product.quantity}" class="btn-box__count">
@@ -77,7 +115,9 @@
                             <span class="item-info__price-pri">Chờ thanh toán</span>
                         </div>
                         <div class="confirm">
-                            <button class="btn-l">Đặt hàng</button>
+                            <form>
+                                <button class="btn-l"  type="submit"  th:formaction="@{checkout}">Đặt hàng</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -130,8 +170,10 @@
         
     </div>
 
-    <footer class="footer">
-        
+    <footer class="main-footer">
+        <img src="./assets/img/LogoGmarket.png" alt="" class="footer__img">
+        <span class="footer__title">G Market - bạn của mọi nhà</span>
+        <p class="footer__desc">Cảm ơn bạn rất nhiều vì đã giúp chúng tôi trở thành thương hiệu số một trong lòng khách hàng. Chúng tôi không thể đạt được thành công này nếu không có bạn là khách hàng của chúng tôi. Sự hài lòng của bạn là mối quan tâm số một của chúng tôi và chúng tôi hứa sẽ luôn đáng tin cậy.</p>
     </footer>
 
     <!-- MODAL -->
@@ -170,9 +212,5 @@
             </div>
         </div>
     </div> -->
-<script src="/QLHTT/src/main/resources/templates/headerCustomer.js"></script>
-<script src="/QLHTT/src/main/resources/templates/footerCustomer.js"></script>
-
-
 </body>
 </html>

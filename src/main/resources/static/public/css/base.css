@@ -410,7 +410,7 @@ input::placeholder {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.4);
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -443,7 +443,7 @@ input::placeholder {
     background-color: var(--main-color);
 }
 
-/* .header__logo {
+.header__logo {
     display: flex;
     justify-content: center;
 }
@@ -451,7 +451,7 @@ input::placeholder {
 .header__img {
     max-width: 100%;
     max-height: 70px;
-} */
+}
 
 .space {
     margin-top: 24px;
@@ -462,7 +462,7 @@ input::placeholder {
     padding: 0;
 }
 
-/* .navbar__title {
+.navbar__title {
     font-size: 2rem;
     color: var(--main-color);
     display: block;
@@ -509,4 +509,4 @@ input::placeholder {
 .navbar__item:hover {
     transform: translateX(5px);
     color: var(--second-color);
-} */
+}

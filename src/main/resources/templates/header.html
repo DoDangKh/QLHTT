@@ -1,149 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+          href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap"
+          rel="stylesheet">
+  <link rel="stylesheet" th:href="@{public/css/reset.css}"/>
+  <link rel="stylesheet" th:href="@{public/css/header.css}"/>
+
+  <title>G-Market</title>
+</head>
+<body>
 <div class="header-wrapper">
-    <div class="heading">
-        <a href="/home" class="header-logo"><img
-                src="https://gmarket24h.com/images/thumbs/0013362_Logo%20Gmarket%20to%20nhat.png"
-                alt="G-Market"></a>
-        <div class="header-search">
-            <form class="search-form">
-                <div class="search-form__input">
-                    <input type="text" placeholder="Tìm kiếm">
-                </div>
-                <button class="search-form__icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
+  <div class="heading">
+    <a href="/home" class="header-logo"><img
+            src="https://gmarket24h.com/images/thumbs/0013362_Logo%20Gmarket%20to%20nhat.png"
+            alt="G-Market"></a>
+    <div class="header-search">
+      <form class="search-form">
+        <div class="search-form__input">
+          <input type="text" placeholder="Tìm kiếm">
         </div>
-        <div class="header-right-wrapper">
-            <div class="header-right">
-                <div class="cart-icon">
-                    <a href="#" class="btn-cart" th:href="@{cart/all}">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <div class="cart-num">0</div>
-                        <div class="cart-price">Giỏ hàng</div>
-                    </a>
-                </div>
-                <div class="account-icon">
-                    <div sec:authorize="isAnonymous()">
-                        <i class=" fa-solid fa-user"></i>
-                        <span class="account-title">Tài khoản</span>
-                        <div class="account-dropdown">
-                            <a href="login" class="btn-signin">Đăng nhập</a>
-                            <a href="register" class="btn-signup">Tạo tài khoản</a>
-                        </div>
-                    </div>
-                    <div sec:authorize="hasRole('ROLE_EMPLOYEE')">
-                        <!-- <i class=" fa-solid fa-user"></i> -->
-                        <span class="account-title" sec:authentication="name"></span>
-                        <div class="account-dropdown">
-                            <a href="user/info" class="btn-signin">Thông Tin</a>
-                            <a href="/logout" class="btn-signup">Đăng Xuất</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        <button class="search-form__icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
     </div>
-    <div class="header-menu">
-        <div class="category-menu">
-            <a class="categories" href="#">
-                <i class="fa-solid fa-bars"></i>
-                <span class="category-title">DANH MỤC</span>
+    <div class="header-right-wrapper">
+      <div class="header-right">
+        <div class="cart-icon">
+          <a href="#" class="btn-cart" th:href="@{cart/all}">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <div class="cart-num">0</div>
+            <div class="cart-price">Giỏ hàng</div>
+          </a>
+        </div>>
+        <div class="account-icon">
+          <div sec:authorize="isAnonymous()">
+            <i class=" fa-solid fa-user"></i>
+            <span class="account-title">Tài khoản</span>
+            <div class="account-dropdown">
+              <a href="login" class="btn-signin">Đăng nhập</a>
+              <a href="register" class="btn-signup">Tạo tài khoản</a>
+            </div>
+          </div>
+          <div sec:authorize="hasRole('ROLE_CUSTOMER')">
+            <i class=" fa-solid fa-user"></i>
+            <span class="account-title" sec:authentication="name"></span>
+            <div class="account-dropdown">
+              <a href="user/info" class="btn-signin">Thông Tin</a>
+              <a href="/logout" class="btn-signup">Đăng Xuất</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+  <div class="header-menu">
+    <div class="category-menu">
+      <a class="categories" href="#">
+        <i class="fa-solid fa-bars"></i>
+        <span class="category-title">DANH MỤC</span>
+      </a>
+      <div class="dropdown-categories">
+        <ul>
+          <li class="category-item">
+            <a href="#">
+              <span>KHUYẾN MÃI</span>
+              <i class="fa-solid fa-angle-up"></i>
             </a>
-            <div class="dropdown-categories">
-                <ul>
-                    <li class="category-item">
-                        <a href="#">
-                            <span>KHUYẾN MÃI</span>
-                            <i class="fa-solid fa-angle-up"></i>
-                        </a>
-                        <div class="dropdown-category-item">
-                            <ul>
-                                <li>
-                                    <a href="#">Hot Deal</a>
-                                </li>
-                                <li>
-                                    <a href="#">Luôn Có Giá Tốt</a>
-                                </li>
-                                <li>
-                                    <a href="#">Mua Nhiều Giảm Sâu</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="category-item">
-                        <a href="#">
-                            <span>TRÁI CÂY - RAU CỦ</span>
-                            <i class="fa-solid fa-angle-up"></i>
-                        </a>
-                        <div class="dropdown-category-item">
-                            <ul>
-                                <li>
-                                    <a href="#">Trái Cây</a>
-                                </li>
-                                <li>
-                                    <a href="#">Rau Củ Quả</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="category-item">
-                        <a href="#">
-                            <span>THỊT - TRỨNG - HẢI SẢN</span>
-                            <i class="fa-solid fa-angle-up"></i>
-                        </a>
-                        <div class="dropdown-category-item">
-                            <ul>
-                                <li>
-                                    <a href="#">Thịt</a>
-                                </li>
-                                <li>
-                                    <a href="#">Trứng</a>
-                                </li>
-                                <li>
-                                    <a href="#">Hải Sản</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="category-item">
-                        <a href="#">
-                            <span>SỮA - SẢN PHẨM TỪ SỮA</span>
-                            <i class="fa-solid fa-angle-up"></i>
-                        </a>
-                        <div class="dropdown-category-item">
-                            <ul>
-                                <li>
-                                    <a href="#">Sữa</a>
-                                </li>
-                                <li>
-                                    <a href="#">Sản Phẩm Từ Sữa</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="category-item">
-                        <a href="#">
-                            <span>THỰC PHẨM KHÔ</span>
-                        </a>
-                    </li>
-                    <li class="category-item">
-                        <a href="#">
-                            <span>BÁNH KẸO - ĐỒ UỐNG</span>
-                        </a>
-                    </li>
-                    <li class="category-item">
-                        <a href="#">
-                            <span>CHĂM SÓC CÁ NHÂN</span>
-                        </a>
-                    </li>
-                </ul>
+            <div class="dropdown-category-item">
+              <ul>
+                <li>
+                  <a href="#">Hot Deal</a>
+                </li>
+                <li>
+                  <a href="#">Luôn Có Giá Tốt</a>
+                </li>
+                <li>
+                  <a href="#">Mua Nhiều Giảm Sâu</a>
+                </li>
+              </ul>
             </div>
-        </div>
+          </li>
+          <li class="category-item">
+            <a href="#">
+              <span>TRÁI CÂY - RAU CỦ</span>
+              <i class="fa-solid fa-angle-up"></i>
+            </a>
+            <div class="dropdown-category-item">
+              <ul>
+                <li>
+                  <a href="#">Trái Cây</a>
+                </li>
+                <li>
+                  <a href="#">Rau Củ Quả</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="category-item">
+            <a href="#">
+              <span>THỊT - TRỨNG - HẢI SẢN</span>
+              <i class="fa-solid fa-angle-up"></i>
+            </a>
+            <div class="dropdown-category-item">
+              <ul>
+                <li>
+                  <a href="#">Thịt</a>
+                </li>
+                <li>
+                  <a href="#">Trứng</a>
+                </li>
+                <li>
+                  <a href="#">Hải Sản</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="category-item">
+            <a href="#">
+              <span>SỮA - SẢN PHẨM TỪ SỮA</span>
+              <i class="fa-solid fa-angle-up"></i>
+            </a>
+            <div class="dropdown-category-item">
+              <ul>
+                <li>
+                  <a href="#">Sữa</a>
+                </li>
+                <li>
+                  <a href="#">Sản Phẩm Từ Sữa</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="category-item">
+            <a href="#">
+              <span>THỰC PHẨM KHÔ</span>
+            </a>
+          </li>
+          <li class="category-item">
+            <a href="#">
+              <span>BÁNH KẸO - ĐỒ UỐNG</span>
+            </a>
+          </li>
+          <li class="category-item">
+            <a href="#">
+              <span>CHĂM SÓC CÁ NHÂN</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-</div> 
+  </div>
+</div>
 
-
+</body>
+</html>
 <style>
 @charset "UTF-8";
 @keyframes moveUp {

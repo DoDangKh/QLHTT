@@ -32,8 +32,14 @@ public class CustomerUserDetailService implements UserDetailsService {
                     List<GrantedAuthority> grantlist=new ArrayList<GrantedAuthority>();
                     GrantedAuthority authority;
                     if(userLogin.getRole_id()==2) {
-                        authority = new SimpleGrantedAuthority("ROLE_EMPLOYEE");
+                        authority = new SimpleGrantedAuthority("ROLE_CUSTOMER");
                         grantlist.add(authority);
+                    }
+                    else{
+                        if(userLogin.getRole_id()==1){
+                            authority = new SimpleGrantedAuthority("ROLE_EMPLOYEE");
+                            grantlist.add(authority);
+                        }
                     }
                     return grantlist;
                 }
