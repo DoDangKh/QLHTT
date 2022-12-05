@@ -37,6 +37,7 @@ public class LoginController {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
     @RequestMapping("/login")
     public String login(){
         //logger.error(error);
@@ -77,5 +78,16 @@ public class LoginController {
             model.addAttribute("error",error);
             return "register";
         }
+    }
+    @RequestMapping("/LoginHandel")
+    public String LoginHandel(HttpServletRequest request){
+        System.out.print(request.getUserPrincipal()+"RRRRRRRRRRRRRRRRRRRRRRRRRRR");
+        if(request.isUserInRole("ROLE_CUSTOMER")){
+            return"redirect:/home";
+        }
+        if(request.isUserInRole("ROLE_EMPLOYEE")){
+            return"redirect:/Employee";
+        }
+        return null;
     }
 }
