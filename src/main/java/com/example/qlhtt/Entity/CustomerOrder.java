@@ -6,7 +6,7 @@ public class CustomerOrder {
     private int order_id;
     private Date order_time;
     private int status_now;
-    private int staff_id;
+    private Long staff_id;
     private int customer_id;
     private int total_money;
 
@@ -34,11 +34,11 @@ public class CustomerOrder {
         this.status_now = status_now;
     }
 
-    public int getStaff_id() {
+    public Long getStaff_id() {
         return staff_id;
     }
 
-    public void setStaff_id(int staff_id) {
+    public void setStaff_id(Long staff_id) {
         this.staff_id = staff_id;
     }
 

@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -69,5 +70,22 @@ public class PersonRepos  {
             e.printStackTrace();
         }
         return false;
+    }
+    public List<Person> getCustomer(){
+        try{
+            List<Integer> id=jdbcTemplate.query("Select customer_id from customeruser where status=1", (rs, rowNum) -> rs.getInt("customer_id")  );
+            List<Person> personList=new ArrayList<>();
+            System.out.print("xxxxxxxxxxxxxxx "+id.size()+" xxxxxxxxxxxxxxxxxxxxxxxx");
+            for(int i=0;i<id.size();i++){
+                System.out.print("xxxxxxx"+id.get(i)+"xxxxxxxx");
+                Person temp=getbyid(id.get(i));
+                personList.add(temp);
+            }
+            return personList;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

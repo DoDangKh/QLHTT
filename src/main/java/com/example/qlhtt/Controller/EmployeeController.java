@@ -1,14 +1,11 @@
 package com.example.qlhtt.Controller;
 
 
-import com.example.qlhtt.Entity.Person;
-import com.example.qlhtt.Entity.Product;
-import com.example.qlhtt.Entity.UserLogin;
-import com.example.qlhtt.Repos.PersonRepos;
-import com.example.qlhtt.Repos.ProductRepos;
-import com.example.qlhtt.Repos.UserLoginRepos;
+import com.example.qlhtt.Entity.*;
+import com.example.qlhtt.Repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +26,15 @@ public class EmployeeController {
     @Autowired
     ProductRepos productRepos;
 
+    @Autowired
+    TypeRepos typeRepos;
+
+
+    @Autowired
+    OrderRepos orderRepos;
+
+
+
     @RequestMapping()
     public  String home(){
         return "admin";
@@ -48,6 +54,31 @@ public class EmployeeController {
         ModelAndView mav=new ModelAndView("adminProduct");
         List<Product> product=productRepos.getall();
         mav.addObject("products",product);
+        return mav;
+    }
+
+    @RequestMapping("/type")
+    public ModelAndView type(){
+        ModelAndView mav= new ModelAndView("adminProductType");
+        List<Type> typeList=typeRepos.getall();
+        mav.addObject("types", typeList);
+        return mav;
+    }
+
+    @RequestMapping("/order")
+    public ModelAndView order(){
+        ModelAndView mav=new ModelAndView("adminOrder");
+        List<CustomerOrder> customerOrders=orderRepos.getall();
+        mav.addObject("orders",customerOrders);
+        return mav;
+    }
+
+    @RequestMapping("/customer")
+    public ModelAndView customer(){
+        ModelAndView mav=new ModelAndView("adminCustomer");
+        List<Person> personList=personRepos.getCustomer();
+        System.out.print("xxxxxxxxxxxxxxxxxxxxx "+personList.size()+" xxxxxxxxxxxxxxx");
+        mav.addObject("persons",personList);
         return mav;
     }
 }

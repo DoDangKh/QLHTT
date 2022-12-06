@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css}" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/public/css/grid.css}">
+    <link rel="stylesheet" th:href="@{/public/css/base.css}">
+    <link rel="stylesheet" th:href="@{/public/css/adminProductType.css}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="employee">
+        <header class="employee-header" th:insert="headerEmployee">
+            
+        </header>
+        <div class="grid">
+            <div class="row sm-gutter space">
+                <div class="col l-2">
+                    <nav class="navbar" th:insert="navbarEmployee">
+                        
+                    </nav>
+                </div>
+
+                <div class="col l-10">
+                    <div class="categoryBtn">
+                        <button class="categoryBtn__btn btn__plus">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Thêm</span>
+                        </button>
+                    </div>
+
+                    <div class="row" th:each="type:${types}">
+                        <div class="col l-2 productType-item">
+                            <div class="productType">
+                                <h2 class="productType__title" th:text="${type.name}"></h2>
+                                <button class="productType-btn">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal add-type">
+        <div class="modal__header">
+            <img src="/QLHTT/src/main/resources/static/public/images/LogoGmarket.png" alt="" class="modal__header-img">
+        </div>
+        <div class="modal__body">
+            <form action="">
+                <div class="basic-form">
+                    <label for="" class="form__label">Mã loại:</label>
+                    <input type="text" class="form__input">
+                </div>
+                <div class="basic-form">
+                    <label for="" class="form__label">Tên loại:</label>
+                    <input type="text" class="form__input">
+                </div>
+            </form>
+            <div class="add-type__btn">
+                <button class="btn-l btnAddTypeModal-accept">Xác nhận</button>
+                <button class="btn-l btnCancelTypeModal-cancel">Huỷ</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal cancel-add-type">
+        <div class="modal-noti-size">
+            <div class="modal-noti__head">
+                <img class="modal-noti__head-img" src="/QLHTT/src/main/resources/static/public/images/LogoGmarket.png" alt="">
+            </div>
+            <div class="modal-noti__body">
+                <span class="modal-noti__body-title">
+                    Bạn có chắc chắn huỷ thêm loại hàng này không?
+                </span>
+                <div class="modal-noti__body-btn">
+                    <button href="" class="btn-l btnCancelModal-accept">Xác nhận</button>
+                    <button class="btn-l btnCancelModal-cancel">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal delete-product-type">
+        <div class="modal-noti-size">
+            <div class="modal-noti__head">
+                <img class="modal-noti__head-img" src="/QLHTT/src/main/resources/static/public/images/LogoGmarket.png" alt="">
+            </div>
+            <div class="modal-noti__body">
+                <span class="modal-noti__body-title">
+                    Bạn có chắc chắn xoá loại hàng này không?
+                </span>
+                <div class="modal-noti__body-btn">
+                    <button href="" class="btn-l btnCancelModal-accept btnDeleteModal-accept">Xác nhận</button>
+                    <button class="btn-l or-body__btn-cancel btnCancelModal-cancel btnCancelDeleteModal-cancel">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var btnPlus = document.querySelector('.btn__plus')
+        var addType = document.querySelector('.add-type')
+        var modalAcceptBtn = document.querySelector('.btnAddTypeModal-accept')
+        var modalCancelBtn = document.querySelector('.btnCancelTypeModal-cancel')
+        var cancelAddType = document.querySelector('.cancel-add-type')
+        var productTypeItem = document.querySelector('.productType-item')
+
+        btnPlus.onclick = function() {querySelectorquerySelector
+            addType.setAttribute("style", "display: flex;")
+            addNewItem()
+            cancelAddNewItem()
+        }
+
+        function addNewItem() {
+            modalAcceptBtn.onclick = function() {
+                addType.setAttribute("style", "display: none;")
+                // console.log('hi')
+            }
+        }
+        function cancelAddNewItem() {
+            modalCancelBtn.onclick = function() {
+                // console.log('hi')
+                cancelAddType.setAttribute("style", "display: flex") 
+                cancelCancelAddType()      
+                acceptCancelAddType()         
+            }
+        }
+        function cancelCancelAddType() {
+            var acceptCancel = document.querySelector('.btnCancelModal-cancel')
+            console.log('hi')
+            acceptCancel.onclick = function() {
+                addType.setAttribute("style", "display: flex;")
+                cancelAddType.setAttribute("style", "display: none") 
+            }
+        }
+        function acceptCancelAddType() { 
+            var cancelCancel = document.querySelector('.btnCancelModal-accept')
+            cancelCancel.onclick = function() {
+                cancelAddType.setAttribute("style", "display: none;")
+                addType.setAttribute("style", "display: none;")
+            }
+        }
+        var deleteProductType = document.querySelector('.delete-product-type')
+        var deleteProductTypeisAccepted = document.querySelector('.btnDeleteModal-accept')
+        var deleteProductTypeisCanceled = document.querySelector('.btnCancelDeleteModal-cancel')
+        var btns = document.getElementsByClassName('productType-btn')
+        Array.from(btns).forEach((btn) => {
+            btn.addEventListener("click", () => {
+                deleteProductType.setAttribute("style", "display: flex;")
+                deleteProductTypeisCanceled.addEventListener("click", () => {
+                    deleteProductType.setAttribute("style", "display: none;")
+                })
+                deleteProductTypeisAccepted.addEventListener("click", function() {
+                    deleteProductType.setAttribute("style", "display: none;")
+                    var temp = btn.parentNode
+                    console.log(temp.parentNode)
+                    temp.parentNode.remove();
+                })
+            });
+        });
+    </script>
+    
+    <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
+    <script src="/QLHTT/src/main/resources/templates/navbarEmployee.js"></script>
+</body>
+</html>

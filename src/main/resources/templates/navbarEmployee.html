@@ -1,31 +1,31 @@
 <span class="navbar__title" xmlns:th="http://www.w3.org/1999/xhtml">Danh Mục</span>
 <ul class="navbar__list">
-    <a href="Employee/info" class="navbar__link">
+    <a th:href="@{/Employee/info}" class="navbar__link">
         <li class="navbar__item">
             Thông tin cá nhân
         </li>
     </a>
-    <a href="/QLHTT/src/main/resources/templates/adminProduct.html" class="navbar__link">
+    <a th:href="@{/Employee/product}" class="navbar__link">
         <li class="navbar__item">
             Quản lí sản phẩm
         </li>
     </a>
-    <a href="/QLHTT/src/main/resources/templates/adminProductType.html" class="navbar__link">
+    <a th:href="@{/Employee/type}" class="navbar__link">
         <li class="navbar__item">
             Quản lí loại sản phẩm
         </li>
     </a>
-    <a href="/QLHTT/src/main/resources/templates/adminOrder.html" class="navbar__link">
+    <a th:href="@{/Employee/order}" class="navbar__link">
         <li class="navbar__item">
             Quản lí đơn hàng
         </li>
     </a>
-    <a href="/QLHTT/src/main/resources/templates/adminCustomer.html" class="navbar__link">
+    <a th:href="@{/Employee/customer}" class="navbar__link">
         <li class="navbar__item">
             Quản lí khách hàng
         </li>
     </a>
-    <a href="/QLHTT/src/main/resources/templates/adminLogout.html" class="navbar__link">
+    <a th:href="@{/logout}" class="navbar__link">
         <li class="navbar__item">
             Đăng xuất
         </li>

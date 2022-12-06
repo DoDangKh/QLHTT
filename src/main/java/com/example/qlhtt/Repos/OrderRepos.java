@@ -1,7 +1,10 @@
 package com.example.qlhtt.Repos;
 
 import com.example.qlhtt.Entity.Cart;
+import com.example.qlhtt.Entity.CustomerOrder;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -38,5 +41,16 @@ public class OrderRepos {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<CustomerOrder> getall(){
+        try{
+            List<CustomerOrder>customerOrders =jdbcTemplate.query("Select * From CustomerOrder", BeanPropertyRowMapper.newInstance(CustomerOrder.class));
+            return  customerOrders;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

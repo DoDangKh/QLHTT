@@ -1,0 +1,161 @@
+
+.categoryBtn {
+    float: right;
+    padding-right: 23px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: end;
+}
+
+.categoryBtn__btn {
+    background-color: var(--main-color);
+    border: none;
+    border-radius: var(--boder-radius);
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.categoryBtn__btn:hover {
+    opacity: .8;
+    cursor: pointer;
+}
+
+.categoryBtn__btn i,
+.categoryBtn__btn span {
+    color: var(--white-text);
+    font-size: 1.6rem;
+}
+
+.categoryBtn__btn span {
+    margin-left: 6px;
+}
+
+.productType {
+    border: 1px solid var(--main-color);
+    border-radius: var(--boder-radius);
+    position: relative;
+    margin-top: 20px;
+    margin-right: 24px;
+}
+
+.productType-btn:hover {
+    opacity: .8;
+    cursor: pointer;
+}
+
+.productType-btn {
+    position: absolute;
+    content: "";
+    right: -11px;
+    top: -12px;
+    border-radius: 54%;
+    background-color: var(--main-color);
+    padding: 3px 6px;
+    border: none;
+}
+
+.productType-btn i {
+    font-size: 1.6rem;
+
+}
+
+.productType__title {
+    font-size: 2rem;
+    color: var(--main-text);
+    padding: 10px;
+    text-align: center;
+}
+
+.modal {
+    display: none;
+    flex-direction: column;
+}
+
+.modal__header {
+    width: 40%;
+    text-align: center;
+}
+
+.modal__body {
+    width: 40%;
+    padding: 0;
+}
+
+.basic-form {
+    padding: 10px;
+    margin-top: 0;
+}
+
+.form__label {
+    font-size: 2rem;
+    min-width: 100px;
+}
+
+.form__input {
+    min-width: 350px
+}
+
+.add-type__btn {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+
+.btnAddTypeModal-accept,
+.btnCancelTypeModal-cancel {
+    margin-top: 0px;
+    min-width: 160px;
+    min-height: 40px;
+    font-size: 1.8rem;
+}
+
+.btnCancelTypeModal-cancel {
+    background-color: var(--boder-color);
+}
+
+.modal-noti-size {
+    max-width: 700px;
+    position: relative;
+}
+
+.modal-noti__head {
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: center;
+}
+
+.modal-noti__head-img {
+    max-width: 170px;
+    display: block;
+    padding: 10px 0;
+}
+
+.modal-noti__body {
+    background-color: var(--white-text);
+}
+
+.modal-noti__body-title {
+    font-size: 2rem;
+    display: block;
+    padding: 20px 10px;
+}
+
+.modal-noti__body-btn {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 10px;
+}
+
+.btnCancelModal-accept,
+.btnCancelModal-cancel {
+    margin-top: 0px;
+    min-width: 160px;
+    min-height: 40px;
+    font-size: 1.8rem;
+}
+
+.btnCancelModal-cancel {
+    background-color: var(--boder-color);
+}
