@@ -27,14 +27,14 @@
                     <div class="employee-body">
                         <span class="employee-body__title">THÔNG TIN CÁ NHÂN</span>
 
-                        <div class="employee-form">
-                            <form action="" class="basic-form">
+                        <form class="employee-form" action="/Employee/info/update" method="post" value="${person}">
+                            <div action="" class="basic-form">
                                 <label for="" class="form__label">Họ và tên:</label>
-                                <input type="text" class="form__input" th:value="${person.name}" th:field="${person.name}">
-                            </form>
-                            
+                                <input type="text" class="form__input" th:field="${person.name}">
+                            </div>
+
                            
-                            <form action="" class="basic-form-radio">
+                            <div action="" class="basic-form-radio">
                                 <div class="form-radio">
                                     <input class="form__radio" type="radio" name="gender" id="gender-male" th:value="Nam" th:field="${person.gender}">
                                     <label class="form__radio-label" for="gender-male">Nam</label>
@@ -43,32 +43,32 @@
                                     <input class="form__radio" type="radio" name="gender" id="gender-female" th:value="Nữ" th:field="${person.gender}">
                                     <label class="form__radio-label" for="gender-female">Nữ</label>
                                 </div>
-                            </form>
+                            </div>
     
-                            <form action="" class="basic-form">
+                            <div action="" class="basic-form">
                                 <label for="" class="form__label">CMND/CCCD:</label>
-                                <input type="text" class="form__input" th:value="${person.identity_card}" th:field="${person.identity_card}">
-                            </form>
+                                <input type="text" class="form__input" th:field="${person.identity_card}">
+                            </div>
     
-                            <form action="" class="basic-form">
+                            <div action="" class="basic-form">
                                 <label for="" class="form__label">Ngày sinh:</label>
-                                <input type="date" class="form__input" th:value="${person.day_of_birth}" th:field="${person.day_of_birth}">
-                            </form>
+                                <input type="date" class="form__input"  th:field="${person.day_of_birth}">
+                            </div>
     
-                            <form action="" class="basic-form">
+                            <div action="" class="basic-form">
                                 <label for="" class="form__label">Số điện thoại:</label>
-                                <input type="text" class="form__input" th:value="${person.phone_num}" th:field="${person.phone_num}">
-                            </form>
+                                <input type="text" class="form__input"  th:field="${person.phone_num}">
+                            </div>
     
-                            <form action="" class="basic-form">
+                            <div action="" class="basic-form">
                                 <label for="" class="form__label">Địa chỉ:</label>
-                                <input type="text" class="form__input" th:value="${person.address}" th:field="${person.address}">
-                            </form>
+                                <input type="text" class="form__input"  th:field="${person.address}">
+                            </div>
                             
                             <div class="employee__btn">
-                                <button class="btn-l">Cập nhật</button>
+                                <button class="btn-l" type="submit">Cập nhật</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

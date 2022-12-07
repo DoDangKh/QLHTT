@@ -88,4 +88,16 @@ public class PersonRepos  {
         }
         return null;
     }
+    public boolean update(Person person){
+        try{
+            jdbcTemplate.update("Update Person set name=?, gender=?, identity_card=?, day_of_birth=?, phone_num=?, address=? where id=? ",person.getName(),person.getGender(),person.getIdentity_card(),person.getDay_of_birth()
+            ,person.getPhone_num(),person.getAddress(),person.getId());
+            System.out.print("xxxxxxxxxx Update done XXXXXXXXXXX");
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

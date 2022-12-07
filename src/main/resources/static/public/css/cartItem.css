@@ -2,9 +2,8 @@
 
 /* MAIN BODY */
 .main-body {
-    margin-top: 120px;
+    margin-top: 0px;
     background-color: var(--page-color);
-    
 }
 
 .main-body-item {
@@ -65,6 +64,7 @@
 
 .bill-item__img {
     max-height: 100px;
+    max-width: 100px;
 }
 
 .bill-item__info {

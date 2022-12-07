@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="categoryBtn">
-                            <button class="categoryBtn__btn btn__plus">
+                            <button class="categoryBtn__btn btn__plus" th:href="@{/Employee/product/detail}">
                                 <i class="fa-solid fa-plus"></i>
                                 <span>Thêm</span>
                             </button>
@@ -74,7 +74,7 @@
                                 </div>
                                 <div>
                                     <span class="product__item-warehouse">Số lượng tồn:</span>
-                                    <span class="product__item-count" th:text="product.quantity">100</span>
+                                    <span class="product__item-count" th:text="${product.quantity}">100</span>
                                 </div>
                             </div>
                         </a>
@@ -88,40 +88,34 @@
             <footer class="footer"></footer>
         </div>
 
-        <div class="modal add-product">
+        <form class="modal add-product" method="post" >
             <div class="modal__header add-product__header">
                 <img src="./assets/img/LogoGmarket.png" alt="" class="modal__header-img">
             </div>
             <div class="modal__body add-product__body">
-                <form action="" class="basic-form">
+                <div action="" class="basic-form">
                     <label for="" class="form__label">Tên sản phẩm:</label>
-                    <input type="text" class="form__input" value="">
-                </form>
+                    <input type="text" class="form__input">
+                </div>
 
                 <div class="category__classify add-product__selection">
                     <label for="" class="form__label">Loại sản phẩm:</label>
                     <select name="type" id="" class="category__classify-select ">
-                        <option value="" class="form-product__option">Option 1</option>
-                        <option value="" class="form-product__option">Option 2</option>
-                        <option value="" class="form-product__option">Option 1</option>
-                        <option value="" class="form-product__option">Option 2</option>
+                        <option  class="form-product__option"></option>
                     </select>
                 </div>
 
                 <div class="category__classify add-product__selection">
                     <label for="" class="form__label">Khuyến mãi:</label>
-                    <select name="type" id="" class="category__classify-select">
+                    <select name="type" id="" class="category__classify-select" >
                         <option value="" class="form-product__option">Option 1</option>
-                        <option value="" class="form-product__option">Option 2</option>
-                        <option value="" class="form-product__option">Option 1</option>
-                        <option value="" class="form-product__option">Option 2</option>
                     </select>
                 </div>
 
                 <div class="product-detail">
-                    <form action="" class="basic-form product-detail__img">
+                    <div action="" class="basic-form product-detail__img">
                         <label for="myfile" class="form__label product-detail__title">Hình ảnh:</label>
-                        <input type="file" id="myfile" accept="*" onchange="readFile(this)">
+                        <input type="file" id="myfile" name="photo" accept="*" onchange="readFile(this)">
                         <label for="myfile" class="myfile-label">
                             <i class="fa-solid fa-file-circle-plus"></i>
                             Thêm hình ảnh
@@ -129,31 +123,32 @@
                         <div class="show-img">
                             <img class="myfile__img" src="" alt="">
                         </div>
-                    </form>
+                    </div>
     
                     <div class="product-detail__info">
-                        <form action="" class="basic-form">
+                        <div action="" class="basic-form">
                             <label for="" class="form__label">Giá:</label>
-                            <input type="text" class="form__input" value="">
-                        </form>
+                            <input type="text" class="form__input" th>
+                        </div>
         
-                        <form action="" class="basic-form">
+                        <div action="" class="basic-form">
                             <label for="" class="form__label">Số lượng:</label>
-                            <input type="text" class="form__input" value="">
-                        </form>
+                            <input type="text" class="form__input">
+                        </div>
                     </div>
                 </div>
 
-                <form action="" class="basic-form">
+                <div action="" class="basic-form">
                     <label for="" class="form__label">Mô tả:</label>
-                    <input type="text" class="form__input" value="">
-                </form>
+                    <input type="text" class="form__input" >
+                </div>
                 <div class="add-product__btn">
-                    <button class="btn-l btnCancelAddProductModal-accept">Xác nhận</button>
+                    <button class="btn-l btnCancelAddProductModal-accept" th:formaction="@{/Employee/product/update}">Xác nhận</button>
                     <button class="btn-l btnCancelAddProductModal-cancel">Huỷ</button>
                 </div>
             </div>
-        </div>
+        </form>
+        </form>
         <div class="modal cancel-add-product">
             <div class="modal-noti-size">
                 <div class="modal-noti__head">
