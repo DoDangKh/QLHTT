@@ -50,12 +50,14 @@
                                 </select>
                             </div>
                         </div>
+                        <form>
                         <div class="categoryBtn">
-                            <button class="categoryBtn__btn btn__plus" th:href="@{/Employee/product/detail}">
+                            <button class="categoryBtn__btn btn__plus" th:formaction="@{/Employee/product/detail}">
                                 <i class="fa-solid fa-plus"></i>
                                 <span>Thêm</span>
                             </button>
                         </div>
+                        </form>
                     </div>
                     <div class="product" th:each="product:${products}">
                         <a href="/QLHTT/src/main/resources/templates/adminProductDetail.html" class="product__item">
@@ -184,87 +186,89 @@
     </div>
     <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
     <script src="/QLHTT/src/main/resources/templates/navbarEmployee.js"></script>
-    <script>
-        // Add Button
-        var btnPlus = document.querySelector('.btn__plus')
-        var addProduct = document.querySelector('.add-product')
-        var modalAcceptBtn = document.querySelector('.btnCancelAddProductModal-accept')
-        var modalCancelBtn = document.querySelector('.btnCancelAddProductModal-cancel')
-        var cancelAddProduct = document.querySelector('.cancel-add-product')
+<!--    <script>-->
+<!--        // Add Button-->
+<!--        var btnPlus = document.querySelector('.btn__plus')-->
+<!--        var addProduct = document.querySelector('.add-product')-->
+<!--        var modalAcceptBtn = document.querySelector('.btnCancelAddProductModal-accept')-->
+<!--        var modalCancelBtn = document.querySelector('.btnCancelAddProductModal-cancel')-->
+<!--        var cancelAddProduct = document.querySelector('.cancel-add-product')-->
 
-        var btnRemove = document.querySelector('.btn__remove')
-        var deleteProduct = document.querySelector('.delete-product')
+<!--        var btnRemove = document.querySelector('.btn__remove')-->
+<!--        var deleteProduct = document.querySelector('.delete-product')-->
 
-        btnPlus.onclick = function() {
-            addProduct.setAttribute("style", "display: flex;")
-            addNewItem()
-            cancelAddNewItem()
-        }
+<!--        btnPlus.onclick = function() {-->
+<!--            addProduct.setAttribute("style", "display: flex;")-->
+<!--            addNewItem()-->
+<!--            cancelAddNewItem()-->
+<!--        }-->
 
-        function addNewItem() {
-            modalAcceptBtn.onclick = function() {
-                addProduct.setAttribute("style", "display: none;")
-                // console.log('hi')
-            }
-        }
-        function cancelAddNewItem() {
-            modalCancelBtn.onclick = function() {
-                addProduct.setAttribute("style", "display: none;")
-                // console.log('hi')
-                cancelAddProduct.setAttribute("style", "display: flex") 
-                cancelCancelAddProduct()      
-                acceptCancelAddProduct()         
-            }
-        }
-        function cancelCancelAddProduct() {
-            var acceptCancel = document.querySelector('.btnCancelModal-cancel')
-            acceptCancel.onclick = function() {
-                addProduct.setAttribute("style", "display: flex;")
-                cancelAddProduct.setAttribute("style", "display: none") 
-            }
-        }
-        function acceptCancelAddProduct() { 
-            var cancelCancel = document.querySelector('.btnCancelModal-accept')
-            cancelCancel.onclick = function() {
-                cancelAddProduct.setAttribute("style", "display: none;")
-            }
-        }
+<!--        function addNewItem() {-->
+<!--            modalAcceptBtn.onclick = function() {-->
+<!--                addProduct.setAttribute("style", "display: none;")-->
+<!--                // console.log('hi')-->
+<!--            }-->
+<!--        }-->
+<!--        function cancelAddNewItem() {-->
+<!--            modalCancelBtn.onclick = function() {-->
+<!--                addProduct.setAttribute("style", "display: none;")-->
+<!--                // console.log('hi')-->
+<!--                cancelAddProduct.setAttribute("style", "display: flex") -->
+<!--                cancelCancelAddProduct()      -->
+<!--                acceptCancelAddProduct()         -->
+<!--            }-->
+<!--        }-->
+<!--        function cancelCancelAddProduct() {-->
+<!--            var acceptCancel = document.querySelector('.btnCancelModal-cancel')-->
+<!--            acceptCancel.onclick = function() {-->
+<!--                addProduct.setAttribute("style", "display: flex;")-->
+<!--                cancelAddProduct.setAttribute("style", "display: none") -->
+<!--            }-->
+<!--        }-->
+<!--        function acceptCancelAddProduct() { -->
+<!--            var cancelCancel = document.querySelector('.btnCancelModal-accept')-->
+<!--            cancelCancel.onclick = function() {-->
+<!--                cancelAddProduct.setAttribute("style", "display: none;")-->
+<!--            }-->
+<!--        }-->
 
-        function removeItem(item) {
-            console.log(item)
-            deleteProduct.setAttribute("style", "display: flex;")
-            acceptDelateProduct()
-            cancelDelateProduct()
-        }
-        function acceptDelateProduct() {
-            var acceptCancel = document.querySelector('.btnDeleteModal-accept')
-            acceptCancel.addEventListener("click", function() {
-                deleteProduct.setAttribute("style", "display: none;")
-                product.setAttribute("style", "display: none;")
-            })
-        }
-        function cancelDelateProduct() {
-            var cancelCancel = document.querySelector('.btnCancelDeleteModal-cancel')
-            // console.log(cancelCancel)
-            cancelCancel.addEventListener("click", function() {
-                deleteProduct.setAttribute("style", "display: none;")
-            })
-        }
+<!--        function removeItem(item) {-->
+<!--            console.log(item)-->
+<!--            deleteProduct.setAttribute("style", "display: flex;")-->
+<!--            acceptDelateProduct()-->
+<!--            cancelDelateProduct()-->
+<!--        }-->
+<!--        function acceptDelateProduct() {-->
+<!--            var acceptCancel = document.querySelector('.btnDeleteModal-accept')-->
+<!--            acceptCancel.addEventListener("click", function() {-->
+<!--                deleteProduct.setAttribute("style", "display: none;")-->
+<!--                product.setAttribute("style", "display: none;")-->
+<!--            })-->
+<!--        }-->
+<!--        function cancelDelateProduct() {-->
+<!--            var cancelCancel = document.querySelector('.btnCancelDeleteModal-cancel')-->
+<!--            // console.log(cancelCancel)-->
+<!--            cancelCancel.addEventListener("click", function() {-->
+<!--                deleteProduct.setAttribute("style", "display: none;")-->
+<!--            })-->
+<!--        }-->
 
-        var showFile = document.querySelector('.myfile__img')
-        var inputFile = document.querySelector('#myfile')
-        function readFile(input) {
-            // console.log('hi')
-            if(input.files && input.files[0]) {
-                var reader = new FileReader()
-                reader.onload = function(e) {
-                    // console.log(e.target.result)
-                    document.querySelector('.show-img').setAttribute("style", "display: flex;")
-                    showFile.setAttribute('src', e.target.result)
-                }
-            }
-            reader.readAsDataURL(input.files[0])
-        }
-    </script>
+<!--        var showFile = document.querySelector('.myfile__img')-->
+<!--        var inputFile = document.querySelector('#myfile')-->
+<!--        function readFile(input) {-->
+<!--            // console.log('hi')-->
+<!--            if(input.files && input.files[0]) {-->
+<!--                var reader = new FileReader()-->
+<!--                reader.onload = function(e) {-->
+<!--                    // console.log(e.target.result)-->
+<!--                    document.querySelector('.show-img').setAttribute("style", "display: flex;")-->
+<!--                    showFile.setAttribute('src', e.target.result)-->
+<!--                }-->
+<!--            }-->
+<!--            reader.readAsDataURL(input.files[0])-->
+<!--        }-->
+<!--    </script>-->
+
+
 </body>
 </html>

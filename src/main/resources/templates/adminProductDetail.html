@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="employee">
-        <header class="employee-header">
+        <header class="employee-header" th:insert="headerEmployee">
             
         </header>
         <div class="order-details">
@@ -26,23 +26,21 @@
                 </h1>
             </div>
 
-            <div class="productDetail">
+            <form class="productDetail" method="post" enctype="multipart/form-data">
                 <div class="modal__body add-product__body">
-                    <form action="" class="basic-form">
+                    <div action="" class="basic-form">
                         <label for="" class="form__label">Tên sản phẩm:</label>
-                        <input type="text" class="form__input" value="Sữa cô gái Hà Lan">
-                    </form>
-    
+                        <input type="text" class="form__input" th:field="${product.name}">
+                    </div>
+
                     <div class="category__classify add-product__selection">
                         <label for="" class="form__label">Loại sản phẩm:</label>
-                        <select name="type" id="" class="category__classify-select ">
-                            <option value="" class="form-product__option">Option 1</option>
-                            <option value="" class="form-product__option">Option 2</option>
-                            <option value="" class="form-product__option">Option 1</option>
-                            <option value="" class="form-product__option">Option 2</option>
+                        <select name="type" id="" class="category__classify-select " th:each="type :${session.type}" th:field="${product.type_id}">
+                            <option th:value="${type.Type_id}" th:text="${type.name}" class="form-product__option">Option 1</option>
+
                         </select>
                     </div>
-    
+
                     <div class="category__classify add-product__selection">
                         <label for="" class="form__label">Khuyến mãi:</label>
                         <select name="type" id="" class="category__classify-select">
@@ -52,11 +50,11 @@
                             <option value="" class="form-product__option">Option 2</option>
                         </select>
                     </div>
-    
+
                     <div class="product-detail">
-                        <form action="" class="basic-form product-detail__img">
+                        <div action="" class="basic-form product-detail__img">
                             <label for="myfile" class="form__label product-detail__title">Hình ảnh:</label>
-                            <input type="file" id="myfile" accept="*" onchange="readFile(this)">
+                            <input type="file" id="myfile" accept="*" name="photo" onchange="readFile(this)">
                             <label for="myfile" class="myfile-label">
                                 <i class="fa-solid fa-file-circle-plus"></i>
                                 Thêm hình ảnh
@@ -64,30 +62,30 @@
                             <div class="show-img">
                                 <img class="myfile__img" src="./assets/img/316007448_1372406313591188_7687324597456367359_n.jpg" alt="">
                             </div>
-                        </form>
-        
+                        </div>
+
                         <div class="product-detail__info">
-                            <form action="" class="basic-form">
+                            <div action="" class="basic-form">
                                 <label for="" class="form__label">Giá:</label>
-                                <input type="text" class="form__input" value="">
-                            </form>
-            
-                            <form action="" class="basic-form">
+                                <input type="text" class="form__input" th:field="${product.price}">
+                            </div>
+
+                            <div action="" class="basic-form">
                                 <label for="" class="form__label">Số lượng:</label>
-                                <input type="text" class="form__input" value="">
-                            </form>
+                                <input type="text" class="form__input" th:field="${product.quantity}">
+                            </div>
                         </div>
                     </div>
-    
-                    <form action="" class="basic-form">
+
+                    <div action="" class="basic-form">
                         <label for="" class="form__label">Mô tả:</label>
-                        <input type="text" class="form__input" value="">
-                    </form>
+                        <input type="text" class="form__input" th:field="${product.describe}">
+                    </div>
                     <div class="add-product__btn">
-                        <button class="btn-l btnCancelAddProductModal-accept">Cập nhật</button>
+                        <button class="btn-l btnCancelAddProductModal-accept" th:formaction="@{/Employee/product/updateConfirm}">Cập nhật</button>
                     </div>
                 </div>
-            </div>
+            </form>
 
             <!-- <div class="or-body-none">
                 Rất tiếc đơn hàng này đã bị xoá!!!

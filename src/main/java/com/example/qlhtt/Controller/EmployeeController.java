@@ -85,9 +85,15 @@ public class EmployeeController {
         mav.addObject("products",product);
         return mav;
     }
+    @RequestMapping("/product/detail")
+    public ModelAndView updateview(){
+        ModelAndView mav=new ModelAndView("adminProductDetail");
+        mav.addObject("product",new Product());
+        return mav;
+    }
 
-    @PostMapping("/product/update")
-    public String update(@ModelAttribute("newproduct") Product product, @RequestParam MultipartFile photo){
+    @PostMapping("/product/updateConfirm")
+    public String update(@ModelAttribute("product") Product product, @RequestParam MultipartFile photo){
 
         Path path= Paths.get("src/main/resources/static/public/images/");
 

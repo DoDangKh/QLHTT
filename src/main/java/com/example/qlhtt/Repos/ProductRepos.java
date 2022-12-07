@@ -49,8 +49,8 @@ public class ProductRepos {
     }
     public boolean add(Product product){
         try{
-            jdbcTemplate.update("Insert into Product(name=?, quantity=?, price=?, img=?,describe=?, discount_id=?, type_id=?) Values(?,?,?,?,?,?,?)",product.getName(),product.getQuantity()
-            ,product.getPrice(),product.getImg(),product.getDescribe(),product.getDiscount_id(),product.getType_id());
+            jdbcTemplate.update("Insert into Product(name=?, quantity=?, price=?, img=?, status=?,describe=?, discount_id=?, type_id=?) Values(?,?,?,?,?,?,?,?)",product.getName(),product.getQuantity()
+            ,product.getPrice(),product.getImg(), 1,product.getDescribe(),product.getDiscount_id(),product.getType_id());
             return true;
         }
         catch(Exception e){
