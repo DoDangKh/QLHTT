@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css}"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/public/css/grid.css}">
+    <link rel="stylesheet" th:href="@{/public/css/base.css}">
+    <link rel="stylesheet" th:href="@{/public/css/adminAddCustomer.css}">
+</head>
+
+<body>
+    <div class="employee">
+        <header class="employee-header" th:insert="headerEmployee">
+            
+        </header>
+        <div class="customer">
+            <div class="customer-heading">
+                <a th:href="@{/Employee}" class="customer-heading__link">
+                    <i class="customer-heading__icon fa-solid fa-arrow-left"></i>
+                </a>
+                <h1 class="customer-heading__title">
+                    THÔNG TIN LOẠI SẢN PHẨM
+                </h1>
+            </div>
+            <div class="customerDetail">
+                <div class="modal__body add-customerDetail__body">
+                    <form th:action="@{/Employee/type/add}" method="post">
+
+                        <div class="basic-form">
+                            <label for="" class="form__label">Tên loại:</label>
+                            <input type="text" class="form__input" th:field="${type.name}">
+                        </div>
+        
+                        <div class="add-customerDetail__btn">
+                            <button class="btn-l btnAddCustomer-accept" type="submit">Xác nhận</button>
+                            <button class="btn-l btnCancelCustomer-cancel" th:formaction="@{/Employee}">Huỷ</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="cancelModal" class="modal">
+        <div class="modal-noti-size">
+            <div class="modal-noti__head">
+                <img class="modal-noti__head-img" src="/QLHTT/src/main/resources/static/public/images/LogoGmarket.png" alt="">
+            </div>
+            <div class="modal-noti__body">
+                <span class="modal-noti__body-title">
+                    Bạn có chắc chắn huỷ thêm khách hàng này không?
+                </span>
+                <div class="modal-noti__body-btn">
+                    <button class="btn-l btnCancelModal-accept">Xác nhận</button>
+                    <button class="btn-l btnCancelModal-cancel or-body__btn-cancel">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
+    <script>
+        // var addCustomerisAccepted = document.querySelector('.btnAddCustomer-accept')
+        // // console.log(addCustomerisAccepted)
+        // addCustomerisAccepted.addEventListener('click', function(e) {
+        //     e.preventDefault()
+        //     window.location.pathname = "/QLHTT/src/main/resources/templates/adminCustomer.html"
+        //     console.log('hi')
+        // })
+
+        var addCustomerisCanceled = document.querySelector('.btnCancelCustomer-cancel')
+        var cancelModal = document.getElementById('cancelModal')
+        addCustomerisCanceled.addEventListener("click", function(e) {
+            e.preventDefault()
+            cancelModal.setAttribute("style","display:flex")
+        })
+        var ModalisAccepted = document.querySelector('.btnCancelModal-accept')
+        ModalisAccepted.addEventListener("click", function() {
+            cancelModal.setAttribute("style","display:none")
+        })
+        var ModalisCanceled = document.querySelector('.btnCancelModal-cancel')
+        ModalisCanceled.addEventListener("click", function() {
+            cancelModal.setAttribute("style","display:none")
+        })
+    </script>
+</body>
+</html>
