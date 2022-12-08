@@ -72,7 +72,7 @@
     
                         <ul class="bill-list" th:each="product :${cartitem}">
                             <li class="bill-item">
-                                <img th:src="@{/public/images/{path}.jpg (path=${product.product.img})}" alt="" class="bill-item__img">
+                                <img th:src="@{/public/images/{path} (path=${product.product.img})}" alt="" class="bill-item__img">
                                 <div class="bill-item__info">
                                     <span class="bill-item__info-title" th:text="${product.product.name}" th:with="sum=sum+${product.product.price * product.quantity}">
                                     </span>

@@ -3,6 +3,7 @@ package com.example.qlhtt.Repos;
 import com.example.qlhtt.Entity.Cart;
 import com.example.qlhtt.Entity.CustomerOrder;
 import org.hibernate.criterion.Order;
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -20,6 +22,9 @@ public class OrderRepos {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private ProductRepos productRepos;
 
     public boolean checkout(List<Cart> cartList){
         try{
@@ -52,5 +57,30 @@ public class OrderRepos {
             e.printStackTrace();
         }
         return null;
+    }
+    public List<Cart> OrderDetail(int id){
+        try{
+            List<Cart> cart= jdbcTemplate.query("Select order_id,product_Id,num_of_product From OrderDetail where order_id=" + id
+                    , (rs, rowNum) -> new Cart(rs.getInt("order_id"),rs.getInt("Product_id"),rs.getInt("num_of_product")));
+            for(int i=0;i< cart.size();i++){
+                cart.get(i).setProduct(productRepos.getid(cart.get(i).getProduct().getProduct_id()));
+            }
+            return cart;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public boolean checkOrder(int id, int Employee_id){
+        try{
+            jdbcTemplate.update("Update CustomerOrder set status_now=? ,staff_id=? where order_id=?"
+            ,1 ,Employee_id ,id);
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 }

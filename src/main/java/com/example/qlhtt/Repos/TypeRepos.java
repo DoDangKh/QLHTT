@@ -28,5 +28,14 @@ public class TypeRepos {
         }
         return null;
     }
-
+    public boolean add(Type type){
+        try{
+            jdbcTemplate.update("insert into Type(name) Values(?)",type.getName());
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

@@ -194,7 +194,7 @@
                     <div class="product-item" th:each="product :${p}">
                         <a th:href="@{product/{path} (path=${product.product_id})}" class="product-link">
                             <div class="product-img">
-                                <img th:src="@{/public/images/{path}.jpg(path=${product.img})}">
+                                <img th:src="@{/public/images/{path}(path=${product.img})}">
                             </div>
                             <div class="product-name" th:text="${product.name}"></div>
                             <div class="product-price">

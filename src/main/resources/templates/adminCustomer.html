@@ -183,22 +183,30 @@
             }
         }
         var btns = document.getElementsByClassName('btn__remove')
+        var deleteCustomer = document.querySelector('.delete-customer')
         var deleteProductisAccepted = document.querySelector('.btnDeleteModal-accept')
         var deleteProductisCanceled = document.querySelector('.btnCancelDeleteModal-cancel')
         Array.from(btns).forEach((btn) => {
             btn.addEventListener("click", (e) => {
-                var deleteCustomer = document.querySelector('.delete-customer')
                 deleteCustomer.style.display = "flex"
-                deleteProductisCanceled.addEventListener("click", () => {
-                    deleteCustomer.style.display = "none"
-                })
-                deleteProductisAccepted.addEventListener("click", function() {
-                deleteCustomer.setAttribute("style", "display: none;")
-                btn.parentNode.remove();
-                console.log(2)
-                })
+                var id = e.target.closest('.customer').getAttribute('id')
+                deleteCustomer.setAttribute("id", id)
             });
         });
+
+        deleteProductisCanceled.addEventListener("click", () => {
+            deleteCustomer.style.display = "none"
+        })
+        deleteProductisAccepted.addEventListener("click", function() {
+            deleteCustomer.setAttribute("style", "display: none;")
+            var id = deleteCustomer.getAttribute('id')
+            var items = document.querySelectorAll('.customer')
+            Array.from(items).forEach((item) => {
+                if(item.getAttribute('id') ===id) {
+                    item.remove()
+                }
+            })
+        })
     </script>
 </body>
 

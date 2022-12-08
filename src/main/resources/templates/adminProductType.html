@@ -25,13 +25,14 @@
                 </div>
 
                 <div class="col l-10">
+                    <form>
                     <div class="categoryBtn">
-                        <button class="categoryBtn__btn btn__plus">
+                        <button class="categoryBtn__btn btn__plus" th:formaction="@{/Employee/type/new}">
                             <i class="fa-solid fa-plus"></i>
                             <span>Thêm</span>
                         </button>
                     </div>
-
+                    </form>
                     <div class="row" th:each="type:${types}">
                         <div class="col l-2 productType-item">
                             <div class="productType">
@@ -108,11 +109,11 @@
         var cancelAddType = document.querySelector('.cancel-add-type')
         var productTypeItem = document.querySelector('.productType-item')
 
-        btnPlus.onclick = function() {querySelectorquerySelector
-            addType.setAttribute("style", "display: flex;")
-            addNewItem()
-            cancelAddNewItem()
-        }
+<!--        btnPlus.onclick = function() {-->
+<!--            addType.setAttribute("style", "display: flex;")-->
+<!--            addNewItem()-->
+<!--            cancelAddNewItem()-->
+<!--        }-->
 
         function addNewItem() {
             modalAcceptBtn.onclick = function() {
@@ -148,19 +149,29 @@
         var deleteProductTypeisCanceled = document.querySelector('.btnCancelDeleteModal-cancel')
         var btns = document.getElementsByClassName('productType-btn')
         Array.from(btns).forEach((btn) => {
-            btn.addEventListener("click", () => {
+            btn.addEventListener("click", (e) => {
                 deleteProductType.setAttribute("style", "display: flex;")
-                deleteProductTypeisCanceled.addEventListener("click", () => {
-                    deleteProductType.setAttribute("style", "display: none;")
-                })
-                deleteProductTypeisAccepted.addEventListener("click", function() {
-                    deleteProductType.setAttribute("style", "display: none;")
-                    var temp = btn.parentNode
-                    console.log(temp.parentNode)
-                    temp.parentNode.remove();
-                })
+                var id = e.target.closest('.productType-item').getAttribute('id')
+                deleteProductType.setAttribute("id", id)
+                if(e.target.closest('.btnDeleteModal-accept')) {
+                    console.log(e.target.closest('.btnDeleteModal-accept'))
+                }
             });
         });
+        deleteProductTypeisCanceled.addEventListener("click", (e) => {
+            deleteProductType.setAttribute("style", "display: none;")
+        })
+        deleteProductTypeisAccepted.addEventListener("click", function(e) {
+            deleteProductType.setAttribute("style", "display: none;")
+            var id = deleteProductType.getAttribute('id')
+            var items = document.querySelectorAll('.productType-item')
+            Array.from(items).forEach((item) => {
+                if(item.getAttribute('id') === id) {
+                    item.remove()
+                }
+            })
+            console.log(id)
+        })
     </script>
     
     <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>

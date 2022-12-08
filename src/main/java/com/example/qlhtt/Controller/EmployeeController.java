@@ -3,13 +3,12 @@ package com.example.qlhtt.Controller;
 
 import com.example.qlhtt.Entity.*;
 import com.example.qlhtt.Repos.*;
+import net.bytebuddy.matcher.StringMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -118,6 +118,19 @@ public class EmployeeController {
         return mav;
     }
 
+    @RequestMapping("/type/new")
+    public ModelAndView newtype(){
+        ModelAndView mav=new ModelAndView( "adminAddProductType");
+        mav.addObject("type",new Type());
+        return mav;
+    }
+
+    @PostMapping("/type/add")
+    public String addtpye(@ModelAttribute("type") Type type){
+        typeRepos.add(type);
+        return "redirect:/Employee";
+    }
+
     @RequestMapping("/order")
     public ModelAndView order(){
         ModelAndView mav=new ModelAndView("adminOrder");
@@ -125,6 +138,42 @@ public class EmployeeController {
         mav.addObject("orders",customerOrders);
         return mav;
     }
+
+    @RequestMapping("/order/{id}")
+    public ModelAndView orderdetail(@PathVariable("id") int id){
+        ModelAndView mav=new ModelAndView("adminOrderDetail");
+        List<Cart> order= orderRepos.OrderDetail(id);
+        mav.addObject("order",order);
+        int sum=0;
+        for(int i=0;i<order.size();i++){
+            sum+=order.get(i).getQuantity()*order.get(i).getProduct().getPrice();
+        }
+        mav.addObject("id",String.valueOf(id));
+        System.out.print(id+"cccccccccccccc");
+        mav.addObject("sum",sum);
+        return mav;
+
+    }
+
+    public class id{
+        int id=100;
+    }
+
+    @PostMapping("/order/check")
+    public String checkorder(@ModelAttribute("order")ArrayList<Cart> carts){
+        System.out.print(carts.get(0).getCustomer_id()+"xxxxxxxxxxxxxxxx");
+        try {
+            UserLogin user = userLoginRepos.getUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+
+            orderRepos.checkOrder(carts.get(0).getCustomer_id(), user.getPerson_id());
+            return "redirect:/Employee";
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return "redirect:/Employee";
+    }
+
 
     @RequestMapping("/customer")
     public ModelAndView customer(){
