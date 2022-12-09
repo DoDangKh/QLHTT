@@ -28,6 +28,10 @@
 
             <form class="productDetail" method="post" enctype="multipart/form-data">
                 <div class="modal__body add-product__body">
+                    <div th:if="product.product_id!=0" action="" class="basic-form">
+                        <label for="" class="form__label">ID:</label>
+                        <input type="text" class="form__input" th:field="${product.product_id}" readonly>
+                    </div>
                     <div action="" class="basic-form">
                         <label for="" class="form__label">Tên sản phẩm:</label>
                         <input type="text" class="form__input" th:field="${product.name}">

@@ -36,7 +36,8 @@
                     </div>
 
                     <div class="customer" th:each="customer:${persons}">
-                        <a href="/QLHTT/src/main/resources/templates/adminCustomerOrder.html" class="customer__item">
+                        <a th:href="@{/Employee/customer/{path} (path=${customer.id})}" class="customer__item">
+
                             <i class="fa-solid fa-user"></i>
                             <div class="customer__content">
                                 <span class="customer__item-title" th:text="${customer.name}">

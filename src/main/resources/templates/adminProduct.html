@@ -60,7 +60,7 @@
                         </form>
                     </div>
                     <div class="product" th:each="product:${products.content}">
-                        <a href="/QLHTT/src/main/resources/templates/adminProductDetail.html" class="product__item">
+                        <a th:href="@{/Employee/product/{path} (path=${product.product_id})}" class="product__item">
                             <img th:src="@{/public/images/{path}(path=${product.img})}" class="product__item-img">
                             <div class="product__content">
                                 <span class="product__item-title" th:text="${product.name}">

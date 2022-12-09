@@ -98,6 +98,13 @@ public class EmployeeController {
         mav.addObject("product",new Product());
         return mav;
     }
+    @RequestMapping("/product/{id}")
+    public ModelAndView updateproduct(@PathVariable("id") int id){
+        Product product=productRepos.getid(id);
+        ModelAndView mav=new ModelAndView("adminProductDetail");
+        mav.addObject("product",product);
+        return mav;
+    }
 
     @PostMapping("/product/updateConfirm")
     public String update(@ModelAttribute("product") Product product, @RequestParam MultipartFile photo){
@@ -109,7 +116,10 @@ public class EmployeeController {
             InputStream inputStream=photo.getInputStream();
             Files.copy(inputStream,path.resolve(photo.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             product.setImg(photo.getOriginalFilename());
+            if(product.getProduct_id()==0)
             productRepos.add(product);
+
+            else productRepos.update(product);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -189,5 +199,20 @@ public class EmployeeController {
         System.out.print("xxxxxxxxxxxxxxxxxxxxx "+personList.size()+" xxxxxxxxxxxxxxx");
         mav.addObject("persons",personList);
         return mav;
+    }
+
+    @RequestMapping("/customer/{id}")
+    public ModelAndView customerdetail(@PathVariable("id") int id){
+        ModelAndView mav =new ModelAndView("adminCustomerOrder");
+        Person person=personRepos.getbyid(id);
+        mav.addObject("person",person);
+        return mav;
+    }
+
+    @PostMapping("/customer/update")
+    public String update(@ModelAttribute("person") Person person){
+        System.out.print("llllllllllllllllllllllll"+ person.getId());
+        personRepos.update(person);
+        return "redirect:/Employee";
     }
 }
