@@ -5,6 +5,9 @@ import com.example.qlhtt.Entity.*;
 import com.example.qlhtt.Repos.*;
 import net.bytebuddy.matcher.StringMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.Option;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,6 +27,7 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/Employee")
@@ -78,11 +83,13 @@ public class EmployeeController {
 
     }
 
-    @RequestMapping("/product")
-    public ModelAndView product(){
+    @GetMapping("/product/page/{p}")
+    public ModelAndView product(@PathVariable("p")Optional<Integer> p){
+        Pageable pageable= PageRequest.of(p.orElse(0),2) ;
+        Page<Product> page=productRepos.getPage(pageable);
         ModelAndView mav=new ModelAndView("adminProduct");
         List<Product> product=productRepos.getall();
-        mav.addObject("products",product);
+        mav.addObject("products",page);
         return mav;
     }
     @RequestMapping("/product/detail")
@@ -159,13 +166,13 @@ public class EmployeeController {
         int id=100;
     }
 
-    @PostMapping("/order/check")
-    public String checkorder(@ModelAttribute("order")ArrayList<Cart> carts){
-        System.out.print(carts.get(0).getCustomer_id()+"xxxxxxxxxxxxxxxx");
+    @RequestMapping("/order/check/{id}")
+    public String checkorder(@PathVariable("id") int id){
+        System.out.print(id+"xxxxxxxxxxxxxxxx");
         try {
             UserLogin user = userLoginRepos.getUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 
-            orderRepos.checkOrder(carts.get(0).getCustomer_id(), user.getPerson_id());
+            orderRepos.checkOrder(id, user.getPerson_id());
             return "redirect:/Employee";
         }
         catch (Exception e){

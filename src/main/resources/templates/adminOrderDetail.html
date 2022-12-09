@@ -76,7 +76,7 @@
                     </table>
                     <div class="or-body__btn">
                         <button class="btn-l or-body__btn-cancel" th:formaction="@{/Employee}">Huỷ</button>
-                        <button class="btn-l or-body__btn-accept" th:with="postid=${id}" th:formaction="@{Employee/order/check/{path} (path={$id})}"  type="submit" >Xác nhận</button>
+                        <button class="btn-l or-body__btn-accept" th:with="postid=${id}" th:formaction="@{/Employee/order/check/{path} (path=${id})}"  type="submit" >Xác nhận</button>
                     </div>
                 </div>
                     <form  method="post" th:formaction="@{/Employee/order/check}" >
@@ -122,92 +122,92 @@
         </div>
     </div>
 
-    <script>
-        // Accept Button
-        var acceptBtn = document.querySelector('.or-body__btn-accept')
-        var acceptModal = document.getElementById('acceptModal')
-        var acceptModalisAccepted = document.querySelector('.btnAcceptModal-accept')
-        var acceptModalisCanceled = document.querySelector('.btnAcceptModal-cancel')
-        
+<!--    <script>-->
+<!--        // Accept Button-->
+<!--        var acceptBtn = document.querySelector('.or-body__btn-accept')-->
+<!--        var acceptModal = document.getElementById('acceptModal')-->
+<!--        var acceptModalisAccepted = document.querySelector('.btnAcceptModal-accept')-->
+<!--        var acceptModalisCanceled = document.querySelector('.btnAcceptModal-cancel')-->
+<!--        -->
 
-        // Cancel Button
-        var cancelBtn = document.querySelector('.or-body__btn-cancel')
-        var cancelModal = document.getElementById('cancelModal')
-        var cancelModalisAccepted = document.querySelector('.btnCancelModal-accept')
-        var cancelModalisCanceled = document.querySelector('.btnCancelModal-cancel')
-        var orBody = document.querySelector('.or-body')
-        var orBodyNone = document.querySelector('.or-body-none')
-        cancelBtn.onclick = function() {
-            cancelModal.setAttribute("style", "display: flex;")
-            cancelModalisAccepted.addEventListener("click", function() {
-                orBody.setAttribute("style", "display: none;")
-                orBodyNone.setAttribute("style", "display: block;")
-                cancelModal.setAttribute("style", "display: none;")
-            })
-            cancelModalisCanceled.addEventListener("click", function() {
-                cancelModal.setAttribute("style", "display: none;")
-            })
-        }
+<!--        // Cancel Button-->
+<!--        var cancelBtn = document.querySelector('.or-body__btn-cancel')-->
+<!--        var cancelModal = document.getElementById('cancelModal')-->
+<!--        var cancelModalisAccepted = document.querySelector('.btnCancelModal-accept')-->
+<!--        var cancelModalisCanceled = document.querySelector('.btnCancelModal-cancel')-->
+<!--        var orBody = document.querySelector('.or-body')-->
+<!--        var orBodyNone = document.querySelector('.or-body-none')-->
+<!--        cancelBtn.onclick = function() {-->
+<!--            cancelModal.setAttribute("style", "display: flex;")-->
+<!--            cancelModalisAccepted.addEventListener("click", function() {-->
+<!--                orBody.setAttribute("style", "display: none;")-->
+<!--                orBodyNone.setAttribute("style", "display: block;")-->
+<!--                cancelModal.setAttribute("style", "display: none;")-->
+<!--            })-->
+<!--            cancelModalisCanceled.addEventListener("click", function() {-->
+<!--                cancelModal.setAttribute("style", "display: none;")-->
+<!--            })-->
+<!--        }-->
 
-        var orderDetailAPI = "http://localhost:3000/orderDetail";
-        var orderDetailList;
-        fetch(orderDetailAPI)
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(list) {
-                orderDetailList = list;
-                console.log(orderDetailList)
-                return handleData(list);
-            })
-            function handleData(list) {
-                orderDetailList = list;
-                console.log(orderDetailList)
-                var orderDetailhtmls = orderDetailList.map(function(orderDetail){
-                var priceCount = orderDetail.count * orderDetail.price
-                    return `
-                        <tr>
-                            <td class="or-customer__item or-customer__item-name">
-                                ${orderDetail.name}
-                            </td>
-                            <td class="or-customer__item or-customer__item-count">
-                                ${orderDetail.count}
-                            </td>
-                            <td class="or-customer__item or-customer__item-left">
-                                ${orderDetail.price}
-                            </td>
-                            <td class="or-customer__item or-customer__item-price">
-                                ${priceCount}
-                            </td>
-                        </tr>
-                    `
-                })
-                var orderDetailhtml = orderDetailhtmls.join('')
-                document.querySelector('.or-customer__body').innerHTML = orderDetailhtml
-                var sumPriceTable = document.querySelector('tfoot .or-customer__item-price')
-                sumPriceTable.innerHTML = sumPrice(orderDetailList)
+<!--        var orderDetailAPI = "http://localhost:3000/orderDetail";-->
+<!--        var orderDetailList;-->
+<!--        fetch(orderDetailAPI)-->
+<!--            .then(function(response) {-->
+<!--                return response.json();-->
+<!--            })-->
+<!--            .then(function(list) {-->
+<!--                orderDetailList = list;-->
+<!--                console.log(orderDetailList)-->
+<!--                return handleData(list);-->
+<!--            })-->
+<!--            function handleData(list) {-->
+<!--                orderDetailList = list;-->
+<!--                console.log(orderDetailList)-->
+<!--                var orderDetailhtmls = orderDetailList.map(function(orderDetail){-->
+<!--                var priceCount = orderDetail.count * orderDetail.price-->
+<!--                    return `-->
+<!--                        <tr>-->
+<!--                            <td class="or-customer__item or-customer__item-name">-->
+<!--                                ${orderDetail.name}-->
+<!--                            </td>-->
+<!--                            <td class="or-customer__item or-customer__item-count">-->
+<!--                                ${orderDetail.count}-->
+<!--                            </td>-->
+<!--                            <td class="or-customer__item or-customer__item-left">-->
+<!--                                ${orderDetail.price}-->
+<!--                            </td>-->
+<!--                            <td class="or-customer__item or-customer__item-price">-->
+<!--                                ${priceCount}-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    `-->
+<!--                })-->
+<!--                var orderDetailhtml = orderDetailhtmls.join('')-->
+<!--                document.querySelector('.or-customer__body').innerHTML = orderDetailhtml-->
+<!--                var sumPriceTable = document.querySelector('tfoot .or-customer__item-price')-->
+<!--                sumPriceTable.innerHTML = sumPrice(orderDetailList)-->
 
-                acceptBtn.onclick = function() {
-                    acceptModal.setAttribute("style", "display: flex;")
-                    acceptModalisAccepted.addEventListener("click", function() {
-                        acceptModal.setAttribute("style", "display: none;")
+<!--                acceptBtn.onclick = function() {-->
+<!--                    acceptModal.setAttribute("style", "display: flex;")-->
+<!--                    acceptModalisAccepted.addEventListener("click", function() {-->
+<!--                        acceptModal.setAttribute("style", "display: none;")-->
 
-                        location.href = "./order.html"
-                    })
-                        acceptModalisCanceled.addEventListener("click", function() {
-                        acceptModal.setAttribute("style", "display: none;")
-                    })
-                }
-            }
-        
-            // hàm tính tổng tiền
-            function sumPrice(orderDetailList) {
-                var sum = 0; 
-                for(var i = 0; i < orderDetailList.length; i++) {
-                    sum += Number(orderDetailList[i].price) * Number(orderDetailList[i].count);
-                }
-                return sum;
-            }
-    </script>
+<!--                        location.href = "./order.html"-->
+<!--                    })-->
+<!--                        acceptModalisCanceled.addEventListener("click", function() {-->
+<!--                        acceptModal.setAttribute("style", "display: none;")-->
+<!--                    })-->
+<!--                }-->
+<!--            }-->
+<!--        -->
+<!--            // hàm tính tổng tiền-->
+<!--            function sumPrice(orderDetailList) {-->
+<!--                var sum = 0; -->
+<!--                for(var i = 0; i < orderDetailList.length; i++) {-->
+<!--                    sum += Number(orderDetailList[i].price) * Number(orderDetailList[i].count);-->
+<!--                }-->
+<!--                return sum;-->
+<!--            }-->
+<!--    </script>-->
 </body>
 </html>

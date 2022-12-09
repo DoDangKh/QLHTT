@@ -59,7 +59,7 @@
                         </div>
                         </form>
                     </div>
-                    <div class="product" th:each="product:${products}">
+                    <div class="product" th:each="product:${products.content}">
                         <a href="/QLHTT/src/main/resources/templates/adminProductDetail.html" class="product__item">
                             <img th:src="@{/public/images/{path}(path=${product.img})}" class="product__item-img">
                             <div class="product__content">
@@ -151,6 +151,8 @@
             </div>
         </form>
         </form>
+        <div th:href="@{/Employee/product/page?={path} (path=${products.number+1})}">next</div>
+        <div th:href="@{/Employee/product/page?={path} (path=${products.number-1})}">prev</div>
         <div class="modal cancel-add-product">
             <div class="modal-noti-size">
                 <div class="modal-noti__head">

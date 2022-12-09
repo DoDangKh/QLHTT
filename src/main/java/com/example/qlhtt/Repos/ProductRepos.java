@@ -2,8 +2,12 @@ package com.example.qlhtt.Repos;
 
 import com.example.qlhtt.Entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -36,6 +40,20 @@ public class ProductRepos {
         }
         return null;
     }
+
+    public Page<Product> getPage(Pageable page){
+        try{
+            List<Product> products=jdbcTemplate.query("Select * From Product Order by product_id OFFSET " + page.getOffset() + "ROWS Fetch NEXT " + page.getPageSize() +" ROWS ONLY"
+            ,BeanPropertyRowMapper.newInstance(Product.class));
+            int count=jdbcTemplate.queryForObject("SELECT count(*) from Product",Integer.class);
+            return new PageImpl<Product>(products, page, count);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public boolean update(Product product){
         try{
             jdbcTemplate.update("update Product set name =? ,quantity=?, price=?, img=?, describe=?, discount_id=?, type_id=? where product_id=? "
