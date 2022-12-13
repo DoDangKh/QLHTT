@@ -6,6 +6,8 @@ import com.example.qlhtt.Repos.PersonRepos;
 import com.example.qlhtt.Repos.UserLoginRepos;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,13 +40,32 @@ public class LoginController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
     @RequestMapping("/login")
     public String login(){
         //logger.error(error);
         return "login";
     }
+    @RequestMapping("/forgotpassword")
+    public ModelAndView Forgotpassword(){
+        ModelAndView mav=new ModelAndView("ForgotPassword");
+        mav.addObject("username",new String());
+        return mav;
+    }
+    @PostMapping("/sendemail")
+    public String sendemail(@ModelAttribute("username") String username){
+        SimpleMailMessage message= new SimpleMailMessage();
+        message.setFrom("n19dccn093@student.ptithcm.edu.vn");
+        message.setTo(username);
+        message.setText("test");
+        message.setSubject("test");
+        mailSender.send(message);
+        return "redirect:/home";
+    }
 //    @RequestMapping("/logut")
-//    public String logout(HttpServletRequest request, HttpServletResponse response){
+//    public String logout(Http  ServletRequest request, HttpServletResponse response){
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        if(authentication != null){
 //            new SecurityContextLogoutHandler().logout(request,response,authentication);

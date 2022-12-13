@@ -32,6 +32,11 @@
   gap: 0.5rem;
   text-align: center;
 }
+.login-wrapper .login-form form a {
+    color:#00833e;
+    font-size: 12px;
+    text-align: end;
+}
 .login-wrapper .login-form form .title {
   font-weight: 700;
   font-size: 18px;
