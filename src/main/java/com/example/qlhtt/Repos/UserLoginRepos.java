@@ -45,6 +45,7 @@ public class UserLoginRepos {
             userLogin.setRole_id(2);
             jdbcTemplate.update("Insert into UserLogin(person_id, username, password, enable, role_id) VALUES(?, ?, ?, ?, ?)"
             , userLogin.getPerson_id(), userLogin.getUsername(), userLogin.getPassword(), 1, userLogin.getRole_id());
+            jdbcTemplate.update("Insert into CustomerUser(customer_id=? ,status=?)", userLogin.getPerson_id(),1);
             return true;
         }
         catch(Exception e){
@@ -52,5 +53,20 @@ public class UserLoginRepos {
         }
         return false;
     }
+    public boolean updateUser(UserLogin userLogin){
+        try{
+            String password=userLogin.getPassword();
+            //userLogin.setPassword(bCryptPasswordEncoder.encode(password));
+            userLogin.setRole_id(2);
+            jdbcTemplate.update("Update UserLogin set Username=? ,Password=? ,Role_id=? Where person_id=?"
+                    ,  userLogin.getUsername(), userLogin.getPassword(), userLogin.getRole_id(), userLogin.getPerson_id());
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 }
