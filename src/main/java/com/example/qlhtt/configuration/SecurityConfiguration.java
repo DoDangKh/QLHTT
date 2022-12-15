@@ -36,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/home","/public/**","/product/**","/forgotpassword/**","/register/**","/sendemail/**").permitAll();
+        http.authorizeRequests().antMatchers("/home","/public/**","/product/**","/forgotpassword/**","/register/**","/sendemail/**","/Confirmregister").permitAll();
         http.csrf().disable().authorizeRequests().antMatchers("/cart/**").hasRole("CUSTOMER")
                 .antMatchers("/Employee/**").hasRole("EMPLOYEE").anyRequest()
                 .authenticated().and().formLogin().loginPage("/login").permitAll().loginProcessingUrl("/login").usernameParameter("username")

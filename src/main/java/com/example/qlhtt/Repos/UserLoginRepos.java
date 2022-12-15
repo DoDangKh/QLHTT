@@ -45,7 +45,7 @@ public class UserLoginRepos {
             userLogin.setRole_id(2);
             jdbcTemplate.update("Insert into UserLogin(person_id, username, password, enable, role_id) VALUES(?, ?, ?, ?, ?)"
             , userLogin.getPerson_id(), userLogin.getUsername(), userLogin.getPassword(), 1, userLogin.getRole_id());
-            jdbcTemplate.update("Insert into CustomerUser(customer_id=? ,status=?)", userLogin.getPerson_id(),1);
+            jdbcTemplate.update("Insert into CustomerUser(customer_id ,status) VALUES(?,?)", userLogin.getPerson_id(),1);
             return true;
         }
         catch(Exception e){

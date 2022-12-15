@@ -16,43 +16,44 @@
     <link rel="stylesheet" th:href="@{public/css/register.css}">
 </head>
 <body>
-<div class="main-header">
-    <header class="heading">
-        <a href="" class="heading__link"><img class="heading__logo" src="./assets/img/LogoGmarket.png" alt=""></a>
-        <div class="heading-with-search">
-            <div class="heading__search">
-                <div class="heading__search-input">
-                    <input type="text" placeholder="Tìm kiếm">
-                </div>
-                <div class="heading__search-logo">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-            </div>
-        </div>
-        <div class="heading__cart">
-            <i class="heading__cart-logo fa-solid fa-cart-shopping"></i>
-            <span class="heading__cart-notice">0</span>
-            <!-- <span class="heading__cart-title">Giỏ hàng</span> -->
-            <span class="heading__cart-title heading__cart-title--price">57.000 đ </span>
-        </div>
-        <div class="heading__account">
-            <i class="heading__account-logo fa-solid fa-user"></i>
-            <span class="heading__account-title">Tài khoản</span>
-        </div>
-    </header>
+<header class="header-top">
+<div  th:insert="header">
+<!--    <header class="heading">-->
+<!--        <a href="" class="heading__link"><img class="heading__logo" src="./assets/img/LogoGmarket.png" alt=""></a>-->
+<!--        <div class="heading-with-search">-->
+<!--            <div class="heading__search">-->
+<!--                <div class="heading__search-input">-->
+<!--                    <input type="text" placeholder="Tìm kiếm">-->
+<!--                </div>-->
+<!--                <div class="heading__search-logo">-->
+<!--                    <i class="fa-solid fa-magnifying-glass"></i>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="heading__cart">-->
+<!--            <i class="heading__cart-logo fa-solid fa-cart-shopping"></i>-->
+<!--            <span class="heading__cart-notice">0</span>-->
+<!--            &lt;!&ndash; <span class="heading__cart-title">Giỏ hàng</span> &ndash;&gt;-->
+<!--            <span class="heading__cart-title heading__cart-title&#45;&#45;price">57.000 đ </span>-->
+<!--        </div>-->
+<!--        <div class="heading__account">-->
+<!--            <i class="heading__account-logo fa-solid fa-user"></i>-->
+<!--            <span class="heading__account-title">Tài khoản</span>-->
+<!--        </div>-->
+<!--    </header>-->
 
-    <nav class="navigation">
-        <div class="nav-heading">
-            <i class="nav-heading__icon fa-solid fa-bars"></i>
-            <span class="nav-heading__title">DANH MỤC</span>
-            <ul class="nav-list">
-                <a href="" class="nav-list__link">
-                    <li class="nav-list__item">Rau củ - Trái cây</li>
-                    <i class="nav-list__logo fa-solid fa-chevron-right"></i>
-                </a>
-            </ul>
-        </div>
-    </nav>
+<!--    <nav class="navigation">-->
+<!--        <div class="nav-heading">-->
+<!--            <i class="nav-heading__icon fa-solid fa-bars"></i>-->
+<!--            <span class="nav-heading__title">DANH MỤC</span>-->
+<!--            <ul class="nav-list">-->
+<!--                <a href="" class="nav-list__link">-->
+<!--                    <li class="nav-list__item">Rau củ - Trái cây</li>-->
+<!--                    <i class="nav-list__logo fa-solid fa-chevron-right"></i>-->
+<!--                </a>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </nav>-->
 </div>
 
 <div class="main-body">
@@ -75,12 +76,13 @@
                            th:field="${person.gender}"
                            id="gender-male">
                     <label class="form__radio-label" for="gender-male">Nam</label>
-                </div>
-                <div class="form-radio">
                     <input class="form__radio" type="radio" name="gender" th:value="Nữ" th:field="${person.gender}"
-                           id="gender-female">
+                    id="gender-female">
                     <label class="form__radio-label" for="gender-female">Nữ</label>
                 </div>
+<!--                <div class="form-radio">-->
+<!--                    <-->
+<!--                </div>-->
 
             <div class="basic-form">
                 <label for="" class="form__label">Số điện thoại:</label>
@@ -134,5 +136,6 @@
         hàng. Chúng tôi không thể đạt được thành công này nếu không có bạn là khách hàng của chúng tôi. Sự hài lòng của
         bạn là mối quan tâm số một của chúng tôi và chúng tôi hứa sẽ luôn đáng tin cậy.</p>
 </footer>
+</header>
 </body>
 </html>

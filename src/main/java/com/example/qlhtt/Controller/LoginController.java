@@ -79,7 +79,7 @@ public class LoginController {
         mav.addObject("date", date);
         return mav;
     }
-    @PostMapping("Confirmregister")
+    @PostMapping("/Confirmregister")
     public String SaveUsers(Model model, @ModelAttribute("person") Person person, @ModelAttribute("userLogin") UserLogin userLogin, @ModelAttribute("date") String date) throws  Exception{
         //date=date.substring(0,10);
         //date.replace("-","/");
