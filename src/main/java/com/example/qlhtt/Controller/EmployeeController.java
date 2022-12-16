@@ -95,6 +95,7 @@ public class EmployeeController {
     @RequestMapping("/product/detail")
     public ModelAndView updateview(){
         ModelAndView mav=new ModelAndView("adminProductDetail");
+
         mav.addObject("product",new Product());
         return mav;
     }
@@ -102,6 +103,7 @@ public class EmployeeController {
     public ModelAndView updateproduct(@PathVariable("id") int id){
         Product product=productRepos.getid(id);
         ModelAndView mav=new ModelAndView("adminProductDetail");
+        mav.addObject("myfile",product.getImg());
         mav.addObject("product",product);
         return mav;
     }
@@ -109,13 +111,24 @@ public class EmployeeController {
     @PostMapping("/product/updateConfirm")
     public String update(@ModelAttribute("product") Product product, @RequestParam MultipartFile photo){
 
+        System.out.println("photo" + photo.getOriginalFilename());
+
         Path path= Paths.get("src/main/resources/static/public/images/");
 
         System.out.print(path);
         try{
-            InputStream inputStream=photo.getInputStream();
-            Files.copy(inputStream,path.resolve(photo.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
-            product.setImg(photo.getOriginalFilename());
+            if(!photo.getOriginalFilename().equals("")) {
+                InputStream inputStream = photo.getInputStream();
+                Files.copy(inputStream, path.resolve(photo.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+                product.setImg(photo.getOriginalFilename());
+                System.out.println(1);
+            }
+            else{
+                Product temp=productRepos.getid(product.getProduct_id());
+                product.setImg(temp.getImg());
+                System.out.println(2);
+            }
+
             if(product.getProduct_id()==0)
             productRepos.add(product);
 
@@ -124,7 +137,7 @@ public class EmployeeController {
         catch(Exception e){
             e.printStackTrace();
         }
-        return "redirect:/Employee/product";
+        return "redirect:/Employee/product/page/0";
     }
 
     @RequestMapping("/type")

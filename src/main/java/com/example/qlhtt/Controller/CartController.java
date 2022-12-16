@@ -63,6 +63,7 @@ public class CartController {
         if(productRepos.getid(id).getQuantity()>0) {
             Product product=productRepos.getid(id);
            product.setQuantity(product.getQuantity()-1);
+           productRepos.update(product);
             cartRepos.add(id, userLogin.getPerson_id());
         }
         else {
@@ -70,6 +71,7 @@ public class CartController {
 
         }
         model.addAttribute("error",error);
+//        model.addAttribute("quantity",error);
         return "redirect:/cart/all";
     }
     @GetMapping("/dec/{id}")
@@ -79,6 +81,9 @@ public class CartController {
         for(int i=0;i<cart.size();i++){
             if(cart.get(i).getProduct().getProduct_id()==id){
                 cart.get(i).setQuantity(cart.get(i).getQuantity()-1);
+                Product product=productRepos.getid(id);
+                product.setQuantity(product.getQuantity()+1);
+                productRepos.update(product);
                 cartRepos.dec(cart.get(i));
                 break;
             }

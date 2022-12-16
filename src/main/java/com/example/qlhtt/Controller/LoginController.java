@@ -34,9 +34,14 @@ public class LoginController {
     @Autowired
     private JavaMailSender mailSender;
 
+
+    @RequestMapping("/")
+    public String defaultpage(){
+        return "redirect:/home";
+    }
     @RequestMapping("/login")
     public String login(){
-        //logger.error(error);
+//        logger.error(error);
         return "login";
     }
     @RequestMapping("/forgotpassword")

@@ -58,13 +58,13 @@
                     <div class="product-detail">
                         <div action="" class="basic-form product-detail__img">
                             <label for="myfile" class="form__label product-detail__title">Hình ảnh:</label>
-                            <input type="file" id="myfile" accept="*" name="photo" onchange="readFile(this)">
+                            <input type="file" id="myfile" th:value="${myfile}" accept="*" name="photo" onchange="readFile(this)">
                             <label for="myfile" class="myfile-label">
                                 <i class="fa-solid fa-file-circle-plus"></i>
                                 Thêm hình ảnh
                             </label>
                             <div class="show-img">
-                                <img class="myfile__img" src="./assets/img/316007448_1372406313591188_7687324597456367359_n.jpg" alt="">
+                                <img class="myfile__img" th:src="@{/public/images/{path}(path=${product.img})}" alt="">
                             </div>
                         </div>
 
