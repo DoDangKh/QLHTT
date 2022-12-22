@@ -1,6 +1,8 @@
 .login-wrapper {
   position: relative;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 .login-wrapper .header {
   background-color: #00833e;
@@ -21,11 +23,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1;
 }
 .login-wrapper .login-form form {
   width: 300px;
-  margin-top: 6rem !important;
-  margin-bottom: 6rem !important;
+  justify-content: center;
   display: inline-flex;
   flex-direction: column;
   align-self: stretch;
@@ -62,8 +64,6 @@
 }
 .login-wrapper .footer {
   width: 100%;
-  position: fixed;
-  bottom: 0;
   background-color: #00833e;
   color: #fff;
 }
@@ -74,4 +74,5 @@
 
 .error-login{
     margin-top: 8px;
+    color:red;
 }

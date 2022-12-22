@@ -24,31 +24,35 @@
                     </nav>
                 </div>
 
-                <div class="col l-10">
+                <div class="col l-10" style="padding: 0 20px;">
+                    <p th:text="${success}" style="color: var(--main-color); font-size: 2rem;"></p>
+                    <p th:text="${error}" style="color: red; font-size: 2rem;"></p>
+
                     <div class="edit">
                         <div class="category">
-                            <div class="category__classify">
+                            <form class="category__classify" >
                                 <span>
-                                    Loại
+                                    Loại sản phẩm
                                 </span>
-                                <select name="type" id="" class="category__classify-select">
-                                    <option value="" class="form-product__option">Option 1</option>
-                                    <option value="" class="form-product__option">Option 2</option>
-                                    <option value="" class="form-product__option">Option 1</option>
-                                    <option value="" class="form-product__option">Option 2</option>
+                                <input type="hidden" id="products" th:value="${products.content}"/>
+                                <select th:field="${types}" class="category__classify-select" th:action="@{/Employee/product/type/haha}" >
+                                    <option style="font-size: 18px;" th:each="t:${types}"
+                                            th:value="${t.type_id}"
+                                            th:text="${t.name}">
+                                    </option>
                                 </select>
-                            </div>
-                            <div class="category__classify">
-                                <span>
-                                    Khuyến mãi
-                                </span>
-                                <select name="type" id="" class="category__classify-select">
-                                    <option value="" class="form-product__option">Option 1</option>
-                                    <option value="" class="form-product__option">Option 2</option>
-                                    <option value="" class="form-product__option">Option 1</option>
-                                    <option value="" class="form-product__option">Option 2</option>
-                                </select>
-                            </div>
+                            </form>
+<!--                            <div class="category__classify">-->
+<!--                                <span>-->
+<!--                                    Khuyến mãi-->
+<!--                                </span>-->
+<!--                                <select name="type" id="" class="category__classify-select">-->
+<!--                                    <option value="" class="form-product__option">Option 1</option>-->
+<!--                                    <option value="" class="form-product__option">Option 2</option>-->
+<!--                                    <option value="" class="form-product__option">Option 1</option>-->
+<!--                                    <option value="" class="form-product__option">Option 2</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
                         </div>
                         <form>
                         <div class="categoryBtn">
@@ -61,29 +65,31 @@
                     </div>
                     <div class="product" th:each="product:${products.content}">
                         <a th:href="@{/Employee/product/{path} (path=${product.product_id})}" class="product__item">
-                            <img th:src="@{/public/images/{path}(path=${product.img})}" class="product__item-img">
+                            <img th:src="@{/public/images/{path}(path=${product.img})}" class="product__item-img" style="width: 160px;">
                             <div class="product__content">
-                                <span class="product__item-title" th:text="${product.name}">
-    
-                                </span>
+                                <span class="product__item-title" th:text="${product.name}"></span>
                                 <div>
-                                    <span class="product__item-warehouse">Thể loại:</span>
-                                    <span class="product__item-count">100</span>
-                                </div>
-                                <div>
-                                    <span class="product__item-warehouse">Khuyến mãi:</span>
-                                    <span class="product__item-count">100</span>
+                                    <span class="product__item-warehouse">Giá:</span>
+                                    <span class="product__item-count" th:text="${product.price}"></span>
                                 </div>
                                 <div>
                                     <span class="product__item-warehouse">Số lượng tồn:</span>
-                                    <span class="product__item-count" th:text="${product.quantity}">100</span>
+                                    <span class="product__item-count" th:text="${product.quantity}"></span>
+                                </div>
+                                <div>
+                                    <span class="product__item-warehouse">Mô tả:</span>
+                                    <span class="product__item-count" th:text="${product.describe}"></span>
                                 </div>
                             </div>
                         </a>
-                        <button onclick="removeItem(this)" class="categoryBtn__btn btn__remove">
+                        <button th:onclick="removeItem(${product.product_id})" class="categoryBtn__btn btn__remove">
                             <i class="fa-solid fa-times"></i>
                             <span>Xoá</span>
                         </button>    
+                    </div>
+                    <div class="btn-page">
+                        <a class="btn-prev" th:href="@{/Employee/product/page/{path} (path=${products.number-1})}">Prev</a>
+                        <a class="btn-next" th:href="@{/Employee/product/page/{path} (path=${products.number+1})}">Next</a>
                     </div>
                 </div>
             </div>
@@ -107,12 +113,12 @@
                     </select>
                 </div>
 
-                <div class="category__classify add-product__selection">
-                    <label for="" class="form__label">Khuyến mãi:</label>
-                    <select name="type" id="" class="category__classify-select" >
-                        <option value="" class="form-product__option">Option 1</option>
-                    </select>
-                </div>
+<!--                <div class="category__classify add-product__selection">-->
+<!--                    <label for="" class="form__label">Khuyến mãi:</label>-->
+<!--                    <select name="type"  class="category__classify-select" >-->
+<!--                        <option value="" class="form-product__option">Option 1</option>-->
+<!--                    </select>-->
+<!--                </div>-->
 
                 <div class="product-detail">
                     <div action="" class="basic-form product-detail__img">
@@ -151,8 +157,7 @@
             </div>
         </form>
         </form>
-        <div th:href="@{/Employee/product/page?={path} (path=${products.number+1})}">next</div>
-        <div th:href="@{/Employee/product/page?={path} (path=${products.number-1})}">prev</div>
+
         <div class="modal cancel-add-product">
             <div class="modal-noti-size">
                 <div class="modal-noti__head">
@@ -196,8 +201,8 @@
 <!--        var modalCancelBtn = document.querySelector('.btnCancelAddProductModal-cancel')-->
 <!--        var cancelAddProduct = document.querySelector('.cancel-add-product')-->
 
-<!--        var btnRemove = document.querySelector('.btn__remove')-->
-<!--        var deleteProduct = document.querySelector('.delete-product')-->
+<!--            var btnRemove = document.querySelector('.btn__remove')-->
+        var deleteProduct = document.querySelector('.delete-product')
 
 <!--        btnPlus.onclick = function() {-->
 <!--            addProduct.setAttribute("style", "display: flex;")-->
@@ -234,12 +239,12 @@
 <!--            }-->
 <!--        }-->
 
-<!--        function removeItem(item) {-->
-<!--            console.log(item)-->
-<!--            deleteProduct.setAttribute("style", "display: flex;")-->
-<!--            acceptDelateProduct()-->
-<!--            cancelDelateProduct()-->
-<!--        }-->
+            function removeItem(id) {
+                console.log(id)
+                deleteProduct.setAttribute("style", "display: flex;")
+<!--                acceptDelateProduct()-->
+<!--                cancelDelateProduct()-->
+            }
 <!--        function acceptDelateProduct() {-->
 <!--            var acceptCancel = document.querySelector('.btnDeleteModal-accept')-->
 <!--            acceptCancel.addEventListener("click", function() {-->
@@ -271,6 +276,12 @@
 <!--        }-->
 <!--    </script>-->
 
+<script type="text/javascript" th:inline="javascript">
+    function changeType(){
+        console.log("change type");
+        const products = document.querySelector("#products").value
 
+    }
+</script>
 </body>
 </html>

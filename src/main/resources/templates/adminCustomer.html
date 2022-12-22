@@ -16,7 +16,7 @@
 
 <body>
     <div class="employee">
-        <header class="employee-header"e th:insert="headerEmployee">
+        <header class="employee-header" th:insert="headerEmployee">
             
         </header>
         <div class="grid">
@@ -27,15 +27,18 @@
                     </nav>
                 </div>
 
-                <div class="col l-10">
-                    <div class="categoryBtn">
-                        <button class="categoryBtn__btn btn__plus">
-                            <i class="fa-solid fa-plus"></i>
-                            <span>Thêm</span>
-                        </button>
+                <div class="col l-10" style="padding: 0 20px;">
+<!--                    <div class="categoryBtn">-->
+<!--                        <button class="categoryBtn__btn btn__plus">-->
+<!--                            <i class="fa-solid fa-plus"></i>-->
+<!--                            <span>Thêm</span>-->
+<!--                        </button>-->
+<!--                    </div>-->
+                    <div>
+                        <p th:text="${success}" style="color: var(--main-color); font-size: 2rem;"></p>
+                        <p th:text="${error}" style="color: red; font-size: 2rem;"></p>
                     </div>
-
-                    <div class="customer" th:each="customer:${persons}">
+                    <div class="customer" th:each="customer:${persons}" th:id="${customer.id}">
                         <a th:href="@{/Employee/customer/{path} (path=${customer.id})}" class="customer__item">
 
                             <i class="fa-solid fa-user"></i>
@@ -59,7 +62,7 @@
     </div>
     <div class="modal add-customer">
         <div class="modal__header add-customer__header">
-            <img src="./assets/img/LogoGmarket.png" alt="" class="modal__header-img">
+            <img src="https://gmarket24h.com/images/thumbs/0013362_Logo%20Gmarket%20to%20nhat.png" alt="" class="modal__header-img">
         </div>
         <div class="modal__body add-customer__body">
             <form action="" class="basic-form">
@@ -97,6 +100,7 @@
                 <label for="" class="form__label">Địa chỉ:</label>
                 <input type="text" class="form__input">
             </form>
+
             <div class="add-customer__btn">
                 <button class="btn-l btnAddCustomerModal-accept">Xác nhận</button>
                 <button class="btn-l btnCancelCustomerModal-cancel">Huỷ</button>
@@ -107,7 +111,7 @@
     <div class="modal cancel-add-customer">
         <div class="modal-noti-size">
             <div class="modal-noti__head">
-                <img class="modal-noti__head-img" src="./assets/img/LogoGmarket.png" alt="">
+                <img class="modal-noti__head-img" src="https://gmarket24h.com/images/thumbs/0013362_Logo%20Gmarket%20to%20nhat.png" alt="">
             </div>
             <div class="modal-noti__body">
                 <span class="modal-noti__body-title">
@@ -122,38 +126,58 @@
     </div>
 
     <div class="modal delete-customer">
-        <div class="modal-noti-size">
+        <div class="modal-noti-size" >
+            <!--            <input id="id_customer" type="hidden" th:field="${id}" value = ""/>-->
             <div class="modal-noti__head">
-                <img class="modal-noti__head-img" src="./assets/img/LogoGmarket.png" alt="">
+                <img class="modal-noti__head-img" src="https://gmarket24h.com/images/thumbs/0013362_Logo%20Gmarket%20to%20nhat.png" alt="">
             </div>
             <div class="modal-noti__body">
-                <span class="modal-noti__body-title">
-                    Bạn có chắc chắn xoá khách hàng này không?
-                </span>
+                                <span class="modal-noti__body-title">
+                                    Bạn có chắc chắn xoá khách hàng này không?
+                                </span>
                 <div class="modal-noti__body-btn">
-                    <button href="" class="btn-l btnCancelModal-accept btnDeleteModal-accept">Xác nhận</button>
+                    <a class="btn-l btnCancelModal-accept btnDeleteModal-accept" type="submit" style="text-decoration: none;text-align: center;line-height: 40px;">Xác nhận</a>
                     <button class="btn-l btnCancelModal-cancel btnCancelDeleteModal-cancel">Huỷ</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <div th:if="${fail == true}" class="modal delete-customer" style="display: flex">
+        <div class="modal-noti-size" >
+            <!--            <input id="id_customer" type="hidden" th:field="${id}" value = ""/>-->
+            <div class="modal-noti__head">
+                <img class="modal-noti__head-img" src="https://gmarket24h.com/images/thumbs/0013362_Logo%20Gmarket%20to%20nhat.png" alt="">
+            </div>
+            <div class="modal-noti__body">
+                                <span class="modal-noti__body-title" style="text-align: center;line-height: 26px;">
+                                    Khách hàng đã từng có đơn đặt hàng. Bạn có muốn vô hiệu hóa khách hàng này không?
+                                </span>
+                <div class="modal-noti__body-btn">
+                    <a th:href="@{/Employee/customer/update/{path} (path=${idUpdate})}" id="update-status" class="btn-l btnCancelModal-accept btnDeleteModal-accept" type="submit" style="text-decoration: none;text-align: center;line-height: 40px;">Xác nhận</a>
+                    <button class="btn-l btnCancelModal-cancel btnCancelDeleteModal-cancel">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
 <script src="/QLHTT/src/main/resources/templates/navbarEmployee.js"></script>
     <script>
         // Add Button
-        var btnPlus = document.querySelector('.btn__plus')
+<!--        var btnPlus = document.querySelector('.btn__plus')-->
         var addCustomer = document.querySelector('.add-customer')
         var modalAcceptBtn = document.querySelector('.btnAddCustomerModal-accept')
         var modalCancelBtn = document.querySelector('.btnCancelCustomerModal-cancel')
         var cancelAddCustomer = document.querySelector('.cancel-add-customer')
-        
-        var btnRemove = document.querySelector('.btn__remove')
 
-        btnPlus.onclick = function() {
-            addCustomer.setAttribute("style", "display: flex;")
-            addNewItem()
-            cancelAddNewItem()
-        }
+
+<!--        btnPlus.onclick = function() {-->
+<!--            addCustomer.setAttribute("style", "display: flex;")-->
+<!--            addNewItem()-->
+<!--            cancelAddNewItem()-->
+<!--        }-->
 
         function addNewItem() {
             modalAcceptBtn.onclick = function() {
@@ -186,28 +210,44 @@
         var btns = document.getElementsByClassName('btn__remove')
         var deleteCustomer = document.querySelector('.delete-customer')
         var deleteProductisAccepted = document.querySelector('.btnDeleteModal-accept')
-        var deleteProductisCanceled = document.querySelector('.btnCancelDeleteModal-cancel')
+        var deleteProductisCanceleds = document.getElementsByClassName('btnCancelDeleteModal-cancel')
+<!--        var deleteProductisCanceled = document.querySelector('.btnCancelDeleteModal-cancel')-->
+
         Array.from(btns).forEach((btn) => {
             btn.addEventListener("click", (e) => {
+                console.log("click ne");
                 deleteCustomer.style.display = "flex"
                 var id = e.target.closest('.customer').getAttribute('id')
+                console.log(id)
                 deleteCustomer.setAttribute("id", id)
+                const loc = location.href
+                if(loc == "http://localhost:8080/Employee/customer")
+                    deleteProductisAccepted.setAttribute("href",`customer/delete/${id}`);
+                else
+                    deleteProductisAccepted.setAttribute("href",`/Employee/customer/delete/${id}`);
             });
         });
+            Array.from(deleteProductisCanceleds).forEach((btn) => {
+                btn.addEventListener("click", (e) => {
+                            const a = e.target.closest(".delete-customer")
+                            a.style.display = "none"
+                });
+            });
 
-        deleteProductisCanceled.addEventListener("click", () => {
-            deleteCustomer.style.display = "none"
-        })
-        deleteProductisAccepted.addEventListener("click", function() {
-            deleteCustomer.setAttribute("style", "display: none;")
-            var id = deleteCustomer.getAttribute('id')
-            var items = document.querySelectorAll('.customer')
-            Array.from(items).forEach((item) => {
-                if(item.getAttribute('id') ===id) {
-                    item.remove()
-                }
-            })
-        })
+<!--        deleteProductisCanceled.addEventListener("click", () => {-->
+<!--            deleteCustomer.style.display = "none"-->
+<!--        })-->
+<!--        deleteProductisAccepted.addEventListener("click", function() {-->
+<!--            deleteCustomer.setAttribute("style", "display: none;")-->
+<!--            var id = deleteCustomer.getAttribute('id')-->
+
+<!--            var items = document.querySelectorAll('.customer')-->
+<!--            Array.from(items).forEach((item) => {-->
+<!--                if(item.getAttribute('id') ===id) {-->
+<!--                    item.remove()-->
+<!--                }-->
+<!--            })-->
+<!--        })-->
     </script>
 </body>
 

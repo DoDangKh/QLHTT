@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css}" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css}" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" th:href="@{/public/css/grid.css}">
     <link rel="stylesheet" th:href="@{/public/css/base.css}">
@@ -13,14 +13,12 @@
 </head>
 <body>
     <div class="employee">
-        <header class="employee-header">
-            <a href="./employee.html" class="header__logo">
-                <img src="./assets/img/LogoGmarket.png" alt="" class="header__img">
-            </a>
+        <header class="employee-header" th:insert="headerEmployee">
+
         </header>
         <div class="order-details">
             <div class="od-heading">
-                <a href="./order.html" class="od-heading__link">
+                <a th:href="@{/Employee/order}" class="od-heading__link">
                     <i class="od-heading__icon fa-solid fa-arrow-left"></i>
                 </a>
                 <h1 class="od-heading__title">
@@ -75,7 +73,7 @@
                         </tfoot>
                     </table>
                     <div class="or-body__btn">
-                        <button class="btn-l or-body__btn-cancel" th:formaction="@{/Employee}">Huỷ</button>
+                        <button class="btn-l or-body__btn-cancel" th:formaction="@{/Employee/order}">Huỷ</button>
                         <button class="btn-l or-body__btn-accept" th:with="postid=${id}" th:formaction="@{/Employee/order/check/{path} (path=${id})}"  type="submit" >Xác nhận</button>
                     </div>
                 </div>

@@ -20,7 +20,7 @@
         </header>
         <div class="order-details">
             <div class="od-heading">
-                <a href="/QLHTT/src/main/resources/templates/adminCustomer.html" class="od-heading__link">
+                <a th:href="@{/Employee/customer}" class="od-heading__link">
                     <i class="od-heading__icon fa-solid fa-arrow-left"></i>
                 </a>
                 <h1 class="od-heading__title">
@@ -70,7 +70,10 @@
                         <label for="" class="form__label">Địa chỉ:</label>
                         <input type="text" class="form__input" th:field="${person.address}">
                     </div>
-    
+                    <div style="text-align: center;" class="error-update">
+                        <p th:text="${success}" style="color: var(--main-color); font-size: 2rem; margin-bottom: 0;"></p>
+                        <p th:text="${error}" style="color: red; font-size: 2rem; margin-bottom: 0;"></p>
+                    </div>
                     <div class="add-customerOrder__btn">
                         <button class="btn-l btn-accept" type="submit">Cập nhật</button>
                     </div>
@@ -79,5 +82,6 @@
         </div>
     </div>
     <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
+
 </body>
 </html>

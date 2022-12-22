@@ -24,7 +24,7 @@
         </header>
         <div class="customer">
             <div class="customer-heading">
-                <a th:href="@{/Employee}" class="customer-heading__link">
+                <a th:href="@{/Employee/type}" class="customer-heading__link">
                     <i class="customer-heading__icon fa-solid fa-arrow-left"></i>
                 </a>
                 <h1 class="customer-heading__title">
@@ -39,10 +39,13 @@
                             <label for="" class="form__label">Tên loại:</label>
                             <input type="text" class="form__input" th:field="${type.name}">
                         </div>
-        
+                        <div style="text-align: center;">
+                            <p th:text="${success}" style="color: var(--main-color); font-size: 2rem; margin-bottom: 0;"></p>
+                            <p th:text="${error}" style="color: red; font-size: 2rem; margin-bottom: 0;"></p>
+                        </div>
                         <div class="add-customerDetail__btn">
                             <button class="btn-l btnAddCustomer-accept" type="submit">Xác nhận</button>
-                            <button class="btn-l btnCancelCustomer-cancel" th:formaction="@{/Employee}">Huỷ</button>
+                            <button class="btn-l btnCancelCustomer-cancel" th:formaction="@{/Employee/type}">Huỷ</button>
                         </div>
                     </form>
                 </div>
@@ -56,7 +59,7 @@
             </div>
             <div class="modal-noti__body">
                 <span class="modal-noti__body-title">
-                    Bạn có chắc chắn huỷ thêm khách hàng này không?
+                    Bạn có chắc chắn huỷ thêm loại sản phẩm này không?
                 </span>
                 <div class="modal-noti__body-btn">
                     <button class="btn-l btnCancelModal-accept">Xác nhận</button>
@@ -75,12 +78,12 @@
         //     console.log('hi')
         // })
 
-        var addCustomerisCanceled = document.querySelector('.btnCancelCustomer-cancel')
+        //var addCustomerisCanceled = document.querySelector('.btnCancelCustomer-cancel')
         var cancelModal = document.getElementById('cancelModal')
-        addCustomerisCanceled.addEventListener("click", function(e) {
-            e.preventDefault()
-            cancelModal.setAttribute("style","display:flex")
-        })
+<!--        addCustomerisCanceled.addEventListener("click", function(e) {-->
+<!--            e.preventDefault()-->
+<!--            cancelModal.setAttribute("style","display:flex")-->
+<!--        })-->
         var ModalisAccepted = document.querySelector('.btnCancelModal-accept')
         ModalisAccepted.addEventListener("click", function() {
             cancelModal.setAttribute("style","display:none")

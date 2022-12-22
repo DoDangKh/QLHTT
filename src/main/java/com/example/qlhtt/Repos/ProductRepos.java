@@ -32,7 +32,7 @@ public class ProductRepos {
     public Product getid(int id){
         try{
             Product product= jdbcTemplate.queryForObject("Select * From Product Where product_id="+ Integer.toString(id),(rs, rowNum) ->
-                    new Product(rs.getInt(("product_id")), rs.getString("name"), rs.getInt("quantity"), rs.getInt("price"), rs.getString("img"), rs.getString("describe"), rs.getInt("status"), rs.getLong("discount_id"), rs.getInt("type_id")));
+                    new Product(rs.getInt(("product_id")), rs.getString("name"), rs.getInt("quantity"), rs.getInt("price"), rs.getString("img"), rs.getString("describe"), rs.getInt("status"), rs.getInt("type_id")));
             return product;
         }
         catch(Exception e){
@@ -56,8 +56,8 @@ public class ProductRepos {
 
     public boolean update(Product product){
         try{
-            jdbcTemplate.update("update Product set name =? ,quantity=?, price=?, img=?, describe=?, discount_id=?, type_id=? where product_id=? "
-            , product.getName(), product.getQuantity(), product.getPrice(), product.getImg(), product.getDescribe(), product.getDiscount_id(), product.getType_id(), product.getProduct_id());
+            jdbcTemplate.update("update Product set name =? ,quantity=?, price=?, img=?, describe=?,  type_id=? where product_id=? "
+            , product.getName(), product.getQuantity(), product.getPrice(), product.getImg(), product.getDescribe(),  product.getType_id(), product.getProduct_id());
             return true;
         }
         catch(Exception e){

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -24,7 +24,7 @@
         </header>
         <div class="customer">
             <div class="customer-heading">
-                <a href="/QLHTT/src/main/resources/templates/adminEmployee.html" class="customer-heading__link">
+                <a th:href="@{/Employee/customer}" class="customer-heading__link">
                     <i class="customer-heading__icon fa-solid fa-arrow-left"></i>
                 </a>
                 <h1 class="customer-heading__title">

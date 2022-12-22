@@ -100,4 +100,13 @@ public class PersonRepos  {
         }
         return false;
     }
+    public boolean delete(int id){
+        try{
+            jdbcTemplate.update("Delete Person where id=? ",id);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
 }

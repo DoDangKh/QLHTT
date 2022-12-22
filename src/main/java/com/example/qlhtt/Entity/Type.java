@@ -25,4 +25,12 @@ public class Type {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Type(String type_id, String name) {
+        Type_id = type_id;
+        this.name = name;
+    }
+
+    public Type() {
+    }
 }

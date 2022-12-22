@@ -67,6 +67,25 @@ public class UserLoginRepos {
         }
         return false;
     }
+    public boolean delete(int id){
+        try{
+            jdbcTemplate.update("Delete UserLogin where person_id=? ",id);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
 
+    public boolean updateStatus(int id){
+        try{
+            jdbcTemplate.update("Update UserLogin set enable = 0 where person_id=? ",id);
+            return true;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
 
 }

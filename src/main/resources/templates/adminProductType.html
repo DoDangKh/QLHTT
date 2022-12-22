@@ -25,23 +25,27 @@
                 </div>
 
                 <div class="col l-10">
-                    <form>
-                    <div class="categoryBtn">
-                        <button class="categoryBtn__btn btn__plus" th:formaction="@{/Employee/type/new}">
-                            <i class="fa-solid fa-plus"></i>
-                            <span>Thêm</span>
-                        </button>
-                    </div>
+                    <form style="display: flex; justify-content: space-between;">
+                        <div>
+                            <p th:text="${success}" style="color: var(--main-color); font-size: 2rem;"></p>
+                            <p th:text="${error}" style="color: red; font-size: 2rem;"></p>
+                        </div>
+                        <div class="categoryBtn">
+                            <button class="categoryBtn__btn btn__plus" th:formaction="@{/Employee/type/new}">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Thêm</span>
+                            </button>
+                        </div>
                     </form>
                     <div class="row" th:each="type:${types}">
-                        <div class="col l-2 productType-item">
+                        <form class="col l-2 productType-item" th:id="${type.Type_id}">
                             <div class="productType">
                                 <h2 class="productType__title" th:text="${type.name}"></h2>
-                                <button class="productType-btn">
+                                <button class="productType-btn" th:formaction="@{/Employee/type/delete/{path} (path=${type.Type_id})}">
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -85,8 +89,8 @@
             </div>
         </div>
     </div>
-    <div class="modal delete-product-type">
-        <div class="modal-noti-size">
+    <form class="modal delete-product-type" >
+        <div class="modal-noti-size" >
             <div class="modal-noti__head">
                 <img class="modal-noti__head-img" src="/QLHTT/src/main/resources/static/public/images/LogoGmarket.png" alt="">
             </div>
@@ -95,12 +99,12 @@
                     Bạn có chắc chắn xoá loại hàng này không?
                 </span>
                 <div class="modal-noti__body-btn">
-                    <button href="" class="btn-l btnCancelModal-accept btnDeleteModal-accept">Xác nhận</button>
-                    <button class="btn-l or-body__btn-cancel btnCancelModal-cancel btnCancelDeleteModal-cancel">Huỷ</button>
+                    <button class="btn-l btnCancelModal-accept btnDeleteModal-accept" type="submit" >Xác nhận</button>
+                    <button class="btn-l or-body__btn-cancel btnCancelModal-cancel btnCancelDeleteModal-cancel" >Huỷ</button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <script>
         var btnPlus = document.querySelector('.btn__plus')
         var addType = document.querySelector('.add-type')
@@ -144,34 +148,36 @@
                 addType.setAttribute("style", "display: none;")
             }
         }
-        var deleteProductType = document.querySelector('.delete-product-type')
-        var deleteProductTypeisAccepted = document.querySelector('.btnDeleteModal-accept')
-        var deleteProductTypeisCanceled = document.querySelector('.btnCancelDeleteModal-cancel')
-        var btns = document.getElementsByClassName('productType-btn')
-        Array.from(btns).forEach((btn) => {
-            btn.addEventListener("click", (e) => {
-                deleteProductType.setAttribute("style", "display: flex;")
-                var id = e.target.closest('.productType-item').getAttribute('id')
-                deleteProductType.setAttribute("id", id)
-                if(e.target.closest('.btnDeleteModal-accept')) {
-                    console.log(e.target.closest('.btnDeleteModal-accept'))
-                }
-            });
-        });
-        deleteProductTypeisCanceled.addEventListener("click", (e) => {
-            deleteProductType.setAttribute("style", "display: none;")
-        })
-        deleteProductTypeisAccepted.addEventListener("click", function(e) {
-            deleteProductType.setAttribute("style", "display: none;")
-            var id = deleteProductType.getAttribute('id')
-            var items = document.querySelectorAll('.productType-item')
-            Array.from(items).forEach((item) => {
-                if(item.getAttribute('id') === id) {
-                    item.remove()
-                }
-            })
-            console.log(id)
-        })
+
+<!--        var deleteProductType = document.querySelector('.delete-product-type')-->
+<!--        var setId = document.querySelector('#type_id')-->
+<!--        var deleteProductTypeisAccepted = document.querySelector('.btnDeleteModal-accept')-->
+<!--        var deleteProductTypeisCanceled = document.querySelector('.btnCancelDeleteModal-cancel')-->
+<!--        -->
+<!--        var btns = document.getElementsByClassName('productType-btn')-->
+<!--        Array.from(btns).forEach((btn) => {-->
+<!--            btn.addEventListener("click", (e) => {-->
+<!--                deleteProductType.setAttribute("style", "display: flex;")-->
+<!--                var id = e.target.closest('.productType-item').getAttribute('id')-->
+<!--                console.log(id);-->
+<!--                deleteProductType.setAttribute("id", id)-->
+<!--                setId.setAttribute("value", id)-->
+<!--            });-->
+<!--        });-->
+<!--        deleteProductTypeisCanceled.addEventListener("click", (e) => {-->
+<!--            e.preventDefault();-->
+<!--            deleteProductType.setAttribute("style", "display: none;")-->
+<!--        })-->
+<!--        deleteProductTypeisAccepted.addEventListener("click", function(e) {-->
+<!--            deleteProductType.setAttribute("style", "display: none;")-->
+<!--            var id = deleteProductType.getAttribute('id')-->
+<!--            var items = document.querySelectorAll('.productType-item')-->
+<!--            Array.from(items).forEach((item) => {-->
+<!--                if(item.getAttribute('id') === id) {-->
+<!--                    item.remove()-->
+<!--                }-->
+<!--            })-->
+<!--        })-->
     </script>
     
     <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>

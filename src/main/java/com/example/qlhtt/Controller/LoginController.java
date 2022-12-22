@@ -110,7 +110,7 @@ public class LoginController {
             return"redirect:/home";
         }
         if(request.isUserInRole("ROLE_EMPLOYEE")){
-            return"redirect:/Employee";
+            return"redirect:/Employee/info";
         }
         return null;
     }

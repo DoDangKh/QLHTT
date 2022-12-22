@@ -72,7 +72,7 @@ public class CustomerUserDetailService implements UserDetailsService {
 
                 @Override
                 public boolean isEnabled() {
-                    return true;
+                    return userLogin.getEnable()==0 ? false : true;
                 }
             };
             return userDetails;

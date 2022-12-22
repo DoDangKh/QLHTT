@@ -15,8 +15,8 @@
     <div class="employee">
         <header class="employee-header" th:insert="headerEmployee">
         </header>
-        <div class="grid">
-            <div class="row sm-gutter space">
+        <div class="grid space">
+            <div class="row sm-gutter ">
                 <div class="col l-2">
                     <div class="navbar" th:insert="navbarEmployee">
                         
@@ -66,8 +66,10 @@
                             </div>
                             
                             <div class="employee__btn">
-                                <button class="btn-l" type="submit">Cập nhật</button>
+                                <button class="btn-l" type="submit" >Cập nhật</button>
                             </div>
+                            <p th:text="${success}" style="color: var(--main-color); font-size: 2rem;"></p>
+                            <p th:text="${error}" style="color: red; font-size: 2rem;"></p>
                         </form>
                     </div>
                 </div>

@@ -18,9 +18,9 @@
         </header>
         <div class="order-details">
             <div class="od-heading">
-                <a href="/QLHTT/src/main/resources/templates/adminProduct.html" class="od-heading__link">
-                    <i class="od-heading__icon fa-solid fa-arrow-left"></i>
-                </a>
+<!--                <a href="/QLHTT/src/main/resources/templates/adminProduct.html" class="od-heading__link">-->
+<!--                    <i class="od-heading__icon fa-solid fa-arrow-left"></i>-->
+<!--                </a>-->
                 <h1 class="od-heading__title">
                     THÔNG TIN SẢN PHẨM
                 </h1>
@@ -28,7 +28,7 @@
 
             <form class="productDetail" method="post" enctype="multipart/form-data">
                 <div class="modal__body add-product__body">
-                    <div th:if="product.product_id!=0" action="" class="basic-form">
+                    <div th:if="${product.product_id!=0}" action="" class="basic-form">
                         <label for="" class="form__label">ID:</label>
                         <input type="text" class="form__input" th:field="${product.product_id}" readonly>
                     </div>
@@ -39,32 +39,32 @@
 
                     <div class="category__classify add-product__selection">
                         <label for="" class="form__label">Loại sản phẩm:</label>
-                        <select name="type" id="" class="category__classify-select " th:each="type :${session.type}" th:field="${product.type_id}">
-                            <option th:value="${type.Type_id}" th:text="${type.name}" class="form-product__option">Option 1</option>
+                        <select name="type" id="" class="category__classify-select " th:field="${product.type_id}">
+                            <option th:value="${type.Type_id}" th:text="${type.name}" class="form-product__option" th:each="type :${types}" >Option 1</option>
 
                         </select>
                     </div>
 
-                    <div class="category__classify add-product__selection">
-                        <label for="" class="form__label">Khuyến mãi:</label>
-                        <select name="type" id="" class="category__classify-select">
-                            <option value="" class="form-product__option">Option 1</option>
-                            <option value="" class="form-product__option">Option 2</option>
-                            <option value="" class="form-product__option">Option 1</option>
-                            <option value="" class="form-product__option">Option 2</option>
-                        </select>
-                    </div>
+<!--                    <div class="category__classify add-product__selection">-->
+<!--                        <label for="" class="form__label">Khuyến mãi:</label>-->
+<!--                        <select name="type" id="" class="category__classify-select">-->
+<!--                            <option value="" class="form-product__option">Option 1</option>-->
+<!--                            <option value="" class="form-product__option">Option 2</option>-->
+<!--                            <option value="" class="form-product__option">Option 1</option>-->
+<!--                            <option value="" class="form-product__option">Option 2</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
 
                     <div class="product-detail">
                         <div action="" class="basic-form product-detail__img">
                             <label for="myfile" class="form__label product-detail__title">Hình ảnh:</label>
-                            <input type="file" id="myfile" th:value="${myfile}" accept="*" name="photo" onchange="readFile(this)">
+                            <input type="file" id="myfile" th:value="${myfile}" accept="*" name="photo" th:onchange="readURL(this);">
                             <label for="myfile" class="myfile-label">
                                 <i class="fa-solid fa-file-circle-plus"></i>
                                 Thêm hình ảnh
                             </label>
                             <div class="show-img">
-                                <img class="myfile__img" th:src="@{/public/images/{path}(path=${product.img})}" alt="">
+                                <img style="width: 200px; height: 200px;" class="myfile__img" th:src="@{/public/images/{path}(path=${product.img})}" alt="">
                             </div>
                         </div>
 
@@ -86,7 +86,7 @@
                         <input type="text" class="form__input" th:field="${product.describe}">
                     </div>
                     <div class="add-product__btn">
-                        <button class="btn-l btnCancelAddProductModal-accept" th:formaction="@{/Employee/product/updateConfirm}">Cập nhật</button>
+                        <button class="btn-l btnCancelAddProductModal-accept" th:formaction="@{/Employee/product/updateConfirm}" th:text="${product.product_id!=0 ? 'Cập nhật' : 'Thêm'}"></button>
                     </div>
                 </div>
             </form>
@@ -220,5 +220,18 @@
                 return sum;
             }
     </script> -->
+<script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          document.querySelector(".myfile__img").setAttribute('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+</script>
 </body>
 </html>

@@ -18,6 +18,7 @@ html {
   margin: 0 auto;
 }
 
+/*
 .header-top {
   position: relative;
   height: 150px;
@@ -266,7 +267,7 @@ html {
 .header-top .header-wrapper .header-menu .category-menu .dropdown-categories > ul .category-item .dropdown-category-item > ul > li > a:hover {
   color: red;
 }
-
+*/
 main {
   background-color: #f6f6f6;
 }

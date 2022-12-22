@@ -3,22 +3,18 @@ package com.example.qlhtt.Controller;
 
 import com.example.qlhtt.Entity.*;
 import com.example.qlhtt.Repos.*;
-import net.bytebuddy.matcher.StringMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.Option;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,7 +23,6 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/Employee")
@@ -52,12 +47,15 @@ public class EmployeeController {
     @Autowired
     OrderRepos orderRepos;
 
+    @Autowired
+    CustomerUserRepos customerUserRepos;
+
 
 
     @RequestMapping()
     public  String home(HttpSession session){
         List<Type> types=typeRepos.getall();
-        session.setAttribute("type",types);
+//        session.setAttribute("type",types);
         return "admin";
     }
 
@@ -74,28 +72,56 @@ public class EmployeeController {
     }
 
     @PostMapping("/info/update")
-    public String update(HttpSession session,@ModelAttribute("person") Person person){
+    public ModelAndView update(HttpSession session,@ModelAttribute("person") Person person){
         //Person person= (Person)session.getAttribute("person");
         person.setId((int)session.getAttribute("id"));
         System.out.print(person.getId()+"asdasdsadsadsaad");
-        personRepos.update(person);
-        return "redirect:/Employee";
-
+        ModelAndView mav=new ModelAndView("Employee");
+        if(personRepos.update(person)){
+            System.out.println("update thanh cong");
+            mav.addObject("success","Cập nhật thông tin thành công!");
+        }else{
+            mav.addObject("error","Cập nhật thông tin thất bại!");
+        }
+        return mav;
+//        return "redirect:/Employee/info";
     }
 
     @GetMapping("/product/page/{p}")
-    public ModelAndView product(@PathVariable("p")Optional<Integer> p){
-        Pageable pageable= PageRequest.of(p.orElse(0),2) ;
-        Page<Product> page=productRepos.getPage(pageable);
+    public ModelAndView product(@PathVariable("p") int p){
+        System.out.println("Trang dang dung "+p);
         ModelAndView mav=new ModelAndView("adminProduct");
         List<Product> product=productRepos.getall();
+
+        if( p <1)
+            p=0;
+        else if(p>(product.size()/3)) {
+            p = product.size() / 3;
+        }
+        System.out.println("so page " + p);
+        Pageable pageable= PageRequest.of(p,3);
+        System.out.println("loi pageble");
+
+        Page<Product> page=productRepos.getPage(pageable);
         mav.addObject("products",page);
+
+        List<Type> typeList=typeRepos.getall();
+        mav.addObject("types", typeList);
+        return mav;
+    }
+    @GetMapping("/product/type/{t}")
+    public ModelAndView getProductByType(@PathVariable("t") String t) {
+        System.out.println("the loai "+t);
+        ModelAndView mav=new ModelAndView("adminProduct");
+
         return mav;
     }
     @RequestMapping("/product/detail")
     public ModelAndView updateview(){
         ModelAndView mav=new ModelAndView("adminProductDetail");
-
+        List<Type> listtype=new ArrayList<>();
+        listtype=typeRepos.getall();
+        mav.addObject("types",listtype);
         mav.addObject("product",new Product());
         return mav;
     }
@@ -105,6 +131,9 @@ public class EmployeeController {
         ModelAndView mav=new ModelAndView("adminProductDetail");
         mav.addObject("myfile",product.getImg());
         mav.addObject("product",product);
+        List<Type> listtype=new ArrayList<>();
+        listtype=typeRepos.getall();
+        mav.addObject("types",listtype);
         return mav;
     }
 
@@ -130,8 +159,14 @@ public class EmployeeController {
             }
 
             if(product.getProduct_id()==0)
-            productRepos.add(product);
+            {
+                if(productRepos.add(product)){
 
+                }else{
+
+                }
+
+            }
             else productRepos.update(product);
         }
         catch(Exception e){
@@ -156,9 +191,34 @@ public class EmployeeController {
     }
 
     @PostMapping("/type/add")
-    public String addtpye(@ModelAttribute("type") Type type){
-        typeRepos.add(type);
-        return "redirect:/Employee";
+    public ModelAndView addtpye(@ModelAttribute("type") Type type){
+        ModelAndView mav = null;
+        if(typeRepos.add(type)){
+            mav = new ModelAndView("adminProductType");
+            List<Type> typeList=typeRepos.getall();
+            mav.addObject("types", typeList);
+            mav.addObject("success", "Thêm loại "+type.getName()+" thành công!");
+        }else{
+            mav=new ModelAndView( "adminAddProductType");
+            mav.addObject("error", "Loại "+type.getName()+" đã tồn tại");
+        }
+
+        return mav;
+    }
+
+    @RequestMapping("/type/delete/{id}")
+    public ModelAndView deleteType(@PathVariable("id") int id){
+        ModelAndView mav=new ModelAndView("adminProductType");
+        String name = typeRepos.getid(id).getName();
+        if(typeRepos.delete(id)){
+            mav.addObject("success", "Xóa loại " +name +" thành công!");
+        }else{
+            mav.addObject("error","Không thể xóa loại "+ name +" (Vì có một số sản phẩm đang thuộc loại này)");
+        }
+
+        List<Type> typeList=typeRepos.getall();
+        mav.addObject("types", typeList);
+        return mav;
     }
 
     @RequestMapping("/order")
@@ -196,12 +256,12 @@ public class EmployeeController {
             UserLogin user = userLoginRepos.getUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 
             orderRepos.checkOrder(id, user.getPerson_id());
-            return "redirect:/Employee";
+            return "redirect:/Employee/order";
         }
         catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:/Employee";
+        return "redirect:/Employee/order";
     }
 
 
@@ -209,7 +269,6 @@ public class EmployeeController {
     public ModelAndView customer(){
         ModelAndView mav=new ModelAndView("adminCustomer");
         List<Person> personList=personRepos.getCustomer();
-        System.out.print("xxxxxxxxxxxxxxxxxxxxx "+personList.size()+" xxxxxxxxxxxxxxx");
         mav.addObject("persons",personList);
         return mav;
     }
@@ -223,9 +282,63 @@ public class EmployeeController {
     }
 
     @PostMapping("/customer/update")
-    public String update(@ModelAttribute("person") Person person){
-        System.out.print("llllllllllllllllllllllll"+ person.getId());
-        personRepos.update(person);
-        return "redirect:/Employee";
+    public ModelAndView updateCustomer(@ModelAttribute("person") Person person){
+        ModelAndView mav =new ModelAndView("adminCustomerOrder");
+        if(person.getName().equals("")){
+            mav.addObject("error", "Họ và tên không được bỏ trống");
+        }else if(person.getIdentity_card().equals("")){
+            mav.addObject("error", "CMND/CCCD không được bỏ trống");
+        }else if(person.getPhone_num().equals("")){
+            mav.addObject("error", "Số điện thoại không được bỏ trống");
+
+        }else {
+            if (personRepos.update(person)) {
+                mav.addObject("success", "Cập nhật thông tin thành công!");
+            } else {
+                mav.addObject("error", "Cập nhật thông tin thất bại!");
+            }
+        }
+        mav.addObject("person",person);
+        return mav;
+    }
+
+    @RequestMapping("/customer/delete/{id}")
+    public ModelAndView deleteCustomer(@PathVariable("id") String id){
+        System.out.println("id xoa " +id );
+        ModelAndView mav =new ModelAndView("adminCustomer");
+        int idCustomner = Integer.parseInt(id);
+        if(customerUserRepos.delete(idCustomner)){
+            if(userLoginRepos.delete(idCustomner)){
+                if(personRepos.delete(idCustomner)){
+                    mav.addObject("success", "Xóa khách hàng thành công!");
+                }
+            }
+        }else{
+            mav.addObject("error", "Không thể xóa ( Vì có tồn tại đơn hàng thuộc khách hàng này)");//idUpdate
+            mav.addObject("fail",true);
+            mav.addObject("idUpdate",id);
+        }
+
+        List<Person> personList=personRepos.getCustomer();
+        mav.addObject("persons",personList);
+        return mav;
+    }
+    @RequestMapping("/customer/update/{id}")
+    public ModelAndView updateCustomer(@PathVariable("id") int id){
+        System.out.println("id update " +id );
+        ModelAndView mav =new ModelAndView("adminCustomer");
+
+        if(customerUserRepos.update(id)){
+            if(userLoginRepos.updateStatus(id)) {
+                mav.addObject("success", "Cập nhật khách hàng thành công!");
+            }
+        }else{
+            mav.addObject("error", "Lỗi khi update");//idUpdate
+            mav.addObject("fail",false);
+        }
+
+        List<Person> personList=personRepos.getCustomer();
+        mav.addObject("persons",personList);
+        return mav;
     }
 }

@@ -42,8 +42,8 @@
 
 .add-customerDetail__btn {
     display: flex;
-    justify-content: space-around;
-
+    justify-content: space-evenly;
+    padding-left: 150px;
 }
 
 .btnCancelCustomer-cancel,
