@@ -78,4 +78,14 @@ public class ProductRepos {
         }
         return false;
     }
+    public boolean delete(int id){
+        try{
+            jdbcTemplate.update("Delete Product Where product_id=?",id);
+
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
 }

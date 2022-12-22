@@ -25,8 +25,10 @@
                 </div>
 
                 <div class="col l-10" style="padding: 0 20px;">
-                    <p th:text="${success}" style="color: var(--main-color); font-size: 2rem;"></p>
-                    <p th:text="${error}" style="color: red; font-size: 2rem;"></p>
+                    <div>
+                        <p th:text="${success}" style="color: var(--main-color); font-size: 2rem;"></p>
+                        <p th:text="${error}" style="color: red; font-size: 2rem;"></p>
+                    </div>
 
                     <div class="edit">
                         <div class="category">
@@ -82,7 +84,7 @@
                                 </div>
                             </div>
                         </a>
-                        <button th:onclick="removeItem(${product.product_id})" class="categoryBtn__btn btn__remove">
+                        <button th:attr="onclick=|removeItem('${product.product_id}')|" class="categoryBtn__btn btn__remove">
                             <i class="fa-solid fa-times"></i>
                             <span>Xoá</span>
                         </button>    
@@ -177,14 +179,14 @@
         <div class="modal delete-product">
             <div class="modal-noti-size">
                 <div class="modal-noti__head">
-                    <img class="modal-noti__head-img" src="./assets/img/LogoGmarket.png" alt="">
+                    <img class="modal-noti__head-img" src="https://gmarket24h.com/images/thumbs/0013362_Logo%20Gmarket%20to%20nhat.png" alt="">
                 </div>
                 <div class="modal-noti__body">
                     <span class="modal-noti__body-title">
                         Bạn có chắc chắn xoá sản phẩm này không?
                     </span>
                     <div class="modal-noti__body-btn">
-                        <button href="" class="btn-l btnCancelModal-accept btnDeleteModal-accept">Xác nhận</button>
+                        <a href="" class="btn-l btnCancelModal-accept btnDeleteModal-accept" style="text-decoration: none;text-align: center;line-height: 40px;">Xác nhận</a>
                         <button class="btn-l or-body__btn-cancel btnCancelModal-cancel btnCancelDeleteModal-cancel">Huỷ</button>
                     </div>
                 </div>
@@ -242,23 +244,24 @@
             function removeItem(id) {
                 console.log(id)
                 deleteProduct.setAttribute("style", "display: flex;")
+
+                const loc = location.href
+<!--                if(loc == "http://localhost:8080/Employee/product")-->
+                    var deleteProductisAccepted = document.querySelector('.btnDeleteModal-accept')
+                    deleteProductisAccepted.setAttribute("href",`/Employee/product/delete/${id}`);
+<!--                else-->
+<!--                    deleteProductisAccepted.setAttribute("href",`/Employee/customer/delete/${id}`);-->
 <!--                acceptDelateProduct()-->
-<!--                cancelDelateProduct()-->
+                cancelDelateProduct()
             }
-<!--        function acceptDelateProduct() {-->
-<!--            var acceptCancel = document.querySelector('.btnDeleteModal-accept')-->
-<!--            acceptCancel.addEventListener("click", function() {-->
-<!--                deleteProduct.setAttribute("style", "display: none;")-->
-<!--                product.setAttribute("style", "display: none;")-->
-<!--            })-->
-<!--        }-->
-<!--        function cancelDelateProduct() {-->
-<!--            var cancelCancel = document.querySelector('.btnCancelDeleteModal-cancel')-->
-<!--            // console.log(cancelCancel)-->
-<!--            cancelCancel.addEventListener("click", function() {-->
-<!--                deleteProduct.setAttribute("style", "display: none;")-->
-<!--            })-->
-<!--        }-->
+
+        function cancelDelateProduct() {
+            var cancelCancel = document.querySelector('.btnCancelDeleteModal-cancel')
+            // console.log(cancelCancel)
+            cancelCancel.addEventListener("click", function() {
+                deleteProduct.setAttribute("style", "display: none;")
+            })
+        }
 
 <!--        var showFile = document.querySelector('.myfile__img')-->
 <!--        var inputFile = document.querySelector('#myfile')-->

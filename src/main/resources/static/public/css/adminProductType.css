@@ -43,14 +43,16 @@
 }
 
 .productType-btn {
-    position: absolute;
-    content: "";
-    right: -11px;
-    top: -12px;
-    border-radius: 54%;
+    border-radius: 50%;
     background-color: var(--main-color);
-    padding: 3px 6px;
     border: none;
+    width: 23px;
+    height: 24px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
 
 .productType-btn i {

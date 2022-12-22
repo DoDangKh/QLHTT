@@ -220,11 +220,7 @@
                 var id = e.target.closest('.customer').getAttribute('id')
                 console.log(id)
                 deleteCustomer.setAttribute("id", id)
-                const loc = location.href
-                if(loc == "http://localhost:8080/Employee/customer")
-                    deleteProductisAccepted.setAttribute("href",`customer/delete/${id}`);
-                else
-                    deleteProductisAccepted.setAttribute("href",`/Employee/customer/delete/${id}`);
+                deleteProductisAccepted.setAttribute("href",`/Employee/customer/delete/${id}`);
             });
         });
             Array.from(deleteProductisCanceleds).forEach((btn) => {

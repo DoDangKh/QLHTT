@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -175,11 +176,24 @@ public class EmployeeController {
         return "redirect:/Employee/product/page/0";
     }
 
+
+    @RequestMapping("/product/delete/{id}")
+    public String deleteProduct(@PathVariable("id") int id, RedirectAttributes redirectAttributes){
+        System.out.println("xoa product "+id);
+        if(productRepos.delete(id)){
+            redirectAttributes.addFlashAttribute("success", "Xóa sản phẩm thành công");
+        }else{
+            redirectAttributes.addFlashAttribute("error", "Xóa sản phẩm thất bại (Vì sản phẩm có tồn tại trong giỏ hàng)");
+        }
+        return "redirect:/Employee/product/page/0";
+    }
+
     @RequestMapping("/type")
     public ModelAndView type(){
         ModelAndView mav= new ModelAndView("adminProductType");
         List<Type> typeList=typeRepos.getall();
         mav.addObject("types", typeList);
+
         return mav;
     }
 
@@ -187,6 +201,39 @@ public class EmployeeController {
     public ModelAndView newtype(){
         ModelAndView mav=new ModelAndView( "adminAddProductType");
         mav.addObject("type",new Type());
+        mav.addObject("status", "new");
+        return mav;
+    }
+    @RequestMapping("/type/update/{id}")
+    public ModelAndView updateType(@PathVariable("id") int id){
+        System.out.println("update type " + id);
+        Type type = typeRepos.getid(id);
+        ModelAndView mav=new ModelAndView( "adminAddProductType");
+        mav.addObject("status", "update");
+        mav.addObject("type", type);
+        mav.addObject("idUpdate", id);
+        return mav;
+    }
+    @PostMapping("/type/update")
+    public ModelAndView updateType1(@ModelAttribute("type") Type type){
+        System.out.println("update type ne " + type.getType_id()+" "+ type.getName());
+        ModelAndView mav =null;
+
+        if(typeRepos.update(type)){
+            mav = new ModelAndView("adminProductType");
+            List<Type> typeList=typeRepos.getall();
+            mav.addObject("types", typeList);
+            mav.addObject("success", "Cập nhật loại "+type.getName()+" thành công!");
+        }else{
+            mav=new ModelAndView( "adminAddProductType");
+            mav.addObject("status", "update");
+            mav.addObject("type", type);
+            mav.addObject("idUpdate", type.getType_id());
+            mav.addObject("error", "Loại "+type.getName()+" đã tồn tại");
+        }
+
+        List<Type> typeList=typeRepos.getall();
+        mav.addObject("types", typeList);
         return mav;
     }
 

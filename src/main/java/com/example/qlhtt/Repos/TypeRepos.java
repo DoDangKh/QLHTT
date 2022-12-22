@@ -68,4 +68,14 @@ public class TypeRepos {
             return false;
         }
     }
+    public boolean update(Type type){
+        try{
+            jdbcTemplate.update("Update Type set name = ? where Type_id=? ",type.getName(), type.getType_id());
+            return true;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
 }

@@ -33,10 +33,24 @@
             </div>
             <div class="customerDetail">
                 <div class="modal__body add-customerDetail__body">
-                    <form th:action="@{/Employee/type/add}" method="post">
-
+                    <form th:if="${status == 'new'}" th:action="@{/Employee/type/add}" method="post">
                         <div class="basic-form">
                             <label for="" class="form__label">Tên loại:</label>
+                            <input type="text" class="form__input" th:field="${type.name}">
+                        </div>
+                        <div style="text-align: center;">
+                            <p th:text="${success}" style="color: var(--main-color); font-size: 2rem; margin-bottom: 0;"></p>
+                            <p th:text="${error}" style="color: red; font-size: 2rem; margin-bottom: 0;"></p>
+                        </div>
+                        <div class="add-customerDetail__btn">
+                            <button class="btn-l btnAddCustomer-accept" type="submit">Xác nhận</button>
+                            <button class="btn-l btnCancelCustomer-cancel" th:formaction="@{/Employee/type}">Huỷ</button>
+                        </div>
+                    </form>
+                    <form th:if="${status == 'update'}" th:action="@{/Employee/type/update}" method="post">
+                        <div class="basic-form">
+                            <label for="" class="form__label">Tên loại:</label>
+                            <input type="hidden" class="form__input" th:field="${type.Type_id}">
                             <input type="text" class="form__input" th:field="${type.name}">
                         </div>
                         <div style="text-align: center;">
