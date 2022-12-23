@@ -177,19 +177,22 @@ public class EmployeeController {
             if(product.getProduct_id()==0)
             {
                 if(productRepos.add(product)){
-
+                    redirectAttributes.addFlashAttribute("success", "Thêm sản phẩm thành công");
                 }else{
-
+                    redirectAttributes.addFlashAttribute("error", "Thêm sản phẩm thất bại");
                 }
 
             }
-            else productRepos.update(product);
+            else {
+                productRepos.update(product);
+                redirectAttributes.addFlashAttribute("success", "Cập nhật sản phẩm thành công");
+            }
         }
         catch(Exception e){
             redirectAttributes.addFlashAttribute("error", "Lỗi khi thêm sản phẩm");
             e.printStackTrace();
         }
-        redirectAttributes.addFlashAttribute("success", "Thêm sản phẩm thành công");
+
         return "redirect:/Employee/product/page/0";
     }
 
