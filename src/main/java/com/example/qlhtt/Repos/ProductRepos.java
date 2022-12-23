@@ -53,6 +53,36 @@ public class ProductRepos {
         }
         return null;
     }
+    public Page<Product> getPagebytpye(Pageable page,Long idtype){
+        try{
+            System.out.println(idtype);
+            List<Product> products=jdbcTemplate.query("Select * From Product WHERE type_id="+idtype+" Order by product_id OFFSET " + page.getOffset() + "ROWS Fetch NEXT " + page.getPageSize() +" ROWS ONLY"
+                    ,BeanPropertyRowMapper.newInstance(Product.class));
+
+            for(Product i : products){
+                System.out.println(i.getName());
+            }
+            int count=jdbcTemplate.queryForObject("SELECT count(*) from Product",Integer.class);
+            return new PageImpl<Product>(products, page, count);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Page<Product> getPagebystring(Pageable page,String name){
+        try{
+            List<Product> products=jdbcTemplate.query("Select * From Product WHERE name like '%"+name+"%' Order by product_id OFFSET " + page.getOffset() + "ROWS Fetch NEXT " + page.getPageSize() +" ROWS ONLY"
+                    ,BeanPropertyRowMapper.newInstance(Product.class));
+            int count=jdbcTemplate.queryForObject("SELECT count(*) from Product",Integer.class);
+            return new PageImpl<Product>(products, page, count);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public boolean update(Product product){
         try{

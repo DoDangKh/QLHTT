@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/Employee")
@@ -111,11 +113,41 @@ public class EmployeeController {
         mav.addObject("types", typeList);
         return mav;
     }
-    @GetMapping("/product/type/{t}")
-    public ModelAndView getProductByType(@PathVariable("t") String t) {
-        System.out.println("the loai "+t);
+    @GetMapping("/product/search/page/{p}")
+    public ModelAndView getProductByType(@PathVariable("p") int p,@RequestParam(name="name",required = false) String name) {
+        Pageable pageable=PageRequest.of(p,3);
+        Page<Product> page=productRepos.getPagebystring(pageable,name);
+//        System.out.println(page.get(0);
         ModelAndView mav=new ModelAndView("adminProduct");
+        mav.addObject("products",page);
+        List<Type> typeList=typeRepos.getall();
+        mav.addObject("types",typeList);
+        return mav;
+    }
 
+    @GetMapping("/product/type/{t}/page/{p}")
+    public ModelAndView getProductByType(@PathVariable("p") int p,@PathVariable("t") Long t) {
+        Pageable pageable=PageRequest.of(p,3);
+        Page<Product> page=productRepos.getPagebytpye(pageable,t);
+//        System.out.println(page.get(0);
+        ModelAndView mav=new ModelAndView("adminProduct");
+        mav.addObject("products",page);
+        List<Type> typeList=typeRepos.getall();
+        int temp1= Math.toIntExact(t);
+        System.out.println(typeList.size());
+        try {
+            for (int i=0;i< typeList.size();i++) {
+                if (typeList.get(i).getType_id() == t) {
+                    Type temp = typeList.get(i);
+                    typeList.remove(i);
+                    typeList.add(0, temp);
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        mav.addObject("types",typeList);
         return mav;
     }
     @RequestMapping("/product/detail")

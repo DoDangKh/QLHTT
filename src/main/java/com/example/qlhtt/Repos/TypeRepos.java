@@ -32,7 +32,7 @@ public class TypeRepos {
     public Type getid(int id){
         try{
             Type type= jdbcTemplate.queryForObject("Select * From Type Where Type_id="+ Integer.toString(id),(rs, rowNum) ->
-                    new Type(rs.getString("Type_id"), rs.getString("name")));
+                    new Type(rs.getLong("Type_id"), rs.getString("name")));
             return type;
         }
         catch(Exception e){

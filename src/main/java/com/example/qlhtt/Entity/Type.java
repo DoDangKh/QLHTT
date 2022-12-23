@@ -7,14 +7,14 @@ import javax.persistence.Table;
 
 public class Type {
 
-    private String Type_id;
+    private Long Type_id;
     private String name;
 
-    public String getType_id() {
+    public Long getType_id() {
         return Type_id;
     }
 
-    public void setType_id(String type_id) {
+    public void setType_id(Long type_id) {
         Type_id = type_id;
     }
 
@@ -26,7 +26,7 @@ public class Type {
         this.name = name;
     }
 
-    public Type(String type_id, String name) {
+    public Type(Long type_id, String name) {
         Type_id = type_id;
         this.name = name;
     }
