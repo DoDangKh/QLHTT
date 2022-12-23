@@ -30,10 +30,10 @@
                 <div class="modal__body add-product__body">
                     <div th:if="${product.product_id!=0}" action="" class="basic-form">
                         <label for="" class="form__label">ID:</label>
-                        <input type="text" class="form__input" th:field="${product.product_id}" readonly>
+                        <input type="text" class="form__input" th:field="${product.product_id}" readonly >
                     </div>
                     <div action="" class="basic-form">
-                        <label for="" class="form__label">Tên sản phẩm:</label>
+                        <label for="" class="form__label">Tên sản phẩm 1:</label>
                         <input type="text" class="form__input" th:field="${product.name}">
                     </div>
 
@@ -84,6 +84,10 @@
                     <div action="" class="basic-form">
                         <label for="" class="form__label">Mô tả:</label>
                         <input type="text" class="form__input" th:field="${product.describe}">
+                    </div>
+                    <div style="text-align: center;">
+                        <p th:text="${success}" style="color: var(--main-color); font-size: 2rem; margin-bottom: 0;"></p>
+                        <p th:text="${error}" style="color: red; font-size: 2rem; margin-bottom: 0;"></p>
                     </div>
                     <div class="add-product__btn">
                         <button class="btn-l btnCancelAddProductModal-accept" th:formaction="@{/Employee/product/updateConfirm}" th:text="${product.product_id!=0 ? 'Cập nhật' : 'Thêm'}"></button>

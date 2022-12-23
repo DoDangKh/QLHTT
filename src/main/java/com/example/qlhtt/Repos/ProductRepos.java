@@ -67,7 +67,6 @@ public class ProductRepos {
     }
     public boolean add(Product product){
         try{
-            System.out.print("idididididididid"+ product.getType_id());
             jdbcTemplate.update("Insert into Product(name, quantity, price, img, describe, status,  type_id) Values(?,?,?,?,?,?,? )",product.getName(),product.getQuantity(),product.getPrice(),product.getImg(),product.getDescribe(), 1,product.getType_id());
             //jdbcTemplate.update("insert into product(name=")
 
@@ -75,8 +74,8 @@ public class ProductRepos {
         }
         catch(Exception e){
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
     public boolean delete(int id){
         try{

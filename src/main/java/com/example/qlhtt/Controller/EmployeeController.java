@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -118,12 +119,13 @@ public class EmployeeController {
         return mav;
     }
     @RequestMapping("/product/detail")
-    public ModelAndView updateview(){
+    public ModelAndView updateview(@ModelAttribute("product") Product product){
+        System.out.println("img ban dau " + product.getImg());
         ModelAndView mav=new ModelAndView("adminProductDetail");
         List<Type> listtype=new ArrayList<>();
         listtype=typeRepos.getall();
         mav.addObject("types",listtype);
-        mav.addObject("product",new Product());
+        mav.addObject("product",product);
         return mav;
     }
     @RequestMapping("/product/{id}")
@@ -139,13 +141,26 @@ public class EmployeeController {
     }
 
     @PostMapping("/product/updateConfirm")
-    public String update(@ModelAttribute("product") Product product, @RequestParam MultipartFile photo){
-
-        System.out.println("photo" + photo.getOriginalFilename());
-
+    public String update(@ModelAttribute("product") Product product, @RequestParam MultipartFile photo, RedirectAttributes redirectAttributes) throws IOException {
+        System.out.println("product " + product.getName() + " " + product.getImg());
         Path path= Paths.get("src/main/resources/static/public/images/");
+        if(product.getName().equals("")){
+            redirectAttributes.addFlashAttribute("error", "Tên sản phẩm không được bỏ trống!");
+            System.out.println("photto " +photo);
+            if(!photo.getOriginalFilename().equals("")) {
+                InputStream inputStream = photo.getInputStream();
+                Files.copy(inputStream, path.resolve(photo.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+                product.setImg(photo.getOriginalFilename());
+            }
+            redirectAttributes.addFlashAttribute("product", product);
+            return "redirect:/Employee/product/detail";
+        }else if(photo.getOriginalFilename().equals("")) {
+            redirectAttributes.addFlashAttribute("product", product);
+            redirectAttributes.addFlashAttribute("error", "Vui lòng thêm hình ảnh sản phẩm!");
+            return "redirect:/Employee/product/detail";
+        }
 
-        System.out.print(path);
+
         try{
             if(!photo.getOriginalFilename().equals("")) {
                 InputStream inputStream = photo.getInputStream();
@@ -171,8 +186,10 @@ public class EmployeeController {
             else productRepos.update(product);
         }
         catch(Exception e){
+            redirectAttributes.addFlashAttribute("error", "Lỗi khi thêm sản phẩm");
             e.printStackTrace();
         }
+        redirectAttributes.addFlashAttribute("success", "Thêm sản phẩm thành công");
         return "redirect:/Employee/product/page/0";
     }
 
