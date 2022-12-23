@@ -33,16 +33,25 @@
                     <div class="edit">
                         <div class="category">
                             <form class="category__classify" >
-                                <span>
+                                <div style="margin-right: 20px;">
+                                    <span>
                                     Loại sản phẩm
-                                </span>
-                                <input type="hidden" id="products" th:value="${products.content}"/>
-                                <select th:field="${types}" class="category__classify-select" th:action="@{/Employee/product/type/haha}" >
-                                    <option style="font-size: 18px;" th:each="t:${types}"
-                                            th:value="${t.type_id}"
-                                            th:text="${t.name}">
-                                    </option>
-                                </select>
+                                    </span>
+                                    <input type="hidden" id="products" th:value="${products.content}"/>
+                                    <select th:field="${types}" class="category__classify-select" th:action="@{/Employee/product/type/haha}" >
+                                        <option style="font-size: 18px;" th:each="t:${types}"
+                                                th:value="${t.type_id}"
+                                                th:text="${t.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <span>
+                                    Tên sản phẩm
+                                    </span>
+                                    <input type="text" id="inputSearch" style="padding: 4px 8px;font-size: 18px;outline: none;color: var(--main-text);"/>
+                                </div>
+                                <button class="categoryBtn__btn"><span>Tìm kiếm</span></button>
                             </form>
 <!--                            <div class="category__classify">-->
 <!--                                <span>-->
