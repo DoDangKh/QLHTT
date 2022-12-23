@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -31,14 +33,17 @@ public class HomeController {
     private TypeRepos typeRepos;
 
     @GetMapping("/home")
-    public ModelAndView home(){
+    public ModelAndView home(HttpServletRequest request){
         ModelAndView mav=new ModelAndView("main");
         //List<Person> persons=personRepos.getall();
+        HttpSession session=request.getSession();
         List<Product> products=productRepos.getall();
         List<Type> types=typeRepos.getall();
         mav.addObject("p", products);
-        mav.addObject("r",types);
+//        mav.addObject("r",types);
+        session.setAttribute("types",types);
         System.out.print(products.get(0).getName());
+        System.out.print(types.size());
         return mav;
     }
 }
