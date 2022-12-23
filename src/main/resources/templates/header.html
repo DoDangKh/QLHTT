@@ -41,15 +41,15 @@
             <i class=" fa-solid fa-user"></i>
             <span class="account-title">Tài khoản</span>
             <div class="account-dropdown">
-              <a href="login" class="btn-signin">Đăng nhập</a>
-              <a href="register" class="btn-signup">Tạo tài khoản</a>
+              <a href="/login" class="btn-signin">Đăng nhập</a>
+              <a href="/register" class="btn-signup">Tạo tài khoản</a>
             </div>
           </div>
           <div class="account-icon" sec:authorize="hasRole('ROLE_CUSTOMER')">
             <i class=" fa-solid fa-user"></i>
             <span class="account-title" sec:authentication="name"></span>
             <div class="account-dropdown">
-              <a href="user/info" class="btn-signin">Thông Tin</a>
+              <a href="/user/info" class="btn-signin">Thông Tin</a>
               <a href="/logout" class="btn-signup">Đăng Xuất</a>
             </div>
           </div>
