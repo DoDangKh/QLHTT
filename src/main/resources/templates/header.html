@@ -19,7 +19,7 @@
             src="https://gmarket24h.com/images/thumbs/0013362_Logo%20Gmarket%20to%20nhat.png"
             alt="G-Market"></a>
     <div class="header-search">
-      <form class="search-form" method="post" action="/product/search" >
+      <form class="search-form" th:action="@{/product/search}" >
         <div class="search-form__input">
           <input type="text" placeholder="Tìm kiếm" name="search">
         </div>
@@ -31,7 +31,7 @@
     <div class="header-right-wrapper">
       <div class="header-right">
         <div class="cart-icon">
-          <a href="#" class="btn-cart" th:href="@{cart/all}">
+          <a href="#" class="btn-cart" th:href="@{/cart/all}">
             <i class="fa-solid fa-cart-shopping"></i>
             <div class="cart-num">0</div>
             <div class="cart-price">Giỏ hàng</div>
@@ -72,9 +72,7 @@
               <span th:text="${type.name}"></span>
               <i class="fa-solid fa-angle-up"></i>
             </a>
-            </div>
           </li>
-
         </ul>
       </div>
     </div>
@@ -166,7 +164,10 @@ html {
   color: green;
 }
 .header-top .header-wrapper .heading .header-search .search-form .search-form__icon:hover {
-  background-color: #031d17;
+  background-color: #00833e;
+}
+.header-top .header-wrapper .heading .header-search .search-form .search-form__icon:hover i{
+  color:white;
 }
 .header-top .header-wrapper .heading .header-right-wrapper {
   width: 34%;

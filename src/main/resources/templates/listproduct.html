@@ -1,214 +1,339 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:c="http://www.w3.org/1999/XSL/Transform"
+      xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    th:href="@{https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap} "
-    rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+          href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Roboto+Condensed:wght@300&family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap"
+          rel="stylesheet">
   <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css}"/>
-  <link rel="stylesheet" th:href="@{public/owlcarousel/owl.carousel.min.css}">
-  <link rel="stylesheet" th:href="@{public/owlcarousel/owl.theme.default.min.css}">
-  <link rel="stylesheet" th:href="@{public/css/reset.css}"/>
-  <link rel="stylesheet" th:href="@{public/css/listproduct.css}"/>
-  <link rel="stylesheet" th:href="@{public/css/header.css}"/>
-    <title>G-Market</title>
+  <style>
+  body{
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    }
+  .list-products {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.list-products .col {
+  width: 20%;
+  height: 100%;
+}
+main {
+  background-color: #f6f6f6;
+  flex: 1;
+}
+main .empty{
+  text-align: center;
+    padding: 20px;
+    font-size: 20px;
+    width: 100%;
+  }
+main .show-list-products .product-item {
+  background-color: #fff;
+  margin: 10px !important;
+  padding: 10px;
+  box-shadow: 0 3px 6px rgba(40, 39, 39, 0.16);
+  border-radius: 6px;
+  display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+main .show-list-products .product-item .product-link .product-img {
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.5s;
+}
+main .show-list-products .product-item .product-link .product-img img {
+  width: 100%;
+  height: auto;
+  transition: all 0.2s;
+  height: 220px;
+}
+main .show-list-products .product-item .product-link .product-img img:hover {
+  transform: scale(1.1);
+}
+main .show-list-products .product-item .product-link .product-name {
+  cursor: pointer;
+  color: #707070;
+  font-size: 16px;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+main .show-list-products .product-item .product-link .product-price {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+main .show-list-products .product-item .product-link .product-price .old-price {
+  font-size: 14px;
+  text-decoration: line-through;
+  color: #949294;
+}
+main .show-list-products .product-item .product-link .product-price .old-price::after {
+  content: "đ";
+  margin-left: 3px;
+}
+main .show-list-products .product-item .product-link .product-price .cur-price {
+  font-size: 18px;
+  color: #f61b1b;
+  padding-right: 5px;
+}
+main .show-list-products .product-item .product-link .product-price .cur-price::after {
+  content: "đ";
+  margin-left: 3px;
+}
+main .show-list-products .product-item .product-describe {
+  font-size: 14px;
+  color: #8A8A8A;
+  margin-bottom: 8px;
+}
+main .show-list-products .product-item .product_quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 40px;
+}
+main .show-list-products .product-item .product_quantity .btn-decre {
+  height: 24px;
+  width: 24px;
+  border-radius: 2px;
+  background-color: #00833e;
+  color: #ffffff;
+  padding: 3px;
+  border: 1px solid #ccc;
+  margin-right: 8px;
+  cursor: pointer;
+}
+main .show-list-products .product-item .product_quantity .btn-decre i {
+  font-size: 10px;
+}
+main .show-list-products .product-item .product_quantity input {
+  height: 24px;
+  width: 60px;
+  text-align: center;
+  border: 1px solid #ccc;
+  margin: 0 8px;
+}
+main .show-list-products .product-item .product_quantity input::-webkit-outer-spin-button,
+main .show-list-products .product-item .product_quantity input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+main .show-list-products .product-item .product_quantity .btn-incre {
+  height: 24px;
+  width: 24px;
+  border-radius: 2px;
+  color: #fff;
+  background-color: #00833e;
+  padding: 3px;
+  border: 1px solid #ccc;
+  margin-left: 8px;
+  cursor: pointer;
+}
+main .show-list-products .product-item .product_action {
+  padding: 16px;
+}
+main .show-list-products .product-item .product_action .btn-add {
+  width: 100%;
+  height: 36px;
+  text-align: center;
+  border-radius: 4px;
+  border: #00833e;
+  color: #fff;
+  font-size: 13px;
+  background-color: rgba(0, 131, 62, 0.9);
+  font-weight: 400;
+  cursor: pointer;
+   display: inline-block;
+  line-height: 36px;
+}
+main .show-list-products .product-item .product_action .btn-add:hover {
+  background-color: #00833e;
+}
+main .btn-pagination {
+  text-align: center;
+  padding-bottom: 30px;
+}
+main .btn-pagination > button {
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid #b0acac;
+  background-color: #ffffff;
+  padding: 0;
+  border-radius: 4px;
+}
+main .btn-pagination > button i {
+  color: #d5d5d5;
+  font-size: 30px;
+  padding: 4px 15px;
+}
+main .btn-pagination > button:hover i {
+  color: #00833e;
+}
+main .btn-pagination .btn-prev {
+  margin: 0 14px 0 0;
+}
+main .btn-pagination .btn-next {
+  margin: 0 14px 0 0;
+}
+footer {
+  background-color: #f6f6f6;
+  padding-top: 70px;
+}
+footer .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+footer .row .col {
+  width: 33%;
+}
+footer .row .footer-left .logo img {
+  text-align: left;
+  width: 250px;
+  height: 100px;
+}
+footer .row .footer-left .list-info > li {
+  color: #8A8A8A;
+  font-size: 18px;
+  padding-right: 50px;
+}
+footer .row .footer-left .list-info > li > i {
+  color: #00833e;
+}
+footer .row .footer-mid {
+  color: #8A8A8A;
+  font-size: 18px;
+}
+footer .row .footer-mid .title {
+  font-weight: bolder;
+  font-family: "Times New Roman", Times, serif;
+}
+footer .row .footer-mid .list-support {
+  padding: 10px 40px 10px 0;
+}
+footer .row .footer-right {
+  color: #8A8A8A;
+  font-size: 18px;
+}
+footer .row .footer-right .title {
+  font-weight: bolder;
+  font-family: "Times New Roman", Times, serif;
+}
+  </style>
+  <title>G-Market</title>
 </head>
 <body>
-    <header class="header-top">
-            <div th:insert="header"></div>
-<!--        <div class="header-wrapper">-->
-<!--          <div class="heading">-->
-<!--            <a href="index.html" class="header-logo"><img-->
-<!--                src="https://gmarket24h.com/images/thumbs/0013362_Logo%20Gmarket%20to%20nhat.png" alt="G-Market"></a>-->
-<!--            <div class="header-search">-->
-<!--              <form class="search-form">-->
-<!--                <div class="search-form__input">-->
-<!--                  <input type="text" placeholder="Tìm kiếm">-->
-<!--                </div>-->
-<!--                <button class="search-form__icon">-->
-<!--                  <i class="fa-solid fa-magnifying-glass"></i>-->
-<!--                </button>-->
-<!--              </form>-->
-<!--            </div>-->
-<!--            <div class="header-right-wrapper">-->
-<!--              <div class="header-right">-->
-<!--                <div class="cart-icon">-->
-<!--                  <a href="#" class="btn-cart">-->
-<!--                    <i class="fa-solid fa-cart-shopping"></i>-->
-<!--                    <div class="cart-num">0</div>-->
-<!--                    <div class="cart-price">Giỏ hàng</div>-->
-<!--                  </a>-->
-<!--                </div>-->
-<!--    -->
-<!--                  <div class="account-icon">-->
-<!--                    <i class=" fa-solid fa-user"></i>-->
-<!--                    <span class="account-title">Tài khoản</span>-->
-<!--                    <div class="account-dropdown">-->
-<!--                      <a href="/login.html" class="btn-signin">Đăng nhập</a>-->
-<!--                      <a href="" class="btn-signup">Tạo tài khoản</a>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  -->
-<!--                </div>-->
-<!--    -->
-<!--      -->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="header-menu">-->
-<!--            <div class="category-menu">-->
-<!--              <a class="categories" href="#">-->
-<!--                <i class="fa-solid fa-bars"></i>-->
-<!--                <span class="category-title">DANH MỤC</span>-->
-<!--              </a>-->
-<!--              <div class="dropdown-categories">-->
-<!--                <ul>-->
-<!--                  <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                      <span>KHUYẾN MÃI</span>-->
-<!--                      <i class="fa-solid fa-angle-up"></i>-->
-<!--                    </a>-->
-<!--                    <div class="dropdown-category-item">-->
-<!--                      <ul>-->
-<!--                        <li>-->
-<!--                          <a href="#">Hot Deal</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                          <a href="#">Luôn Có Giá Tốt</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                          <a href="#">Mua Nhiều Giảm Sâu</a>-->
-<!--                        </li>-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                  <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                      <span>TRÁI CÂY - RAU CỦ</span>-->
-<!--                      <i class="fa-solid fa-angle-up"></i>-->
-<!--                    </a>-->
-<!--                    <div class="dropdown-category-item">-->
-<!--                      <ul>-->
-<!--                        <li>-->
-<!--                          <a href="#">Trái Cây</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                          <a href="#">Rau Củ Quả</a>-->
-<!--                        </li>-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                  <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                      <span>THỊT - TRỨNG - HẢI SẢN</span>-->
-<!--                      <i class="fa-solid fa-angle-up"></i>-->
-<!--                    </a>-->
-<!--                    <div class="dropdown-category-item">-->
-<!--                      <ul>-->
-<!--                        <li>-->
-<!--                          <a href="#">Thịt</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                          <a href="#">Trứng</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                          <a href="#">Hải Sản</a>-->
-<!--                        </li>-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                  <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                      <span>SỮA - SẢN PHẨM TỪ SỮA</span>-->
-<!--                      <i class="fa-solid fa-angle-up"></i>-->
-<!--                    </a>-->
-<!--                    <div class="dropdown-category-item">-->
-<!--                      <ul>-->
-<!--                        <li>-->
-<!--                          <a href="#">Sữa</a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                          <a href="#">Sản Phẩm Từ Sữa</a>-->
-<!--                        </li>-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                  <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                      <span>THỰC PHẨM KHÔ</span>      -->
-<!--                    </a>-->
-<!--                  </li>-->
-<!--                  <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                      <span>BÁNH KẸO - ĐỒ UỐNG</span>      -->
-<!--                    </a>-->
-<!--                  </li>-->
-<!--                  <li class="category-item">-->
-<!--                    <a href="#">-->
-<!--                      <span>CHĂM SÓC CÁ NHÂN</span>      -->
-<!--                    </a>-->
-<!--                  </li>-->
-<!--                </ul>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        -->
-      </header>
-      <main>
-        <div class="show-list-products container">
-          <div class="list-products">                                    
-          </div>
-        </div>
-        <div class="btn-pagination">
-          <button class="btn-prev">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          <button class="btn-next">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
-        </div>
-        <!-- <ul id="pagination"></ul> -->
-      </main>
-      <footer>
-        <div class="container">
-          <div class="row">
-            <div class="footer-left col">
-              <div class="product-img"><img src="/public/images/LogoGmarket.png" alt=""></div>
-              <ul class="list-info">
-                <li class="address">
-                  <i class="fa-sharp fa-solid fa-location-dot"></i>
-                  97, Man Thiện, Phường Tân Nhơn Phú A, TP Thủ Đức
-                </li>
-                <li class="phone">
-                  <i class="fa-solid fa-phone"></i>
-                  190056789
-                </li>
-                <li class="email">
-                  <i class="fa-solid fa-envelope"></i>
-                  hocvienhoanggia@gmail.com
-                </li>
-              </ul>
+  <header class="header-top">
+    <div th:insert="header"></div>
+  </header>
+  <main>
+    <div class="show-list-products container">
+      <div class="list-products">
+        <p class="empty" th:if="${empty}" th:text="${empty}"></p>
+        <div class="col" th:each="product :${products}">
+          <div class="product-item" >
+            <div >
+              <a th:href="@{/product/{path} (path=${product.product_id})}" class="product-link">
+                <div class="product-img">
+                  <img th:src="@{/public/images/{path}(path=${product.img})}">
+                </div>
+                <div class="product-name" th:text="${product.name}"></div>
+                <div class="product-price">
+                  <span class="cur-price" th:text="${product.price}"></span>
+                  <span class="old-price" th:text="${product.price}"></span>
+                </div>
+              </a>
+              <div class="product-describe" th:text="${product.describe}"></div>
             </div>
-            <div class="footer-mid col">
-              <div class="title">HỖ TRỢ KHÁCH HÀNG</div>
-              <ul class="list-support">
-                <li>Đơn hàng</li>
-                <li>Chính sách thành viên</li>
-                <li>Chính sách giao hàng</li>
-                <li>Chính sách đổi trả</li>
-                <li>Chính sách thanh toán</li>
-                <li>Chính sách bảo mật</li>
-              </ul>
+            <div>
+            <form class="product_quantity">
+              <button class="btn-quantity btn-decre">
+                <i class="fa-solid fa-minus"></i>
+              </button>
+              <input class="quantity-input" type="number" value="1" name="quantity"/>
+                <button class="btn-quantity btn-incre" >
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+            </form>
+            <div class="product_action">
+              <a class="btn-add" th:href="@{/cart/add/{path} (path=${product.product_id})}"  >THÊM VÀO GIỎ HÀNG</a>
             </div>
-            <div class="footer-right col">
-              <div class="title">HÌNH THỨC THANH TOÁN</div>
-              <img src="/public/images/paymentmethod.png" alt="">
             </div>
           </div>
         </div>
-      </footer>
-      <script type="module" src="public/script/listproduct.js"></script>
+      </div>
+    </div>
+
+    <!-- <ul id="pagination"></ul> -->
+  </main>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="footer-left col">
+          <div class="logo"><img src="/public/images/LogoGmarket.png" alt=""></div>
+          <ul class="list-info">
+            <li class="address">
+              <i class="fa-sharp fa-solid fa-location-dot"></i>
+              97, Man Thiện, Phường Tân Nhơn Phú A, TP Thủ Đức
+            </li>
+            <li class="phone">
+              <i class="fa-solid fa-phone"></i>
+              190056789
+            </li>
+            <li class="email">
+              <i class="fa-solid fa-envelope"></i>
+              hocvienhoanggia@gmail.com
+            </li>
+          </ul>
+        </div>
+        <div class="footer-mid col">
+          <div class="title">HỖ TRỢ KHÁCH HÀNG</div>
+          <ul class="list-support">
+            <li>Đơn hàng</li>
+            <li>Chính sách thành viên</li>
+            <li>Chính sách giao hàng</li>
+            <li>Chính sách đổi trả</li>
+            <li>Chính sách thanh toán</li>
+            <li>Chính sách bảo mật</li>
+          </ul>
+        </div>
+        <div class="footer-right col">
+          <div class="title">HÌNH THỨC THANH TOÁN</div>
+          <img src="/public/images/paymentmethod.png" alt="">
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    var btns = document.getElementsByClassName('btn-quantity')
+        Array.from(btns).forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              e.preventDefault();
+              if(e.target.closest(".btn-incre")){
+                const inpStr= e.target.closest(".product-item").querySelector(".quantity-input")
+                inpStr.value = +inpStr.value + 1
+               }
+              if(e.target.closest(".btn-decre")){
+                const inpStr= e.target.closest(".product-item").querySelector(".quantity-input")
+                if(+inpStr.value ===1) return
+                inpStr.value = +inpStr.value - 1
+              }
+            })
+           });
+</script>
 </html>

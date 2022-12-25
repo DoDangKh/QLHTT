@@ -40,12 +40,42 @@ public class ProductController {
         mav.addObject(page);
         return mav;
     }
+
+    @RequestMapping("/type/{id}")
+    public ModelAndView searchType(@PathVariable("id") Long id) {
+        List<Product> products = productRepos.getProductsByType(id);
+
+        ModelAndView mav=new ModelAndView("listproduct");
+
+        if(products.size() == 0){
+            mav.addObject("empty", "Không tìm thấy sản phẩm thuộc loại này");
+        }
+
+        mav.addObject("products", products);
+        return mav;
+    }
     @RequestMapping("/search/page/{p}")
     public ModelAndView search(@RequestParam("name")String name,@PathVariable("p") int p){
         Pageable pageable=PageRequest.of(p,10);
         Page<Product> page=productRepos.getPagebystring(pageable,name);
         ModelAndView mav=new ModelAndView("listproduct");
         mav.addObject(page);
+        return mav;
+    }
+
+    @GetMapping("/search")
+    public ModelAndView searchProducts(@RequestParam(name="search",required = false) String name) {
+        System.out.println("search product " + name);
+
+        List<Product> products = productRepos.getProductsByName(name);
+
+        ModelAndView mav=new ModelAndView("listproduct");
+
+        if(products.size() == 0){
+            mav.addObject("empty", "Không tìm thấy sản phẩm");
+        }
+
+        mav.addObject("products", products);
         return mav;
     }
 }

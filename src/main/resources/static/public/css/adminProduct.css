@@ -114,6 +114,7 @@ text-transform: capitalize;
     overflow: hidden;
     display: block;
     color: var(--main-text);
+    text-transform: capitalize;
 }
 
 .form-product {

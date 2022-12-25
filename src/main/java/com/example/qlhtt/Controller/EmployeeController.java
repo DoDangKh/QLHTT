@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -110,43 +111,65 @@ public class EmployeeController {
         mav.addObject("products",page);
 
         List<Type> typeList=typeRepos.getall();
+        typeList.add(0,new Type(Long.parseLong("-1"), "Tất cả"));
         mav.addObject("types", typeList);
+
+
+
+        mav.addObject("selected_id", -1);
         return mav;
     }
     @GetMapping("/product/search/page/{p}")
     public ModelAndView getProductByType(@PathVariable("p") int p,@RequestParam(name="name",required = false) String name) {
+        System.out.println("string search "+ name);
         Pageable pageable=PageRequest.of(p,3);
         Page<Product> page=productRepos.getPagebystring(pageable,name);
-//        System.out.println(page.get(0);
+
         ModelAndView mav=new ModelAndView("adminProduct");
         mav.addObject("products",page);
         List<Type> typeList=typeRepos.getall();
+        typeList.add(0,new Type(Long.parseLong("-1"), "Tất cả"));
         mav.addObject("types",typeList);
+        mav.addObject("selected_id", -1);
         return mav;
     }
 
     @GetMapping("/product/type/{t}/page/{p}")
     public ModelAndView getProductByType(@PathVariable("p") int p,@PathVariable("t") Long t) {
+        ModelAndView mav=new ModelAndView("adminProduct");
+        if(t==-1){
+            Pageable pageable= PageRequest.of(p,3);
+            Page<Product> page=productRepos.getPage(pageable);
+            mav.addObject("products",page);
+            List<Type> typeList=typeRepos.getall();
+            typeList.add(0,new Type(Long.parseLong("-1"), "Tất cả"));
+            mav.addObject("types", typeList);
+            mav.addObject("selected_id", -1);
+            return mav;
+        }
+
+
         Pageable pageable=PageRequest.of(p,3);
         Page<Product> page=productRepos.getPagebytpye(pageable,t);
-//        System.out.println(page.get(0);
-        ModelAndView mav=new ModelAndView("adminProduct");
+
         mav.addObject("products",page);
         List<Type> typeList=typeRepos.getall();
         int temp1= Math.toIntExact(t);
         System.out.println(typeList.size());
-        try {
-            for (int i=0;i< typeList.size();i++) {
-                if (typeList.get(i).getType_id() == t) {
-                    Type temp = typeList.get(i);
-                    typeList.remove(i);
-                    typeList.add(0, temp);
-                }
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            for (int i=0;i< typeList.size();i++) {
+//                if (typeList.get(i).getType_id() == t) {
+//                    Type temp = typeList.get(i);
+//                    typeList.remove(i);
+//                    typeList.add(0, temp);
+//                }
+//            }
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
+        typeList.add(0,new Type(Long.parseLong("-1"), "Tất cả"));
+        mav.addObject("selected_id",t);
         mav.addObject("types",typeList);
         return mav;
     }

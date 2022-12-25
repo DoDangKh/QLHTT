@@ -37,12 +37,21 @@
                                     <span>
                                     Loại sản phẩm
                                     </span>
-                                    <input type="hidden" id="products" th:value="${products.content}" />
+                                    <input type="hidden" id="products"th:value="${products.content}" />
                                     <select th:field="${types}" class="category__classify-select" onchange="window.location.href=this.value" name="type" >
                                         <option style="font-size: 18px;" th:each="t:${types}"
+                                                th:if="${selected_id == t.type_id}"
+                                                selected
                                                 th:value="@{/Employee/product/type/{path1}/page/0 (path1=${t.type_id})}"
                                                 th:text="${t.name}">
                                         </option>
+                                        <option style="font-size: 18px;" th:each="t:${types}"
+                                                th:unless="${selected_id == t.type_id}"
+                                                th:value="@{/Employee/product/type/{path1}/page/0 (path1=${t.type_id})}"
+                                                th:text="${t.name}">
+                                        </option>
+<!--                                        <option th:if="${selected_id == null}" selected th:value="@{/Employee/product/page/0}" >a</option>-->
+<!--                                        <option th:unless="${selected_id == null}" th:value="@{/Employee/product/page/0}" >b</option>-->
                                     </select>
                                 </div>
                                 <div>

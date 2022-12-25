@@ -19,8 +19,6 @@ public class ProductRepos {
     public List<Product> getall(){
         try{
             List<Product> products= jdbcTemplate.query("Select * From Product", BeanPropertyRowMapper.newInstance(Product.class));
-            System.out.print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ok xxxxxxxxxxxxxxxxxxxxx");
-            System.out.print(products.get(0).getName());
             return products;
         }
         catch(Exception e){
@@ -58,10 +56,6 @@ public class ProductRepos {
             System.out.println(idtype);
             List<Product> products=jdbcTemplate.query("Select * From Product WHERE type_id="+idtype+" Order by product_id OFFSET " + page.getOffset() + "ROWS Fetch NEXT " + page.getPageSize() +" ROWS ONLY"
                     ,BeanPropertyRowMapper.newInstance(Product.class));
-
-            for(Product i : products){
-                System.out.println(i.getName());
-            }
             int count=jdbcTemplate.queryForObject("SELECT count(*) from Product",Integer.class);
             return new PageImpl<Product>(products, page, count);
         }
@@ -71,9 +65,16 @@ public class ProductRepos {
         return null;
     }
 
+    public List<Product> getProductsByType(Long idtype){
+        List<Product> products=jdbcTemplate.query("Select * From Product WHERE type_id="+idtype+" Order by product_id",BeanPropertyRowMapper.newInstance(Product.class));
+        return products;
+    }
+
     public Page<Product> getPagebystring(Pageable page,String name){
+        String name1 = name.toLowerCase();
+        System.out.println(name1);
         try{
-            List<Product> products=jdbcTemplate.query("Select * From Product WHERE name like '%"+name+"%' Order by product_id OFFSET " + page.getOffset() + "ROWS Fetch NEXT " + page.getPageSize() +" ROWS ONLY"
+            List<Product> products=jdbcTemplate.query("Select * From Product WHERE name like '%"+name1+"%' Order by product_id OFFSET " + page.getOffset() + "ROWS Fetch NEXT " + page.getPageSize() +" ROWS ONLY"
                     ,BeanPropertyRowMapper.newInstance(Product.class));
             int count=jdbcTemplate.queryForObject("SELECT count(*) from Product",Integer.class);
             return new PageImpl<Product>(products, page, count);
@@ -83,7 +84,10 @@ public class ProductRepos {
         }
         return null;
     }
-
+    public List<Product> getProductsByName(String name){
+        List<Product> products=jdbcTemplate.query("Select * From Product WHERE name like '%"+name+"%' Order by product_id",BeanPropertyRowMapper.newInstance(Product.class));
+        return products;
+    }
     public boolean update(Product product){
         try{
             jdbcTemplate.update("update Product set name =? ,quantity=?, price=?, img=?, describe=?,  type_id=? where product_id=? "
@@ -96,6 +100,7 @@ public class ProductRepos {
         return false;
     }
     public boolean add(Product product){
+        product.setName(product.getName().toLowerCase());
         try{
             jdbcTemplate.update("Insert into Product(name, quantity, price, img, describe, status,  type_id) Values(?,?,?,?,?,?,? )",product.getName(),product.getQuantity(),product.getPrice(),product.getImg(),product.getDescribe(), 1,product.getType_id());
             //jdbcTemplate.update("insert into product(name=")
