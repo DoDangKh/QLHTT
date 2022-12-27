@@ -291,6 +291,7 @@ main .section-product-review .review-product .product-info .name-product {
   font-size: 22px;
   font-weight: 500;
   color: #000;
+  text-transform: capitalize;
 }
 main .section-product-review .review-product .product-info .describe {
   color: #4a4a4a;

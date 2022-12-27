@@ -463,4 +463,11 @@ public class EmployeeController {
         mav.addObject("persons",personList);
         return mav;
     }
+    @RequestMapping("/statistic")
+    public ModelAndView statistic(){
+        ModelAndView mav= new ModelAndView("statistic");
+
+
+        return mav;
+    }
 }
