@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +56,9 @@ public class EmployeeController {
     @Autowired
     CustomerUserRepos customerUserRepos;
 
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
     @RequestMapping()
@@ -486,6 +490,20 @@ public class EmployeeController {
         mav.addObject("account", new UserLogin());
         return mav;
     }
-//    @PostMapping("/list/add/update")
-//    public String()
+    @PostMapping("/list/add/update")
+    public String saveEmployee(@ModelAttribute("person") Person person, @ModelAttribute("account") UserLogin userLogin,Model model){
+        if(userLoginRepos.CheckUserName(userLogin.getUsername())==0) {
+            personRepos.insertPerson(person);
+            Person temp=personRepos.getbyidcard(person.getIdentity_card());
+            userLogin.setPerson_id(temp.getId());
+            userLogin.setPassword(passwordEncoder.encode(userLogin.getPassword()));
+            userLoginRepos.saveEmployee(userLogin);
+            return "redirect:/Employee";
+        }
+        else{
+            String error="Them Nhan Vien That Bai";
+            model.addAttribute("error",error);
+            return "adminadd";
+        }
+    }
 }
