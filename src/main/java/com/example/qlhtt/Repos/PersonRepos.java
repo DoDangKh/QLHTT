@@ -88,6 +88,24 @@ public class PersonRepos  {
         }
         return null;
     }
+    public List<Person> getStaff(){
+        try{
+            List<Integer> id=jdbcTemplate.query("Select staff_id from staff where status=1", (rs, rowNum) -> rs.getInt("staff_id")  );
+            List<Person> personList=new ArrayList<>();
+            System.out.print("xxxxxxxxxxxxxxx "+id.size()+" xxxxxxxxxxxxxxxxxxxxxxxx");
+            for(int i=0;i<id.size();i++){
+                System.out.print("xxxxxxx"+id.get(i)+"xxxxxxxx");
+                Person temp=getbyid(id.get(i));
+                personList.add(temp);
+            }
+            return personList;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public boolean update(Person person){
         try{
             jdbcTemplate.update("Update Person set name=?, gender=?, identity_card=?, day_of_birth=?, phone_num=?, address=? where id=? ",person.getName(),person.getGender(),person.getIdentity_card(),person.getDay_of_birth()

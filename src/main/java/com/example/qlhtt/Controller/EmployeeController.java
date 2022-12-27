@@ -470,4 +470,22 @@ public class EmployeeController {
 
         return mav;
     }
+
+    @RequestMapping("/list")
+    public ModelAndView Employeelist(){
+        ModelAndView mav=new ModelAndView("adminEmployeelist");
+        List<Person>listperson=personRepos.getStaff();
+
+        mav.addObject("persons",listperson);
+        return mav;
+    }
+    @RequestMapping("/list/add")
+    public ModelAndView Employeeadd(){
+        ModelAndView mav =new ModelAndView("adminadd");
+        mav.addObject("person", new Person());
+        mav.addObject("account", new UserLogin());
+        return mav;
+    }
+//    @PostMapping("/list/add/update")
+//    public String()
 }
