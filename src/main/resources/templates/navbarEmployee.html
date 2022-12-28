@@ -1,4 +1,4 @@
-<span class="navbar__title" xmlns:th="http://www.w3.org/1999/xhtml">Danh Mục</span>
+<span class="navbar__title" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">Danh Mục</span>
 <ul class="navbar__list">
     <a th:href="@{/Employee/info}" class="navbar__link">
         <li class="navbar__item">
@@ -25,16 +25,16 @@
             Quản lí khách hàng
         </li>
     </a>
-    <a th:href="@{/Employee/statistics/2022}" class="navbar__link">
+    <a th:href="@{/Employee/statistics/2022}" class="navbar__link" sec:authorize="hasRole('ROLE_ADMIN')" >
         <li class="navbar__item">
             Thống kê
         </li>
     </a>
-<!--    <a th:href="@{/Employee/list}" class="navbar__link">-->
-<!--        <li class="navbar__item">-->
-<!--            Quản lí nhân viên-->
-<!--        </li>-->
-<!--    </a>-->
+    <a th:href="@{/Employee/list}" class="navbar__link" sec:authorize="hasRole('ROLE_ADMIN')">
+        <li class="navbar__item">
+            Quản lí nhân viên
+        </li>
+    </a>
     <a th:href="@{/logout}" class="navbar__link">
         <li class="navbar__item">
             Đăng xuất

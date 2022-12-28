@@ -38,7 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/home","/public/**","/product/**","/forgotpassword/**","/register/**","/sendemail/**","/Confirmregister","/").permitAll();
         http.csrf().disable().authorizeRequests().antMatchers("/cart/**").hasRole("CUSTOMER")
-                .antMatchers("/Employee/**").hasRole("EMPLOYEE").anyRequest()
+                .antMatchers("/Employee/**").hasAnyRole("EMPLOYEE","ADMIN")
+                .anyRequest()
                 .authenticated().and().formLogin().loginPage("/login").permitAll().loginProcessingUrl("/login").usernameParameter("username")
                 .passwordParameter("password").defaultSuccessUrl("/LoginHandel").failureUrl("/login?error=failed").and()
                 .exceptionHandling().accessDeniedPage("/login?error=deny");

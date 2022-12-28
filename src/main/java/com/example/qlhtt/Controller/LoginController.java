@@ -111,7 +111,7 @@ public class LoginController {
         if(request.isUserInRole("ROLE_CUSTOMER")){
             return"redirect:/home";
         }
-        if(request.isUserInRole("ROLE_EMPLOYEE")){
+        if(request.isUserInRole("ROLE_EMPLOYEE")||request.isUserInRole("ROLE_ADMIN")){
             return"redirect:/Employee/info";
         }
         return null;
