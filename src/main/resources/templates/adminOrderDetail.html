@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +18,10 @@
         </header>
         <div class="order-details">
             <div class="od-heading">
-                <a th:href="@{/Employee/order}" class="od-heading__link">
+                <a th:href="@{/Employee/order}" class="od-heading__link" sec:authorize="hasRole('ROLE_EMPLOYEE')">
+                    <i class="od-heading__icon fa-solid fa-arrow-left"></i>
+                </a>
+                <a th:href="@{/users/order}" class="od-heading__link" sec:authorize="hasRole('ROLE_CUSTOMER')">
                     <i class="od-heading__icon fa-solid fa-arrow-left"></i>
                 </a>
                 <h1 class="od-heading__title">
@@ -73,8 +76,8 @@
                         </tfoot>
                     </table>
                     <div class="or-body__btn">
-                        <button class="btn-l or-body__btn-cancel" th:formaction="@{/Employee/order}">Huỷ</button>
-                        <button class="btn-l or-body__btn-accept" th:with="postid=${id}" th:formaction="@{/Employee/order/check/{path} (path=${id})}"  type="submit" >Xác nhận</button>
+                        <button class="btn-l or-body__btn-cancel" th:formaction="@{/Employee/order}"  sec:authorize="hasRole('ROLE_EMPLOYEE')">Huỷ</button>
+                        <button class="btn-l or-body__btn-accept" th:with="postid=${id}" th:formaction="@{/Employee/order/check/{path} (path=${id})}"  type="submit"  sec:authorize="hasRole('ROLE_EMPLOYEE')">Xác nhận</button>
                     </div>
                 </div>
                     <form  method="post" th:formaction="@{/Employee/order/check}" >

@@ -1,8 +1,7 @@
 package com.example.qlhtt.Controller;
 
-import com.example.qlhtt.Entity.Person;
-import com.example.qlhtt.Entity.Product;
-import com.example.qlhtt.Entity.UserLogin;
+import com.example.qlhtt.Entity.*;
+import com.example.qlhtt.Repos.OrderRepos;
 import com.example.qlhtt.Repos.PersonRepos;
 import com.example.qlhtt.Repos.ProductRepos;
 import com.example.qlhtt.Repos.UserLoginRepos;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -30,13 +30,42 @@ public class UserController {
     private UserLoginRepos userLoginRepos;
 
     @Autowired
+    private OrderRepos orderRepos;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/all")
-    public ResponseEntity<?> getListUser(){
+    @RequestMapping("/info")
+    public ModelAndView info(Principal principal){
 
-            List<Product> products=productRepos.getall();
-            return ResponseEntity.ok(products);
+        ModelAndView mav= new ModelAndView("customer");
+        UserLogin userLogin=userLoginRepos.getUserName(principal.getName());
+        mav.addObject("person",personRepos.getbyid(userLogin.getPerson_id()));
+        mav.addObject("account",userLogin);
+        return mav;
+    }
+    @RequestMapping("/order")
+    public ModelAndView order(Principal principal){
+        ModelAndView mav= new ModelAndView("customerorder");
+        UserLogin userLogin= userLoginRepos.getUserName(principal.getName());
+        List<CustomerOrder> orders=orderRepos.getall();
+        mav.addObject("orders",orders);
+        return mav;
+    }
+    @RequestMapping("/order/{id}")
+    public ModelAndView orderdetail(@PathVariable("id") int id){
+        ModelAndView mav=new ModelAndView("adminOrderDetail");
+        List<Cart> order= orderRepos.OrderDetail(id);
+        mav.addObject("order",order);
+        int sum=0;
+        for(int i=0;i<order.size();i++){
+            sum+=order.get(i).getQuantity()*order.get(i).getProduct().getPrice();
+        }
+        mav.addObject("id",String.valueOf(id));
+        System.out.print(id+"cccccccccccccc");
+        mav.addObject("sum",sum);
+        return mav;
+
     }
 //    @RequestMapping("/login")
 //    public ModelAndView Login(){

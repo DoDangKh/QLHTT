@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.1">
+  <title>Document</title>
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css}" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" th:href="@{/public/css/grid.css}">
+  <link rel="stylesheet" th:href="@{/public/css/base.css}">
+  <link rel="stylesheet" th:href="@{/public/css/adminOrder.css}">
+</head>
+<body>
+<div class="employee">
+  <header class="employee-header " th:insert="headerEmployee">
+
+  </header>
+  <div class="grid">
+    <div class="row sm-gutter space">
+      <div class="col l-2">
+        <nav class="navbar" th:insert="navbarEmployee">
+
+        </nav>
+      </div>
+
+      <div class="col l-10">
+        <div class="main-order" th:each="order:${orders}">
+          <a th:href="@{/users/order/{path} (path=${order.order_id})}" class="order">
+            <div class="order__icon">
+              <i class="fa-regular fa-file"></i>
+            </div>
+
+            <div class="order__detail">
+              <div class="detail__title">
+                <span class="detail__title-heading">Mã đơn hàng </span>
+                <span class="detail__title-number" th:text="${order.order_id}"></span>
+              </div>
+
+              <div class="detail__time">
+                <i class="fa-solid fa-clock"></i>
+                <span class="detail__time-order" th:text="${order.order_time}"></span>
+              </div>
+            </div>
+          </a>
+          <div class="order__status">
+            <i class="fa-solid fa-spinner order__status-icon order__status-icon--loading" th:if="${order.status_now==0}"></i>
+            <i class="fa-solid fa-check order__status-icon order__status-icon--checked" th:if="${order.status_now==1}"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row sm-gutter space">
+      <div class="col l-12">
+        <div id="pagination">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer"></footer>
+</div>
+<script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
+<script src="/QLHTT/src/main/resources/templates/navbarEmployee.js"></script>
+<script>
+        var orderAPI = "http://localhost:3000/order";
+        var currentPage = 1// trang hiện tại
+            var perPage = 5// số sản phẩm trong 1 trang
+            var totalPage = 0
+            var perOrderList = []
+        fetch(orderAPI)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                // console.log(data)
+                return handleData(data)
+            })
+            .catch(function(error) {
+                console.log(error)
+            })
+            function handleData(orderList) {
+                // // phân trang
+                // perOrderList = orderList.slice(
+                //     (currentPage - 1) * perPage,
+                //     (currentPage - 1) * perPage + perPage
+                // )
+                // var pagination = document.getElementById('pagination')
+                // function renderPageNumber() {
+                //     renderOrderList()
+                //     totalPage = Math.ceil(orderList.length / perPage)
+                //     console.log(Math.ceil(orderList.length / perPage))
+                //     for(var i = 1; i <= totalPage; i++) {
+                //         console.log(i)
+                //         console.log(`<div class="pagination__num">${i}</div>`)
+                //         pagination.innerHTML = `<div class="pagination__num">${i}</div>`;
+                //     }
+                // }
+
+                // render
+                function renderOrderList() {
+                    // console.log(perOrderList)
+                    var orderListhtmls = perOrderList.map(function(order) {
+                        // for
+                    if(order.status == "false") {
+                        return `
+                        <div class="main-order">
+                            <a href="./orderDetail.html" class="order">
+                                <div class="order__icon">
+                                    <i class="fa-regular fa-file"></i>
+                                </div>
+
+                                <div class="order__detail">
+                                    <div class="detail__title">
+                                        <span class="detail__title-heading">Mã đơn hàng </span>
+                                        <span class="detail__title-number">${order.id}</span>
+                                    </div>
+
+                                    <div class="detail__time">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <span class="detail__time-order">${order.time} ${order.day}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="order__status">
+                                <i class="fa-solid fa-spinner order__status-icon order__status-icon--loading"></i>
+                            </div>
+                        </div>
+                        `
+                    }
+                    else {
+                        return `
+                        <div class="main-order">
+                            <a href="./orderDetail.html" class="order">
+                                <div class="order__icon">
+                                    <i class="fa-regular fa-file"></i>
+                                </div>
+
+                                <div class="order__detail">
+                                    <div class="detail__title">
+                                        <span class="detail__title-heading">Mã đơn hàng </span>
+                                        <span class="detail__title-number">${order.id}</span>
+                                    </div>
+
+                                    <div class="detail__time">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <span class="detail__time-order">${order.time} ${order.day}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="order__status">
+                                <i class="fa-solid fa-check order__status-icon order__status-icon--checked"></i>
+                            </div>
+                            </div>
+                        `
+                        }
+                    })
+                    var orderListhtml = orderListhtmls.join('')
+                    document.querySelector('.l-10').innerHTML = orderListhtml
+                    // renderPageNumber()
+                }
+                renderPageNumber()
+            };
+
+    </script>
+</body>
+</html>

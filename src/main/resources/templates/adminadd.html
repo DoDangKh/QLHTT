@@ -19,12 +19,19 @@
     </a> -->
   </header>
   <div class="order-details">
-    <div class="od-heading">
+    <div class="row sm-gutter space">
+      <div class="col l-2">
+        <nav class="navbar" th:insert="navbarEmployee">
+
+        </nav>
+      </div>
+
+      <div class="od-heading">
       <a th:href="@{/Employee/customer}" class="od-heading__link">
         <i class="od-heading__icon fa-solid fa-arrow-left"></i>
       </a>
       <h1 class="od-heading__title">
-        THÔNG TIN KHÁCH HÀNG
+        THÔNG TIN
       </h1>
     </div>
 
@@ -76,7 +83,7 @@
         </div>
         <div action="" class="basic-form">
           <label for="" class="form__label">Mật Khẩu</label>
-          <input type="text" class="form__input" th:field="${account.password}">
+          <input type="password" class="form__input" th:field="${account.password}">
         </div>
         <div style="text-align: center;" class="error-update">
           <p th:text="${success}" style="color: var(--main-color); font-size: 2rem; margin-bottom: 0;"></p>

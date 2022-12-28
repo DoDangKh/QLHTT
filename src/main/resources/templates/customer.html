@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css}" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" th:href="@{/public/css/grid.css}">
+  <link rel="stylesheet" th:href="@{/public/css/base.css}">
+  <link rel="stylesheet" th:href="@{/public/css/employee.css}">
+</head>
+<body>
+<div class="employee">
+  <header class="employee-header" th:insert="headerEmployee">
+  </header>
+  <div class="grid space">
+    <div class="row sm-gutter ">
+      <div class="col l-2">
+        <div class="navbar" th:insert="navbarEmployee">
+
+        </div>
+      </div>
+
+      <div class="col l-10">
+        <div class="employee-body">
+          <span class="employee-body__title">THÔNG TIN CÁ NHÂN</span>
+
+          <form class="employee-form" action="/Employee/info/update" method="post" value="${person}">
+            <div action="" class="basic-form">
+              <label for="" class="form__label">Họ và tên:</label>
+              <input type="text" class="form__input" th:field="${person.name}">
+            </div>
+
+
+            <div action="" class="basic-form-radio">
+              <div class="form-radio">
+                <input class="form__radio" type="radio" name="gender" id="gender-male" th:value="Nam" th:field="${person.gender}">
+                <label class="form__radio-label" for="gender-male">Nam</label>
+              </div>
+              <div class="form-radio">
+                <input class="form__radio" type="radio" name="gender" id="gender-female" th:value="Nữ" th:field="${person.gender}">
+                <label class="form__radio-label" for="gender-female">Nữ</label>
+              </div>
+            </div>
+
+            <div action="" class="basic-form">
+              <label for="" class="form__label">CMND/CCCD:</label>
+              <input type="text" class="form__input" th:field="${person.identity_card}">
+            </div>
+
+            <div action="" class="basic-form">
+              <label for="" class="form__label">Ngày sinh:</label>
+              <input type="date" class="form__input"  th:field="${person.day_of_birth}">
+            </div>
+
+            <div action="" class="basic-form">
+              <label for="" class="form__label">Số điện thoại:</label>
+              <input type="text" class="form__input"  th:field="${person.phone_num}">
+            </div>
+
+            <div action="" class="basic-form">
+              <label for="" class="form__label">Địa chỉ:</label>
+              <input type="text" class="form__input"  th:field="${person.address}">
+            </div>
+            <div action="" class="basic-form">
+              <label for="" class="form__label">Tài Khoản</label>
+              <input type="text" class="form__input" th:field="${account.username}">
+            </div>
+            <div action="" class="basic-form">
+              <label for="" class="form__label">Mật Khẩu</label>
+              <input type="password" class="form__input" th:field="${account.password}">
+            </div>
+            <div class="employee__btn">
+              <button class="btn-l" type="submit" >Cập nhật</button>
+            </div>
+            <p th:text="${success}" style="color: var(--main-color); font-size: 2rem;"></p>
+            <p th:text="${error}" style="color: red; font-size: 2rem;"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,26 +1,41 @@
 <span class="navbar__title" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">Danh Mục</span>
 <ul class="navbar__list">
-    <a th:href="@{/Employee/info}" class="navbar__link">
+    <a th:href="@{/users/info}" class="navbar__link"  sec:authorize="hasRole('ROLE_CUSTOMER')">
         <li class="navbar__item">
             Thông tin cá nhân
         </li>
     </a>
-    <a th:href="@{/Employee/product/page/0}" class="navbar__link">
+    <a th:href="@{/users/order}" class="navbar__link"  sec:authorize="hasRole('ROLE_CUSTOMER')">
+        <li class="navbar__item">
+            Đơn Hàng
+        </li>
+    </a>
+    <a th:href="@{/home}" class="navbar__link"  sec:authorize="hasRole('ROLE_CUSTOMER')">
+        <li class="navbar__item">
+            Trang Chủ
+        </li>
+    </a>
+    <a th:href="@{/Employee/info}" class="navbar__link"  sec:authorize="hasRole('ROLE_EMPLOYEE')">
+        <li class="navbar__item">
+            Thông tin cá nhân
+        </li>
+    </a>
+    <a th:href="@{/Employee/product/page/0}" class="navbar__link" sec:authorize="hasRole('ROLE_EMPLOYEE')">
         <li class="navbar__item">
             Quản lí sản phẩm
         </li>
     </a>
-    <a th:href="@{/Employee/type}" class="navbar__link">
+    <a th:href="@{/Employee/type}" class="navbar__link" sec:authorize="hasRole('ROLE_EMPLOYEE')">
         <li class="navbar__item">
             Quản lí loại sản phẩm
         </li>
     </a>
-    <a th:href="@{/Employee/order}" class="navbar__link">
+    <a th:href="@{/Employee/order}" class="navbar__link" sec:authorize="hasRole('ROLE_EMPLOYEE')">
         <li class="navbar__item">
             Quản lí đơn hàng
         </li>
     </a>
-    <a th:href="@{/Employee/customer}" class="navbar__link">
+    <a th:href="@{/Employee/customer}" class="navbar__link" sec:authorize="hasRole('ROLE_EMPLOYEE')">
         <li class="navbar__item">
             Quản lí khách hàng
         </li>
