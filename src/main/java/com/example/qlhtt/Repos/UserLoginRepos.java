@@ -28,6 +28,18 @@ public class UserLoginRepos {
         }
         return null;
     }
+
+    public UserLogin getid(int id){
+        try {
+            UserLogin userLogin = jdbcTemplate.queryForObject("Select * From UserLogin Where person_id='" + id+"'", (rs, rowNum) ->
+                    new UserLogin(rs.getInt("person_id"), rs.getString("username"), rs.getString("password"), rs.getInt("enable"),rs.getInt("role_id")));
+            return userLogin;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     public int CheckUserName(String UserName){
         try{
             int count=jdbcTemplate.queryForObject("SELECT count(*) FROM UserLogin WHERE USERNAME='"+UserName+"'",Integer.class);

@@ -33,5 +33,14 @@ public class CustomerUserRepos {
             return false;
         }
     }
+    public boolean deletestaff(int id){
+        try{
+            jdbcTemplate.update("Delete Staff where staff_id=? ",id);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
 
 }

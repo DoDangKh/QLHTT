@@ -52,6 +52,9 @@ public class EmployeeController {
     OrderRepos orderRepos;
 
     @Autowired
+    StatisticRepos statisticRepos;
+
+    @Autowired
     CustomerUserRepos customerUserRepos;
 
 
@@ -465,60 +468,47 @@ public class EmployeeController {
         mav.addObject("persons",personList);
         return mav;
     }
-    @RequestMapping("/statistics")
-    public ModelAndView statistic(){
-        ModelAndView mav= new ModelAndView("statistics");
-
-        ArrayList<String> years = new ArrayList<>();
-        years.add("2020");
-        years.add("2021");
-        years.add("2022");
-
-        ArrayList<Integer> data = new ArrayList<>();
-        data.add(1);
-        data.add(2);
-        data.add(3);
-        data.add(4);
-        data.add(5);
-        data.add(6);
-        data.add(7);
-        data.add(8);
-        data.add(9);
-        data.add(10);
-        data.add(11);
-        data.add(12);
-
-
-        mav.addObject("years", years);
-        mav.addObject("selected_id", new Date().getYear());
-        mav.addObject("data",data);
-
-        return mav;
-    }
+//    @RequestMapping("/statistics")
+//    public ModelAndView statistic(){
+//        ModelAndView mav= new ModelAndView("statistics");
+//
+//        List<String> years = new ArrayList<>();
+//        years=statisticRepos.loadyear();
+//
+//        ArrayList<Integer> data = new ArrayList<>();
+//        data.add(1);
+//        data.add(2);
+//        data.add(3);
+//        data.add(4);
+//        data.add(5);
+//        data.add(6);
+//        data.add(7);
+//        data.add(8);
+//        data.add(9);
+//        data.add(10);
+//        data.add(11);
+//        data.add(12);
+//
+//
+//        mav.addObject("years", years);
+//        mav.addObject("selected_id", new Date().getYear());
+//        mav.addObject("data",data);
+//
+//        return mav;
+//    }
     @GetMapping("/statistics/{year}")
     public ModelAndView getYearByStatictis(@PathVariable("year") String year) {
         ModelAndView mav= new ModelAndView("statistics");
 
         System.out.println("year " + year);
-        ArrayList<String> years = new ArrayList<>();
-        years.add("2020");
-        years.add("2021");
-        years.add("2022");
+        List<String> years = new ArrayList<>();
+        years=statisticRepos.loadyear();
 
 
         ArrayList<Integer> data = new ArrayList<>();
-        data.add(1);
-        data.add(2);
-        data.add(3);
-        data.add(4);
-        data.add(5);
-        data.add(6);
-        data.add(7);
-        data.add(8);
-        data.add(9);
-        data.add(10);
-        data.add(11);
-        data.add(12);
+        for(int i=1;i<13;i++){
+            data.add(statisticRepos.loadincome(Integer.parseInt(year),i));
+        }
 
         mav.addObject("years", years);
         mav.addObject("selected_id", year);
@@ -542,18 +532,55 @@ public class EmployeeController {
     }
     @PostMapping("/list/add/update")
     public String saveEmployee(@ModelAttribute("person") Person person, @ModelAttribute("account") UserLogin userLogin,Model model){
-        if(userLoginRepos.CheckUserName(userLogin.getUsername())==0) {
-            personRepos.insertPerson(person);
-            Person temp=personRepos.getbyidcard(person.getIdentity_card());
-            userLogin.setPerson_id(temp.getId());
-            userLogin.setPassword(passwordEncoder.encode(userLogin.getPassword()));
-            userLoginRepos.saveEmployee(userLogin);
-            return "redirect:/Employee";
+        if (person.getId()!=0){
+            if (userLoginRepos.CheckUserName(userLogin.getUsername()) == 0) {
+                personRepos.insertPerson(person);
+                Person temp = personRepos.getbyidcard(person.getIdentity_card());
+                userLogin.setPerson_id(temp.getId());
+                userLogin.setPassword(passwordEncoder.encode(userLogin.getPassword()));
+                userLoginRepos.saveEmployee(userLogin);
+                return "redirect:/Employee";
+            } else {
+                String error = "Them Nhan Vien That Bai";
+                model.addAttribute("error", error);
+                return "adminadd";
+            }
         }
         else{
-            String error="Them Nhan Vien That Bai";
-            model.addAttribute("error",error);
-            return "adminadd";
+            if(personRepos.update(person)&& userLoginRepos.updateUser(userLogin)){
+                return "redirect:/Employee";
+            }
+            else{
+                String error ="Cap Nhat That Bai";
+                model.addAttribute("error",error);
+                return "adminadd";
+            }
         }
+    }
+    @RequestMapping("/list/{id}")
+    public ModelAndView  detailEmployee(@PathVariable("id") int id){
+        ModelAndView mav =new ModelAndView("adminadd");
+        Person person=personRepos.getbyid(id);
+        UserLogin userLogin=userLoginRepos.getid(id);
+        mav.addObject("person",person);
+        mav.addObject("account",userLogin);
+        return mav;
+    }
+    @RequestMapping("/list/delete/{id}")
+    public String deleteEmployee(@PathVariable("id") int id,Model model){
+        System.out.println("id xoa " +id );
+        if(customerUserRepos.deletestaff(id)){
+            if(userLoginRepos.delete(id)){
+                if(personRepos.delete(id)){
+                    return "redirect:/Employee";
+                }
+            }
+        }else{
+            model.addAttribute("error", "Không thể xóa ( Vì có tồn tại đơn hàng thuộc khách hàng này)");//idUpdate
+            model.addAttribute("fail",true);
+            model.addAttribute("idUpdate",id);
+            return "adminEmployeelist";
+        }
+        return "redirect:/Employee";
     }
 }

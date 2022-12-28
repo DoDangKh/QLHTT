@@ -42,7 +42,7 @@
         </div>
         </form>
         <div class="customer" th:each="customer:${persons}" th:id="${customer.id}">
-          <a th:href="@{/Employee/customer/{path} (path=${customer.id})}" class="customer__item">
+          <a th:href="@{/Employee/list/{path} (path=${customer.id})}" class="customer__item">
 
             <i class="fa-solid fa-user"></i>
             <div class="customer__content">
