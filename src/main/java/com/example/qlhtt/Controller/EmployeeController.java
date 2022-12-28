@@ -25,9 +25,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/Employee")
@@ -463,15 +461,67 @@ public class EmployeeController {
         mav.addObject("persons",personList);
         return mav;
     }
-    @RequestMapping("/statistic")
+    @RequestMapping("/statistics")
     public ModelAndView statistic(){
-        ModelAndView mav= new ModelAndView("statistic");
+        ModelAndView mav= new ModelAndView("statistics");
 
+        ArrayList<String> years = new ArrayList<>();
+        years.add("2020");
+        years.add("2021");
+        years.add("2022");
+
+        ArrayList<Integer> data = new ArrayList<>();
+        data.add(1);
+        data.add(2);
+        data.add(3);
+        data.add(4);
+        data.add(5);
+        data.add(6);
+        data.add(7);
+        data.add(8);
+        data.add(9);
+        data.add(10);
+        data.add(11);
+        data.add(12);
+
+
+        mav.addObject("years", years);
+        mav.addObject("selected_id", new Date().getYear());
+        mav.addObject("data",data);
 
         return mav;
     }
+    @GetMapping("/statistics/{year}")
+    public ModelAndView getYearByStatictis(@PathVariable("year") String year) {
+        ModelAndView mav= new ModelAndView("statistics");
 
-    @RequestMapping("/list")
+        System.out.println("year " + year);
+        ArrayList<String> years = new ArrayList<>();
+        years.add("2020");
+        years.add("2021");
+        years.add("2022");
+
+
+        ArrayList<Integer> data = new ArrayList<>();
+        data.add(1);
+        data.add(2);
+        data.add(3);
+        data.add(4);
+        data.add(5);
+        data.add(6);
+        data.add(7);
+        data.add(8);
+        data.add(9);
+        data.add(10);
+        data.add(11);
+        data.add(12);
+
+        mav.addObject("years", years);
+        mav.addObject("selected_id", year);
+        mav.addObject("data",data);
+        return mav;
+    }
+        @RequestMapping("/list")
     public ModelAndView Employeelist(){
         ModelAndView mav=new ModelAndView("adminEmployeelist");
         List<Person>listperson=personRepos.getStaff();

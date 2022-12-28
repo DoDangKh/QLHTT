@@ -93,7 +93,9 @@ public class LoginController {
             personRepos.insertPerson(person);
             Person temp=personRepos.getbyidcard(person.getIdentity_card());
             userLogin.setPerson_id(temp.getId());
+
             userLogin.setPassword(passwordEncoder.encode(userLogin.getPassword()));
+
             userLoginRepos.saveUser(userLogin);
             return "redirect:/home";
         }

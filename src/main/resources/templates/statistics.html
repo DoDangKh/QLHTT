@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css}" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css}" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" th:href="@{/public/css/grid.css}">
+    <link rel="stylesheet" th:href="@{/public/css/base.css}">
+    <link rel="stylesheet" th:href="@{/public/css/adminProductType.css}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="employee">
+        <header class="employee-header" th:insert="headerEmployee">
+            
+        </header>
+        <div class="grid">
+            <div class="row sm-gutter space">
+                <div class="col l-2">
+                    <nav class="navbar" th:insert="navbarEmployee">
+                        
+                    </nav>
+                </div>
+
+                <div class="col l-10" style="padding: 0 20px;">
+                    <div style="margin-right: 20px;">
+                                    <span style="font-size: 2rem;">
+                                    Năm thống kê
+                                    </span>
+                        <input type="hidden" th:value="${data}" id="data"/>
+                        <select th:field="${years}" class="category__classify-select" onchange="window.location.href=this.value" name="type" style="font-size: 2rem;">
+                            <option style="font-size: 2rem;" th:each="year:${years}"
+                                    th:if="${selected_id == year}"
+                                    selected
+                                    th:value="@{/Employee/statistics/{path} (path=${year})}"
+                                    th:text="${year}">
+
+                            </option>
+                            <option style="font-size: 2rem;" th:each="year:${years}"
+                                    th:unless="${selected_id == year}"
+                                    th:value="@{/Employee/statistics/{path} (path=${year})}"
+                                    th:text="${year}">
+                            </option>
+                            <!--                                        <option th:if="${selected_id == null}" selected th:value="@{/Employee/product/page/0}" >a</option>-->
+                            <!--                                        <option th:unless="${selected_id == null}" th:value="@{/Employee/product/page/0}" >b</option>-->
+                        </select>
+                    </div>
+                    <div style="height: 95%;display: flex;justify-content: center;align-items: center;">
+                        <canvas id="myChart" style="width: 100%"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let data1 = document.querySelector("#data").value
+        data1 = data1.substring(1, data1.length-1).split(",")
+        const ctx = document.getElementById('myChart');
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5' , 'Tháng 6' ,'Tháng 7','Tháng 8','Tháng 9','Tháng 10', 'Tháng 11', 'Tháng 12'],
+              datasets: [{
+                label: 'Doanh Thu',
+                data: data1,
+                borderWidth: 1,
+                backgroundColor: ["#00833E"],
+
+              }]
+            },
+            options: {
+              title:{
+              display:true,
+              text:'Thống Kê Doanh Thu',
+              fontSize:25
+            }
+            }
+          });
+    </script>
+    
+    <script src="/QLHTT/src/main/resources/templates/headerEmployee.js"></script>
+    <script src="/QLHTT/src/main/resources/templates/navbarEmployee.js"></script>
+</body>
+</html>

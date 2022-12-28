@@ -319,20 +319,22 @@ input::placeholder {
 }
 
 .footer__img {
-    max-width: 300px;
+    max-width: 220px;
     max-height: 150px;
     margin-left: 10px;
 }
 
 .footer__title {
-    font-size: 3rem;
+    font-size: 2rem;
     color: var(--main-color);
     margin-top: 10px;
 }
 
 .footer__desc {
-    font-size: 2rem;
-    line-height: 2.4rem;
+        font-size: 16px;
+        text-align: center;
+        line-height: 28px;
+
     color: var(--main-text);
     padding: 10px 68px;
 }
