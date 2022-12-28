@@ -24,6 +24,7 @@ public class PersonRepos  {
 
 
 
+
     public List<Person> getall() {
         //jdbcTemplate.setDataSource(dataSource);
         //dataSource.toString();
@@ -45,8 +46,8 @@ public class PersonRepos  {
         }
         catch(Exception e){
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
     public Person getbyidcard(String idcard){
         try{
@@ -55,10 +56,11 @@ public class PersonRepos  {
             return person;
         }
         catch(Exception e){
-            e.printStackTrace();
+            return null;
         }
-        return null;
+
     }
+
     public boolean insertPerson(Person person){
         try{
             System.out.print(person.getName()+" "+person.getGender()+" "+person.getIdentity_card()+" "+person.getDay_of_birth()+" "+person.getPhone_num()+" "+person.getAddress());
@@ -126,5 +128,29 @@ public class PersonRepos  {
         catch(Exception e){
             return false;
         }
+    }
+    public String checkUser(Person person, String status){
+        if(person.getName().equals(""))
+            return "Vui lòng nhập họ và tên";
+        else if(person.getIdentity_card().equals(""))
+            return "CMND/CCCD không được bỏ trống!";
+        else if(person.getIdentity_card().length()!=9 && person.getIdentity_card().length()!=12)
+            return "CCCD/CMND không hợp lệ!";
+        else if(this.getbyidcard(person.getIdentity_card())!=null){
+            Person p = this.getbyidcard(person.getIdentity_card());
+            if(status.equals("update")) {
+                if (p.getId() != person.getId()) {
+                    return "CMND/CCCD đã tồn tại";
+                } else
+                    return "";
+            }
+            return "CMND/CCCD đã tồn tại";
+        }
+        else if(person.getDay_of_birth().equals(""))
+            return "Vui lòng chọn ngày sinh";
+
+        else if(person.getPhone_num().length()!=10)
+            return "Số điện thoại không hợp lệ!";
+        return "";
     }
 }

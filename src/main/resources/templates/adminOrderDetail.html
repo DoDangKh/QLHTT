@@ -63,7 +63,7 @@
                                 <td class="or-customer__item or-customer__item-left" th:text="${product.product.price}">
 
                                 </td>
-                                <td class="or-customer__item or-customer__item-left" th:with="var=${product.product.price * product.quantity}">
+                                <td class="or-customer__item or-customer__item-left" th:with="var=${product.product.price * product.quantity}" th:text="${var}">
                                 </td>
                             </tr>
                         </tbody>

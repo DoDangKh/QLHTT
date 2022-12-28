@@ -24,7 +24,7 @@
         </nav>
       </div>
 
-      <div class="col l-10">
+      <div class="col l-10" style="flex: 1;padding: 0 20px;">
         <div class="main-order" th:each="order:${orders}">
           <a th:href="@{/users/order/{path} (path=${order.order_id})}" class="order">
             <div class="order__icon">

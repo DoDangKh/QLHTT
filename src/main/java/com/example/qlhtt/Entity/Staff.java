@@ -5,6 +5,15 @@ public class Staff {
     private int salary;
     private int status;
 
+    public Staff(int staff_id, int salary, int status) {
+        this.staff_id = staff_id;
+        this.salary = salary;
+        this.status = status;
+    }
+
+    public Staff() {
+    }
+
     public int getStaff_id() {
         return staff_id;
     }

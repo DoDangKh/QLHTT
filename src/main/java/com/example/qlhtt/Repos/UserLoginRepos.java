@@ -1,5 +1,6 @@
 package com.example.qlhtt.Repos;
 
+import com.example.qlhtt.Entity.Staff;
 import com.example.qlhtt.Entity.UserLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -65,14 +66,14 @@ public class UserLoginRepos {
         }
         return false;
     }
-    public boolean saveEmployee(UserLogin userLogin){
+    public boolean saveEmployee(UserLogin userLogin, Staff staff){
         try{
             String password=userLogin.getPassword();
             //userLogin.setPassword(bCryptPasswordEncoder.encode(password));
             userLogin.setRole_id(1);
             jdbcTemplate.update("Insert into UserLogin(person_id, username, password, enable, role_id) VALUES(?, ?, ?, ?, ?)"
                     , userLogin.getPerson_id(), userLogin.getUsername(), userLogin.getPassword(), 1, userLogin.getRole_id());
-            jdbcTemplate.update("Insert into Staff(staff_id ,status) VALUES(?,?)", userLogin.getPerson_id(),1);
+            jdbcTemplate.update("Insert into Staff(staff_id ,salary, status) VALUES(?,?,?)", userLogin.getPerson_id(),staff.getSalary(),1);
             return true;
         }
         catch(Exception e){
@@ -113,6 +114,13 @@ public class UserLoginRepos {
             System.out.println(e);
             return false;
         }
+    }
+    public String checkAccount(UserLogin userLogin){
+        if(userLogin.getUsername().equals("")){
+            return "Tên tài khoản không được bỏ trống!";
+        }else if(userLogin.getPassword().equals(""))
+            return "Mật khẩu không được bỏ trống!";
+        return "";
     }
 
 }

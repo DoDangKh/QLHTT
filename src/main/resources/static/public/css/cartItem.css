@@ -115,7 +115,7 @@
 .item-info__check {
     background-color: var(--white-text);
     margin: 10px 0;
-    padding: 10px;
+        padding: 30px 10px;
     min-height: 201px;
 }
 
@@ -203,6 +203,10 @@
 .confirm {
     display: flex;
     justify-content: center;
+        padding: 30px 10px;
+            flex-direction: column;
+            align-items: center;
+
 }
 
 

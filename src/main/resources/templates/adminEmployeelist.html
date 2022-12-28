@@ -136,7 +136,7 @@
     </div>
     <div class="modal-noti__body">
                                 <span class="modal-noti__body-title">
-                                    Bạn có chắc chắn xoá khách hàng này không?
+                                    Bạn có chắc chắn xoá nhân viên này không?
                                 </span>
       <div class="modal-noti__body-btn">
         <a class="btn-l btnCancelModal-accept btnDeleteModal-accept" type="submit" style="text-decoration: none;text-align: center;line-height: 40px;">Xác nhận</a>
@@ -223,7 +223,7 @@
                 var id = e.target.closest('.customer').getAttribute('id')
                 console.log(id)
                 deleteCustomer.setAttribute("id", id)
-                deleteProductisAccepted.setAttribute("href",`/Employee/customer/delete/${id}`);
+                deleteProductisAccepted.setAttribute("href",`/Employee/list/delete/${id}`);
             });
         });
             Array.from(deleteProductisCanceleds).forEach((btn) => {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
@@ -78,17 +79,31 @@ public class LoginController {
     @RequestMapping("/register")
     public ModelAndView register(){
         ModelAndView mav=new ModelAndView("register");
-        mav.addObject("person",new Person());
+        Person person = new Person();
+        person.setGender("Nam");
+        mav.addObject("person",person);
         mav.addObject("userLogin", new UserLogin());
         String date=new String();
         mav.addObject("date", date);
         return mav;
     }
     @PostMapping("/Confirmregister")
-    public String SaveUsers(Model model, @ModelAttribute("person") Person person, @ModelAttribute("userLogin") UserLogin userLogin, @ModelAttribute("date") String date) throws  Exception{
+    public String SaveUsers(Model model, RedirectAttributes redirectAttributes, @ModelAttribute("person") Person person, @ModelAttribute("userLogin") UserLogin userLogin, @ModelAttribute("date") String date) throws  Exception{
         //date=date.substring(0,10);
         //date.replace("-","/");
-
+        String error = personRepos.checkUser(person, "add");
+        boolean ktAdd = true;
+        if(!error.equals("")){
+            ktAdd = false;
+        }
+        else if(!userLoginRepos.checkAccount(userLogin).equals("")){
+            error = userLoginRepos.checkAccount(userLogin);
+            ktAdd = false;
+        }
+        if(ktAdd==false){
+            model.addAttribute("error", error);
+            return "register";
+        }
         if(userLoginRepos.CheckUserName(userLogin.getUsername())==0) {
             personRepos.insertPerson(person);
             Person temp=personRepos.getbyidcard(person.getIdentity_card());
@@ -97,11 +112,11 @@ public class LoginController {
             userLogin.setPassword(passwordEncoder.encode(userLogin.getPassword()));
 
             userLoginRepos.saveUser(userLogin);
+            model.addAttribute("success", "Tạo tài khoản thành công!");
             return "redirect:/home";
         }
         else{
-            String error="Dang Ky That Bai";
-            model.addAttribute("error",error);
+            model.addAttribute("error", "Email đã được sử dụng!");
             return "register";
         }
     }

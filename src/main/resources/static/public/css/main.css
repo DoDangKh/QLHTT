@@ -391,15 +391,18 @@ main .section-products-wrapper .show-products .list-products-sale .list-products
   margin-left: 3px;
 }
 main .section-products-wrapper .show-products .list-products-sale .list-products .product-item .product-describe {
-  font-size: 14px;
-  color: #8A8A8A;
-  margin-bottom: 8px;
+font-size: 14px;
+    color: #8A8A8A;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 20px;
 }
 main .section-products-wrapper .show-products .list-products-sale .list-products .product-item .product_quantity {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin: 0 40px;
 }
 main .section-products-wrapper .show-products .list-products-sale .list-products .product-item .product_quantity .btn-decre {
   height: 24px;

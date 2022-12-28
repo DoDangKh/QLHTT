@@ -37,21 +37,23 @@
                             </button>
                         </div>
                     </form>
-                    <div class="row" th:each="type:${types}">
-                        <form class="col l-2 productType-item" th:id="${type.Type_id}">
-                            <div class="productType">
-                                <h2 class="productType__title" th:text="${type.name}" style=" text-transform: capitalize;"></h2>
-                                <div style="display: flex;position: absolute;right: -11px;top: -12px;">
-                                    <a class="productType-btn" th:href="@{/Employee/type/update/{path} (path=${type.Type_id})}">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <button class="productType-btn" th:formaction="@{/Employee/type/delete/{path} (path=${type.Type_id})}" style="margin-left: 2px;">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </button>
+                    <div class="row" >
+                        <div th:each="type:${types}" class="col l-2" style="padding: 20px;">
+                            <form class=" productType-item" th:id="${type.Type_id}" style="height: 100%;">
+                                <div class="productType" style=" height: 100%;display: flex;justify-content: center;align-items: center; margin: 0;" >
+                                    <h2 class="productType__title" th:text="${type.name}" style=" text-transform: capitalize; line-height: 26px;font-size: 18px;margin: 0;"></h2>
+                                    <div style="display: flex;position: absolute;right: -11px;top: -12px;">
+                                        <a class="productType-btn" th:href="@{/Employee/type/update/{path} (path=${type.Type_id})}">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <button class="productType-btn" th:formaction="@{/Employee/type/delete/{path} (path=${type.Type_id})}" style="margin-left: 2px;">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
 
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

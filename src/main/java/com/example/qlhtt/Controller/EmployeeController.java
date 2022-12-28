@@ -57,6 +57,9 @@ public class EmployeeController {
     @Autowired
     CustomerUserRepos customerUserRepos;
 
+    @Autowired
+    StaffRepos staffRepos;
+
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -329,7 +332,7 @@ public class EmployeeController {
             mav=new ModelAndView( "adminAddProductType");
             mav.addObject("error", "Loại "+type.getName()+" đã tồn tại");
         }
-
+        mav.addObject("status", "new");
         return mav;
     }
 
@@ -516,43 +519,106 @@ public class EmployeeController {
         return mav;
     }
         @RequestMapping("/list")
-    public ModelAndView Employeelist(){
+    public ModelAndView Employeelist(Model model){
         ModelAndView mav=new ModelAndView("adminEmployeelist");
         List<Person>listperson=personRepos.getStaff();
-
+        mav.addObject("success", model.getAttribute("success"));
+            mav.addObject("error", model.getAttribute("error"));
         mav.addObject("persons",listperson);
+
         return mav;
     }
     @RequestMapping("/list/add")
     public ModelAndView Employeeadd(){
         ModelAndView mav =new ModelAndView("adminadd");
-        mav.addObject("person", new Person());
+        Person person = new Person();
+        person.setGender("Nam");
+        mav.addObject("person", person);
         mav.addObject("account", new UserLogin());
+        mav.addObject("staff", new Staff());
+        mav.addObject("btnName", "Thêm");
         return mav;
     }
+
+
     @PostMapping("/list/add/update")
-    public String saveEmployee(@ModelAttribute("person") Person person, @ModelAttribute("account") UserLogin userLogin,Model model){
-        if (person.getId()!=0){
+    public String saveEmployee(@ModelAttribute("person") Person person, @ModelAttribute("account") UserLogin userLogin,@ModelAttribute("staff") Staff staff, Model model){
+        System.out.println("\nThem nhan vien\n" + staff.getSalary());
+
+        if (person.getId()==0){
+            String error = personRepos.checkUser(person, "add");
+            boolean ktAdd = true;
+            if(!error.equals("")){
+                ktAdd = false;
+            }
+            else if(!userLoginRepos.checkAccount(userLogin).equals("")){
+                error = userLoginRepos.checkAccount(userLogin);
+                ktAdd = false;
+            }
+            if(ktAdd==false){
+                model.addAttribute("error", error);
+                model.addAttribute("btnName", "Thêm");
+                return "adminadd";
+            }
+
             if (userLoginRepos.CheckUserName(userLogin.getUsername()) == 0) {
                 personRepos.insertPerson(person);
                 Person temp = personRepos.getbyidcard(person.getIdentity_card());
                 userLogin.setPerson_id(temp.getId());
                 userLogin.setPassword(passwordEncoder.encode(userLogin.getPassword()));
-                userLoginRepos.saveEmployee(userLogin);
-                return "redirect:/Employee";
+
+                userLoginRepos.saveEmployee(userLogin, staff);
+                model.addAttribute("success", "Thêm nhân viên thành công!");
+                System.out.println("\nThêm thành công");
+
+                List<Person>listperson=personRepos.getStaff();
+
+                model.addAttribute("persons",listperson);
+
+                return "redirect:/Employee/list";
             } else {
-                String error = "Them Nhan Vien That Bai";
-                model.addAttribute("error", error);
+                model.addAttribute("btnName", "Thêm");
+                model.addAttribute("error", "Username đã tồn tại tài khoản!");
                 return "adminadd";
             }
         }
         else{
-            if(personRepos.update(person)&& userLoginRepos.updateUser(userLogin)){
-                return "redirect:/Employee";
+            String error = personRepos.checkUser(person, "update");
+            boolean ktUpdate = true;
+            if(!error.equals("")){
+                ktUpdate=false;
+            }
+            else if(!userLoginRepos.checkAccount(userLogin).equals("")){
+                error = userLoginRepos.checkAccount(userLogin);
+                ktUpdate=false;
+            }
+            else if (userLoginRepos.CheckUserName(userLogin.getUsername()) > 1) {
+                error="Username đã tồn tại tài khoản!";
+                ktUpdate=false;
+            }
+            if(ktUpdate==false){
+                model.addAttribute("error", error);
+                model.addAttribute("btnName", "Cập nhật");
+                return "adminadd";
+            }
+                if(personRepos.update(person)&& userLoginRepos.updateUser(userLogin)){
+                    if(staffRepos.updateSalary(staff)) {
+                        model.addAttribute("success", "Cập nhật thông tin nhân viên thành công!");
+                        List<Person> listperson = personRepos.getStaff();
+
+                        model.addAttribute("persons", listperson);
+
+                        return "redirect:/Employee/list";
+                    }
+                    else{
+                        model.addAttribute("btnName", "Cập nhật");
+                        model.addAttribute("error","Cập nhật thất bại!");
+                        return "adminadd";
+                    }
             }
             else{
-                String error ="Cap Nhat That Bai";
-                model.addAttribute("error",error);
+                model.addAttribute("btnName", "Cập nhật");
+                model.addAttribute("error","Cập nhật thất bại!");
                 return "adminadd";
             }
         }
@@ -562,25 +628,36 @@ public class EmployeeController {
         ModelAndView mav =new ModelAndView("adminadd");
         Person person=personRepos.getbyid(id);
         UserLogin userLogin=userLoginRepos.getid(id);
+        Staff staff = staffRepos.getStaffById(id);
+
+        System.out.println("luong "+ staff.getSalary());
+
         mav.addObject("person",person);
         mav.addObject("account",userLogin);
+        mav.addObject("staff",staff);
+        mav.addObject("btnName", "Cập nhật");
         return mav;
     }
     @RequestMapping("/list/delete/{id}")
     public String deleteEmployee(@PathVariable("id") int id,Model model){
         System.out.println("id xoa " +id );
+        boolean kt = false;
         if(customerUserRepos.deletestaff(id)){
             if(userLoginRepos.delete(id)){
                 if(personRepos.delete(id)){
-                    return "redirect:/Employee";
+//                    model.addAttribute("fail",true);
+                    model.addAttribute("success", "Xóa nhân viên thành công");
+                    kt= true;
+                    return "redirect:/Employee/list";
                 }
             }
-        }else{
-            model.addAttribute("error", "Không thể xóa ( Vì có tồn tại đơn hàng thuộc khách hàng này)");//idUpdate
+        }
+        if(kt==false){
+            model.addAttribute("error", "Không thể xóa nhân viên này!");//idUpdate
             model.addAttribute("fail",true);
             model.addAttribute("idUpdate",id);
-            return "adminEmployeelist";
+            return "redirect:/Employee/list";
         }
-        return "redirect:/Employee";
+        return "redirect:/Employee/list";
     }
 }

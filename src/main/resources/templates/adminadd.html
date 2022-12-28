@@ -19,29 +19,19 @@
     </a> -->
   </header>
   <div class="order-details">
-    <div class="row sm-gutter space">
-      <div class="col l-2">
-        <nav class="navbar" th:insert="navbarEmployee">
-
-        </nav>
-      </div>
-
-      <div class="od-heading">
-      <a th:href="@{/Employee/customer}" class="od-heading__link">
+    <div class="od-heading">
+      <a th:href="@{/Employee/list}" class="od-heading__link">
         <i class="od-heading__icon fa-solid fa-arrow-left"></i>
       </a>
       <h1 class="od-heading__title">
-        THÔNG TIN
+        THÔNG TIN NHÂN VIÊN
       </h1>
     </div>
 
     <form class="customerOrderDetail" method="post" th:action="@{/Employee/list/add/update}">
       <div class="modal__body add-customerOrder__body">
-        <div action="" class="basic-form">
-          <label for="" class="form__label">ID:</label>
-          <input type="text" class="form__input" th:field="${person.id}" readonly>
-        </div>
-
+          <input type="hidden" class="form__input" th:field="${person.id}" readonly>
+        <input type="hidden" class="form__input" th:field="${staff.staff_id}" readonly>
         <div action="" class="basic-form">
           <label for="" class="form__label">Họ và tên:</label>
           <input type="text" class="form__input" th:field="${person.name}">
@@ -49,7 +39,7 @@
 
         <div action="" class="basic-form-radio" >
           <div class="form-radio">
-            <input class="form__radio" type="radio" name="gender" th:value="Nam" th:field="${person.gender}" id="gender-male">
+            <input class="form__radio" type="radio" name="gender" th:value="Nam" th:field="${person.gender}" id="gender-male" >
             <label class="form__radio-label" for="gender-male">Nam</label>
           </div>
           <div class="form-radio">
@@ -78,19 +68,23 @@
           <input type="text" class="form__input" th:field="${person.address}">
         </div>
         <div action="" class="basic-form">
+          <label for="" class="form__label">Lương:</label>
+          <input type="number" class="form__input" th:field="${staff.salary}">
+        </div>
+        <div action="" class="basic-form">
           <label for="" class="form__label">Tài Khoản</label>
-          <input type="text" class="form__input" th:field="${account.username}">
+          <input type="email" class="form__input" th:field="${account.username}">
         </div>
         <div action="" class="basic-form">
           <label for="" class="form__label">Mật Khẩu</label>
-          <input type="password" class="form__input" th:field="${account.password}">
+          <input type="text" class="form__input" th:field="${account.password}">
         </div>
         <div style="text-align: center;" class="error-update">
           <p th:text="${success}" style="color: var(--main-color); font-size: 2rem; margin-bottom: 0;"></p>
           <p th:text="${error}" style="color: red; font-size: 2rem; margin-bottom: 0;"></p>
         </div>
         <div class="add-customerOrder__btn">
-          <button class="btn-l btn-accept" type="submit">Cập nhật</button>
+          <button class="btn-l btn-accept" type="submit" th:text="${btnName}"></button>
         </div>
       </div>
     </form>

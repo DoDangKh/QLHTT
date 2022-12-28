@@ -16,47 +16,8 @@
 <header class="header-top">
     <div th:insert="header"></div>
 </header>
-<!--    <div class="main-header">-->
-<!--        <header class="heading">-->
-<!--            <a href="" class="heading__link" th:href="@{/home}" ><img class="heading__logo" th:src="@{/public/images/LogoGmarket.png}"  alt=""></a>-->
-<!--            <div class="heading-with-search">-->
-<!--                <div class="heading__search">-->
-<!--                    <div class="heading__search-input">-->
-<!--                        <input type="text" placeholder="Tìm kiếm">-->
-<!--                    </div>-->
-<!--                    <div class="heading__search-logo">-->
-<!--                        <i class="fa-solid fa-magnifying-glass"></i>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="heading__cart">-->
-<!--                <i class="heading__cart-logo fa-solid fa-cart-shopping"></i>-->
-<!--                <span class="heading__cart-notice">0</span>-->
-<!--                &lt;!&ndash; <span class="heading__cart-title">Giỏ hàng</span> &ndash;&gt;-->
-<!--                <span class="heading__cart-title heading__cart-title&#45;&#45;price">57.000 đ </span>-->
-<!--            </div>-->
-<!--            <div class="heading__account">-->
-<!--                <i class="heading__account-logo fa-solid fa-user"></i>-->
-<!--                <span class="heading__account-title">Tài khoản</span>-->
-<!--            </div>-->
-<!--        </header>-->
-
-<!--        <nav class="navigation">-->
-<!--            <div class="nav-heading">-->
-<!--                <i class="nav-heading__icon fa-solid fa-bars"></i>-->
-<!--                <span class="nav-heading__title">DANH MỤC</span>-->
-<!--                <ul class="nav-list">-->
-<!--                    <a href="" class="nav-list__link">-->
-<!--                        <li class="nav-list__item">Rau củ - Trái cây</li>-->
-<!--                        <i class="nav-list__logo fa-solid fa-chevron-right"></i>-->
-<!--                    </a>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </nav>-->
-<!--    </div>-->
-
     <div class="main-body">
-        <div class="grid wide">
+        <div class="grid wide" style="padding: 40px 0;">
             <div class="row main-body-item">
                 <div class="item-info col l-9">
                     <div class="item-info__detail">
@@ -64,10 +25,10 @@
                             <span class="item-info__detail-title">
                                 Thông tin đơn hàng
                             </span>
-                            <button class="item-info__detail-del">
-                                <i class="fa-solid fa-trash-can"></i>
-                                <span>Xóa giỏ hàng</span>
-                            </button>
+<!--                            <button class="item-info__detail-del">-->
+<!--                                <i class="fa-solid fa-trash-can"></i>-->
+<!--                                <span>Xóa giỏ hàng</span>-->
+<!--                            </button>-->
                         </div>
     
                         <ul class="bill-list" th:each="product :${cartitem}">
@@ -103,7 +64,7 @@
 
                     <div class="item-info__check">
                         <span class="item-info__check-title">
-                            Thông tin đơn hàng
+                            Thanh toán
                         </span>
                         <div class="item-info__price">
                             <span style="color: #544444" class="item-info__price-tit">Tạm tính:</span>
@@ -115,6 +76,10 @@
                             <span class="item-info__price-pri">Chờ thanh toán</span>
                         </div>
                         <div class="confirm">
+                            <div style="text-align: center;">
+                                <p th:text="${success}" style="color: var(--main-color); font-size: 2rem; margin-bottom: 0;"></p>
+                                <p th:text="${error}" style="color: red; font-size: 2rem; margin-bottom: 0;"></p>
+                            </div>
                             <form>
                                 <button class="btn-l"  type="submit"  th:formaction="@{checkout}">Đặt hàng</button>
                             </form>
