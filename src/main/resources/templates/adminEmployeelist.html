@@ -33,12 +33,14 @@
           <p th:text="${success}" style="color: var(--main-color); font-size: 2rem;"></p>
           <p th:text="${error}" style="color: red; font-size: 2rem;"></p>
         </div>
+        <form>
         <div class="categoryBtn" style="margin-right: 0;">
-          <button class="categoryBtn__btn btn__plus">
+          <button class="categoryBtn__btn btn__plus" th:formaction="@{/Employee/list/add}">
             <i class="fa-solid fa-plus"></i>
             <span>Thêm</span>
           </button>
         </div>
+        </form>
         <div class="customer" th:each="customer:${persons}" th:id="${customer.id}">
           <a th:href="@{/Employee/customer/{path} (path=${customer.id})}" class="customer__item">
 

@@ -53,6 +53,21 @@ public class UserLoginRepos {
         }
         return false;
     }
+    public boolean saveEmployee(UserLogin userLogin){
+        try{
+            String password=userLogin.getPassword();
+            //userLogin.setPassword(bCryptPasswordEncoder.encode(password));
+            userLogin.setRole_id(1);
+            jdbcTemplate.update("Insert into UserLogin(person_id, username, password, enable, role_id) VALUES(?, ?, ?, ?, ?)"
+                    , userLogin.getPerson_id(), userLogin.getUsername(), userLogin.getPassword(), 1, userLogin.getRole_id());
+            jdbcTemplate.update("Insert into Staff(staff_id ,status) VALUES(?,?)", userLogin.getPerson_id(),1);
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
     public boolean updateUser(UserLogin userLogin){
         try{
             String password=userLogin.getPassword();

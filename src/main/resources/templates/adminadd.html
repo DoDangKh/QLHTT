@@ -28,7 +28,7 @@
       </h1>
     </div>
 
-    <form class="customerOrderDetail" method="post" th:action="@{/Employee/customer/update}">
+    <form class="customerOrderDetail" method="post" th:action="@{/Employee/list/add/update}">
       <div class="modal__body add-customerOrder__body">
         <div action="" class="basic-form">
           <label for="" class="form__label">ID:</label>
@@ -72,11 +72,11 @@
         </div>
         <div action="" class="basic-form">
           <label for="" class="form__label">Tài Khoản</label>
-          <input type="text" class="form__input" >
+          <input type="text" class="form__input" th:field="${account.username}">
         </div>
         <div action="" class="basic-form">
           <label for="" class="form__label">Mật Khẩu</label>
-          <input type="text" class="form__input" >
+          <input type="text" class="form__input" th:field="${account.password}">
         </div>
         <div style="text-align: center;" class="error-update">
           <p th:text="${success}" style="color: var(--main-color); font-size: 2rem; margin-bottom: 0;"></p>
