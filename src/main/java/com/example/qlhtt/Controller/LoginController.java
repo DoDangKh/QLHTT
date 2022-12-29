@@ -65,7 +65,7 @@ public class LoginController {
         UserLogin temp=userLoginRepos.getUserName(username);
         temp.setPassword(passwordEncoder.encode(str));
 
-        userLoginRepos.updateUser(temp);
+        userLoginRepos.updateUser(temp,2);
         return "redirect:/home";
     }
 //    @RequestMapping("/logut")

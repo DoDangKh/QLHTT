@@ -81,11 +81,11 @@ public class UserLoginRepos {
         }
         return false;
     }
-    public boolean updateUser(UserLogin userLogin){
+    public boolean updateUser(UserLogin userLogin,int role){
         try{
             String password=userLogin.getPassword();
             //userLogin.setPassword(bCryptPasswordEncoder.encode(password));
-            userLogin.setRole_id(2);
+            userLogin.setRole_id(role);
             jdbcTemplate.update("Update UserLogin set Username=? ,Password=? ,Role_id=? Where person_id=?"
                     ,  userLogin.getUsername(), userLogin.getPassword(), userLogin.getRole_id(), userLogin.getPerson_id());
             return true;

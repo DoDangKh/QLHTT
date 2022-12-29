@@ -363,6 +363,8 @@ public class EmployeeController {
     public ModelAndView orderdetail(@PathVariable("id") int id){
         ModelAndView mav=new ModelAndView("adminOrderDetail");
         List<Cart> order= orderRepos.OrderDetail(id);
+        Person person=personRepos.getbyid(order.get(0).getCustomer_id());
+        mav.addObject("person",person);
         mav.addObject("order",order);
         int sum=0;
         for(int i=0;i<order.size();i++){
@@ -601,7 +603,7 @@ public class EmployeeController {
                 model.addAttribute("btnName", "Cập nhật");
                 return "adminadd";
             }
-                if(personRepos.update(person)&& userLoginRepos.updateUser(userLogin)){
+                if(personRepos.update(person)&& userLoginRepos.updateUser(userLogin,1)){
                     if(staffRepos.updateSalary(staff)) {
                         model.addAttribute("success", "Cập nhật thông tin nhân viên thành công!");
                         List<Person> listperson = personRepos.getStaff();

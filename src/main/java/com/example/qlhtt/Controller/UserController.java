@@ -52,6 +52,22 @@ public class UserController {
         mav.addObject("orders",orders);
         return mav;
     }
+    @PostMapping("/info/update")
+    public String Update(Model model,@ModelAttribute("person") Person person,@ModelAttribute("account") UserLogin userLogin,Principal principal){
+        System.out.print(person.getName());
+        person.setId(userLoginRepos.getUserName(principal.getName()).getPerson_id());
+        System.out.print(person.getId());
+        Person temp=personRepos.getbyidcard(person.getIdentity_card());
+        userLogin.setPerson_id(temp.getId());
+        if(userLogin.getPassword().equals(""))
+            userLogin.setPassword(userLoginRepos.getUserName(userLogin.getUsername()).getPassword());
+        else{
+            userLogin.setPassword(passwordEncoder.encode(userLogin.getPassword()));
+        }
+        personRepos.update(person);
+        userLoginRepos.updateUser(userLogin,2);
+        return "redirect:/users/info";
+    }
     @RequestMapping("/order/{id}")
     public ModelAndView orderdetail(@PathVariable("id") int id){
         ModelAndView mav=new ModelAndView("adminOrderDetail");
