@@ -49,6 +49,16 @@ public class UserController {
         ModelAndView mav= new ModelAndView("customerorder");
         UserLogin userLogin= userLoginRepos.getUserName(principal.getName());
         List<CustomerOrder> orders=orderRepos.getall();
+        System.out.print(orders.size()+"kkkkkkkkkkkkkkkk");
+        for(int i=0;i<orders.size();i++){
+            System.out.print(orders.size()+"kkkkkkkkkkkkkkkk");
+            if(orders.get(i).getCustomer_id()!=userLogin.getPerson_id()){
+                orders.remove(i);
+                System.out.print(orders.size()+"kkkkkkkkkkkkkkkk");
+            }
+            if(orders.size()==0) break;
+            i--;
+        }
         mav.addObject("orders",orders);
         return mav;
     }
