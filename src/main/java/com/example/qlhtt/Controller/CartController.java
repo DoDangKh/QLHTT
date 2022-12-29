@@ -106,7 +106,7 @@ public class CartController {
             List<CustomerOrder> orderList = orderRepos.getall();
             if (orderList.size() > 0) {
                 CustomerOrder order = orderList.get(orderList.size() - 1);
-                String redirect = "redirect:/cart/order/" + order.getOrder_id();
+                String redirect = "redirect:/users/order/" + order.getOrder_id();
                 return redirect;
             }
         }

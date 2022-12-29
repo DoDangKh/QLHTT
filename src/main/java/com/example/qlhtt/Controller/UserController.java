@@ -81,6 +81,18 @@ public class UserController {
     @RequestMapping("/order/{id}")
     public ModelAndView orderdetail(@PathVariable("id") int id){
         ModelAndView mav=new ModelAndView("adminOrderDetail");
+        List<CustomerOrder> customerOrders=orderRepos.getall();
+        Person person=new Person();
+        for(int i=0;i<customerOrders.size();i++){
+            if(customerOrders.get(i).getOrder_id()==id){
+                person=personRepos.getbyid(customerOrders.get(i).getCustomer_id());
+                break;
+            }
+        }
+        //System.out.println(order.get(0).getCustomer_id());
+
+//        System.out.println(person.getName());
+        mav.addObject("person",person);
         List<Cart> order= orderRepos.OrderDetail(id);
         mav.addObject("order",order);
         int sum=0;
