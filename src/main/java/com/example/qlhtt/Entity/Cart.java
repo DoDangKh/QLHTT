@@ -30,7 +30,7 @@ public class Cart {
         this.quantity = quantity;
     }
 
-    public Cart(int customer_id, int product_id, int quantity) {
+    public Cart(int customer_id,int product_id, int quantity) {
         this.customer_id = customer_id;
         this.product= new Product();
         this.product.setProduct_id(product_id);

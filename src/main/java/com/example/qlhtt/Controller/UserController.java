@@ -57,7 +57,7 @@ public class UserController {
                 System.out.print(orders.size()+"kkkkkkkkkkkkkkkk");
             }
             if(orders.size()==0) break;
-            i--;
+           
         }
         mav.addObject("orders",orders);
         return mav;

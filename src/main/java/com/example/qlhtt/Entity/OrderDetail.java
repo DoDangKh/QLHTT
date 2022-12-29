@@ -37,4 +37,10 @@ public class OrderDetail {
     public void setCur_price(int cur_price) {
         this.cur_price = cur_price;
     }
+
+    public OrderDetail(int order_id, int product_id, int num_of_product) {
+        this.order_id = order_id;
+        this.product_id = product_id;
+        this.num_of_product = num_of_product;
+    }
 }
